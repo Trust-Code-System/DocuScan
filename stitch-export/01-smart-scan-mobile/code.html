@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan - Smart Scan Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0f172a",
+              "primary-fixed-dim": "#334155",
+              "primary-container": "#e2e8f0",
+              "on-primary-container": "#0f172a",
+              "inverse-primary": "#f8fafc",
+              "surface": "#ffffff",
+              "surface-container-low": "#f8fafc",
+              "surface-container-highest": "#e2e8f0",
+              "on-surface": "#0f172a",
+              "on-surface-variant": "#475569",
+              "surface-variant": "#cbd5e1",
+              "inverse-surface": "#0f172a",
+              "inverse-on-surface": "#f8fafc",
+              "outline": "#94a3b8",
+              "outline-variant": "#cbd5e1",
+              "error": "#ef4444",
+              "on-error": "#ffffff",
+              "success": "#22c55e",
+              "on-success": "#ffffff",
+              "warning": "#f59e0b",
+              "on-warning": "#ffffff",
+              "ai-glow": "#8b5cf6",
+              "ai-glow-dim": "#ddd6fe"
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "2xl": "1rem",
+              "3xl": "1.5rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "edge-padding": "1.5rem",
+              "stack-sm": "0.5rem",
+              "stack-md": "1rem",
+              "stack-lg": "2rem",
+              "container-max": "1200px"
+            },
+            fontFamily: {
+              "headline": ["Public Sans", "sans-serif"],
+              "display": ["Public Sans", "sans-serif"],
+              "body": ["Public Sans", "sans-serif"],
+              "label": ["Public Sans", "sans-serif"]
+            },
+            fontSize: {
+              "display-lg": ["4rem", { lineHeight: "1.1" }],
+              "display-md": ["3rem", { lineHeight: "1.1" }],
+              "headline-lg": ["2.5rem", { lineHeight: "1.2" }],
+              "headline-md": ["2rem", { lineHeight: "1.2" }],
+              "headline-sm": ["1.5rem", { lineHeight: "1.3" }],
+              "body-lg": ["1.125rem", { lineHeight: "1.5" }],
+              "body-md": ["1rem", { lineHeight: "1.5" }],
+              "body-sm": ["0.875rem", { lineHeight: "1.5" }],
+              "label-caps": ["0.75rem", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .ai-gradient-text {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .ai-gradient-bg {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+        }
+        .ai-border {
+            border-image: linear-gradient(135deg, #8b5cf6, #3b82f6) 1;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-low text-on-surface font-body min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<!-- Brand -->
+<a class="flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</span>
+</a>
+<!-- Nav Links (Web) -->
+<nav class="hidden md:flex gap-8 items-center h-full">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors h-full flex items-center text-body-md font-body-md" href="#">Documents</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors h-full flex items-center text-body-md font-body-md" href="#">Tools</a>
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary h-full flex items-center text-body-md font-body-md relative" href="#">
+<span class="ai-gradient-text mr-1">AI Scan ✨</span>
+</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-3">
+<button class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all p-2 flex items-center justify-center active:scale-95 duration-150 transition-transform">
+<span class="text-label-caps font-label-caps font-semibold">Login</span>
+</button>
+<button class="bg-primary text-inverse-primary px-4 py-2 rounded-lg font-semibold text-body-sm hover:bg-primary-fixed-dim transition-colors active:scale-95 duration-150 transition-transform shadow-sm">
+                        Upload
+                    </button>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Settings" class="p-2 text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all active:scale-95 duration-150 transition-transform">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button aria-label="Account" class="p-2 text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all active:scale-95 duration-150 transition-transform">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-edge-padding py-stack-lg flex flex-col gap-stack-lg mb-20 md:mb-0">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-stack-md relative z-10">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-ai-glow animate-pulse">auto_awesome</span>
+<span class="text-label-caps text-ai-glow font-semibold tracking-wider">AI ASSISTANT</span>
+</div>
+<h1 class="text-headline-lg font-headline font-extrabold tracking-tight mb-2">Smart Scan Results</h1>
+<p class="text-on-surface-variant text-body-lg">We've extracted the key information from your receipt.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 rounded-lg border border-outline-variant text-on-surface font-semibold text-body-sm hover:bg-surface-variant/20 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+                    Rescan
+                </button>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-inverse-primary font-semibold text-body-sm hover:bg-primary-fixed-dim transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                    Save Document
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
+<!-- Left Column: Image Preview (Span 5) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="glass-panel rounded-2xl p-4 shadow-sm border border-outline-variant/30 flex-grow relative overflow-hidden group">
+<div class="absolute top-6 left-6 z-10 bg-surface/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-outline-variant/20 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-success animate-pulse"></div>
+<span class="text-label-caps font-bold">Original Image</span>
+</div>
+<div class="absolute top-6 right-6 z-10 flex gap-2">
+<button class="w-8 h-8 rounded-full bg-surface/90 backdrop-blur-sm shadow-sm border border-outline-variant/20 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+<div class="w-full h-full min-h-[400px] rounded-xl overflow-hidden relative bg-surface-variant/20 border border-outline-variant/20 flex items-center justify-center">
+<img alt="Scanned Receipt" class="w-full h-full object-cover opacity-90 mix-blend-multiply filter grayscale-[20%] contrast-125" data-alt="A brightly lit, slightly crumpled white paper receipt resting on a clean, modern wooden desk surface. The receipt features crisp black printed typography typical of a coffee shop or upscale cafe. Soft, natural daylight streams in from a nearby window, casting subtle, elegant shadows that highlight the texture of the paper. The overall aesthetic is clean, light, and professional, perfectly suited for a modern document management application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdFoGtQ9ox7n26GALOWoNth4qk1l5-qWmI3mqw8f6SwZqeSGlS0ANm_xo0emc696shGv-_W3uZOuKQ0JZyFlzEiswryj8FYFIF-d9GydO3CZp0rhT5_PlnLlSkkSQ3UWQAtaehZaiyYaz_ShOZEFtfN05BAvZ7WK8Ke43gZmDg7H1eVM4S4PmFsfv8YYZVerY9_-F3WOba0RX7TKVR52ercMWgbnyqhSVGH8bIEegb-sAHjz7Eai8"/>
+<!-- AI Scanning Overlay Effect -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="w-full h-1 bg-ai-glow/50 shadow-[0_0_15px_rgba(139,92,246,0.6)] absolute top-0 left-0 animate-[scan_3s_ease-in-out_infinite]"></div>
+<style>
+                                @keyframes scan {
+                                    0% { top: 0%; opacity: 0; }
+                                    10% { opacity: 1; }
+                                    90% { opacity: 1; }
+                                    100% { top: 100%; opacity: 0; }
+                                }
+                            </style>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Extracted Data (Span 7) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Suggested Metadata Card -->
+<div class="glass-panel rounded-2xl p-6 shadow-sm border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-ai-glow to-blue-500"></div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-ai-glow">psychology</span>
+<h3 class="text-headline-sm font-headline font-bold text-on-surface">Smart Suggestions</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- File Name -->
+<div>
+<label class="text-label-caps text-on-surface-variant mb-2 block">SUGGESTED FILENAME</label>
+<div class="relative">
+<input class="w-full bg-surface border border-outline-variant/50 rounded-lg py-2.5 pl-3 pr-10 text-body-sm font-medium text-on-surface focus:ring-2 focus:ring-ai-glow/50 focus:border-ai-glow transition-shadow" type="text" value="2023-10-24_BlueBottle_Coffee_Receipt.pdf"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+<!-- Document Type & Confidence -->
+<div class="flex flex-col gap-2">
+<label class="text-label-caps text-on-surface-variant block">DOCUMENT TYPE</label>
+<div class="flex items-center justify-between bg-surface border border-outline-variant/50 rounded-lg py-2 px-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">receipt_long</span>
+<span class="text-body-sm font-medium">Receipt</span>
+</div>
+<div class="flex items-center gap-1 bg-success/10 text-success px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="text-label-caps font-bold">98% Match</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Auto-Tags -->
+<div class="mt-6">
+<label class="text-label-caps text-on-surface-variant mb-2 block">AI GENERATED TAGS</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-ai-gradient-bg border border-ai-glow/30 rounded-full text-body-sm font-medium text-primary flex items-center gap-1 hover:bg-ai-glow/10 cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-[14px] text-ai-glow">local_cafe</span> Meals &amp; Entertainment
+                            </span>
+<span class="px-3 py-1 bg-surface border border-outline-variant/50 rounded-full text-body-sm font-medium text-on-surface-variant flex items-center gap-1 hover:bg-surface-variant/30 cursor-pointer transition-colors">
+                                Business Travel
+                            </span>
+<span class="px-3 py-1 bg-surface border border-outline-variant/50 rounded-full text-body-sm font-medium text-on-surface-variant flex items-center gap-1 hover:bg-surface-variant/30 cursor-pointer transition-colors">
+                                Q4 Expenses
+                            </span>
+<button class="px-2 py-1 border border-dashed border-outline-variant rounded-full text-on-surface-variant hover:text-primary hover:border-outline transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Structured Data Card -->
+<div class="bg-surface rounded-2xl p-0 shadow-sm border border-outline-variant/30 flex-grow flex flex-col overflow-hidden">
+<div class="p-5 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-low/50">
+<h3 class="text-body-lg font-headline font-bold text-on-surface">Extracted Fields</h3>
+<button class="text-primary text-body-sm font-semibold hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">add_circle</span> Add Field
+                        </button>
+</div>
+<div class="flex-grow p-5 flex flex-col gap-4">
+<!-- Field Row -->
+<div class="group flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="flex items-center gap-4 w-1/3">
+<div class="w-8 h-8 rounded-lg bg-surface-variant/30 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">storefront</span>
+</div>
+<span class="text-body-sm font-medium text-on-surface-variant">Merchant</span>
+</div>
+<div class="w-2/3 flex items-center justify-between">
+<span class="text-body-md font-semibold text-on-surface">Blue Bottle Coffee</span>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+</div>
+</div>
+</div>
+<!-- Field Row -->
+<div class="group flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="flex items-center gap-4 w-1/3">
+<div class="w-8 h-8 rounded-lg bg-surface-variant/30 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+</div>
+<span class="text-body-sm font-medium text-on-surface-variant">Date</span>
+</div>
+<div class="w-2/3 flex items-center justify-between">
+<span class="text-body-md font-semibold text-on-surface">Oct 24, 2023</span>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+</div>
+</div>
+</div>
+<!-- Field Row -->
+<div class="group flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="flex items-center gap-4 w-1/3">
+<div class="w-8 h-8 rounded-lg bg-surface-variant/30 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+</div>
+<span class="text-body-sm font-medium text-on-surface-variant">Order #</span>
+</div>
+<div class="w-2/3 flex items-center justify-between">
+<span class="text-body-md font-semibold text-on-surface">#4920-A</span>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+</div>
+</div>
+</div>
+<!-- Line Items / Total Area -->
+<div class="mt-4 pt-4 border-t border-outline-variant/30">
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/20">
+<div class="flex justify-between items-end mb-2">
+<span class="text-body-sm font-medium text-on-surface-variant">Total Amount</span>
+<span class="text-headline-md font-bold text-on-surface">$14.50</span>
+</div>
+<div class="flex justify-between items-center text-body-sm text-on-surface-variant pt-2 border-t border-outline-variant/20">
+<span>Tax included</span>
+<span>$1.15</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface/90 backdrop-blur-xl dark:bg-surface-container-highest/90 border-t border-outline-variant/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)] md:hidden">
+<div class="flex justify-around items-center w-full py-3 px-4">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-body-sm font-body-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="text-body-sm font-body-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">grid_view</span>
+<span class="text-body-sm font-body-sm">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">folder_open</span>
+<span class="text-body-sm font-body-sm">Library</span>
+</a>
+</div>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest w-full border-t border-outline-variant/30 mt-auto hidden md:block">
+<div class="w-full py-stack-lg px-edge-padding max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">DocuScan</span>
+<div class="flex flex-wrap gap-6 justify-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline text-body-sm font-body-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline text-body-sm font-body-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline text-body-sm font-body-sm" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline text-body-sm font-body-sm" href="#">Trust Center</a>
+</div>
+<span class="text-on-surface-variant dark:text-surface-variant text-body-sm font-body-sm text-center md:text-right">© 2024 DocuScan. Privacy First Document Management.</span>
+</div>
+</footer>
+</body></html>

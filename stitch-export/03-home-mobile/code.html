@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan - Privacy-First Document Scanning</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              surface: '#ffffff',
+              'surface-variant': '#f1f5f9',
+              'surface-container-low': '#f8fafc',
+              'on-surface': '#0f172a',
+              'on-surface-variant': '#475569',
+              primary: '#2563eb',
+              'on-primary': '#ffffff',
+              'primary-container': '#dbeafe',
+              'on-primary-container': '#1e3a8a',
+              'outline-variant': '#e2e8f0',
+              edge: '#f8fafc',
+            },
+            borderRadius: {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem"
+            },
+            spacing: {
+                'edge-padding': '1rem',
+                'stack-md': '1.5rem',
+                'stack-lg': '2rem',
+                'stack-xl': '3rem',
+            },
+            fontFamily: {
+                    "headline": ["Public Sans", "sans-serif"],
+                    "display": ["Public Sans", "sans-serif"],
+                    "body": ["Public Sans", "sans-serif"],
+                    "label": ["Public Sans", "sans-serif"]
+            },
+            fontSize: {
+                'headline-md': ['1.5rem', { lineHeight: '2rem' }],
+                'headline-sm': ['1.25rem', { lineHeight: '1.75rem' }],
+                'body-md': ['1rem', { lineHeight: '1.5rem' }],
+                'body-sm': ['0.875rem', { lineHeight: '1.25rem' }],
+                'label-caps': ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }],
+            },
+            maxWidth: {
+                'container-max': '1200px'
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col bg-surface">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</span>
+</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" href="#">Documents</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" href="#">AI Scan ✨</a>
+</nav>
+<div class="flex items-center gap-2">
+<span class="hidden md:inline-flex items-center gap-1 text-label-caps font-label-caps text-on-surface-variant bg-surface-variant px-2 py-1 rounded-full">
+                    No signup
+                </span>
+<button aria-label="Upload" class="md:hidden p-2 text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all">
+<span class="material-symbols-outlined">upload</span>
+</button>
+<button class="hidden md:flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                    Upload
+                </button>
+<button aria-label="Login" class="p-2 text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow pb-24 md:pb-0">
+<!-- Hero Section -->
+<section class="px-edge-padding py-stack-xl flex flex-col items-center text-center max-w-3xl mx-auto mt-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full text-sm font-medium mb-6">
+<span class="material-symbols-outlined" style="font-size: 16px;">lock</span>
+                100% Secure &amp; Private
+            </div>
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
+                Privacy-First Document Scanning
+            </h1>
+<p class="text-lg text-on-surface-variant mb-8 max-w-2xl">
+                Securely process private information with enterprise-grade encryption. Fast, free, and fully client-side.
+            </p>
+<button class="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-on-primary rounded-2xl font-bold text-lg hover:bg-primary/90 transition-all hover:scale-105 shadow-lg mb-4 w-full md:w-auto">
+<span class="material-symbols-outlined text-2xl group-hover:animate-bounce">document_scanner</span>
+                Scan a document
+            </button>
+<p class="text-sm text-on-surface-variant flex items-center gap-2 justify-center">
+                Free <span class="text-outline-variant">•</span> No signup <span class="text-outline-variant">•</span> Files never leave your device
+            </p>
+</section>
+<!-- Tools Grid -->
+<section class="px-edge-padding py-stack-lg max-w-container-max mx-auto bg-surface-container-low rounded-3xl mx-4 md:mx-auto mb-16">
+<h2 class="text-2xl font-bold text-on-surface mb-8 text-center">Powerful Tools</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+<!-- Row 1 -->
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2" style="font-variation-settings: 'FILL' 1;">edit_document</span>
+<span class="text-sm font-medium text-on-surface text-center">Edit PDF</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">document_scanner</span>
+<span class="text-sm font-medium text-on-surface text-center">Scan to PDF</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">image</span>
+<span class="text-sm font-medium text-on-surface text-center">Image to PDF</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">call_merge</span>
+<span class="text-sm font-medium text-on-surface text-center">Merge</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">compress</span>
+<span class="text-sm font-medium text-on-surface text-center">Compress</span>
+</a>
+<!-- Row 2 -->
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">call_split</span>
+<span class="text-sm font-medium text-on-surface text-center">Split</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">text_fields</span>
+<span class="text-sm font-medium text-on-surface text-center">OCR</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">rotate_right</span>
+<span class="text-sm font-medium text-on-surface text-center">Rotate</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">branding_watermark</span>
+<span class="text-sm font-medium text-on-surface text-center">Watermark</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">format_list_numbered</span>
+<span class="text-sm font-medium text-on-surface text-center">Page numbers</span>
+</a>
+<!-- Row 3 -->
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">draw</span>
+<span class="text-sm font-medium text-on-surface text-center">Sign</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">lock</span>
+<span class="text-sm font-medium text-on-surface text-center">Protect</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50" href="#">
+<span class="material-symbols-outlined text-primary mb-2">lock_open</span>
+<span class="text-sm font-medium text-on-surface text-center">Unlock</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border border-outline-variant/50 col-span-2 md:col-span-1" href="#">
+<span class="material-symbols-outlined text-primary mb-2">format_size</span>
+<span class="text-sm font-medium text-on-surface text-center">Batch compress</span>
+</a>
+<!-- AI Row (Highlighted) -->
+<a class="flex flex-col items-center justify-center p-4 bg-primary-container/30 border border-primary/20 rounded-xl shadow-sm hover:shadow-md hover:border-primary/50 transition-all hover:-translate-y-1 col-span-2 md:col-span-1" href="#">
+<span class="material-symbols-outlined text-on-primary-container mb-2">auto_awesome</span>
+<span class="text-sm font-bold text-on-primary-container text-center">AI Assistant</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-primary-container/30 border border-primary/20 rounded-xl shadow-sm hover:shadow-md hover:border-primary/50 transition-all hover:-translate-y-1 col-span-2 md:col-span-1" href="#">
+<span class="material-symbols-outlined text-on-primary-container mb-2">edit_note</span>
+<span class="text-sm font-bold text-on-primary-container text-center">Make editable ✨</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-primary-container/30 border border-primary/20 rounded-xl shadow-sm hover:shadow-md hover:border-primary/50 transition-all hover:-translate-y-1 col-span-2 md:col-span-1" href="#">
+<span class="material-symbols-outlined text-on-primary-container mb-2">chat</span>
+<span class="text-sm font-bold text-on-primary-container text-center">Chat with PDF ✨</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-primary-container/30 border border-primary/20 rounded-xl shadow-sm hover:shadow-md hover:border-primary/50 transition-all hover:-translate-y-1 col-span-2 md:col-span-1" href="#">
+<span class="material-symbols-outlined text-on-primary-container mb-2">visibility_off</span>
+<span class="text-sm font-bold text-on-primary-container text-center">AI Redact ✨</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-primary-container/30 border border-primary/20 rounded-xl shadow-sm hover:shadow-md hover:border-primary/50 transition-all hover:-translate-y-1 col-span-2 md:col-span-1" href="#">
+<span class="material-symbols-outlined text-on-primary-container mb-2">translate</span>
+<span class="text-sm font-bold text-on-primary-container text-center">Translate ✨</span>
+</a>
+<a class="flex flex-col items-center justify-center p-4 bg-primary-container/30 border border-primary/20 rounded-xl shadow-sm hover:shadow-md hover:border-primary/50 transition-all hover:-translate-y-1 col-span-2 md:col-span-1" href="#">
+<span class="material-symbols-outlined text-on-primary-container mb-2">compare_arrows</span>
+<span class="text-sm font-bold text-on-primary-container text-center">Compare ✨</span>
+</a>
+</div>
+</section>
+<!-- How it works -->
+<section class="px-edge-padding py-stack-lg max-w-4xl mx-auto mb-16">
+<h2 class="text-2xl font-bold text-on-surface mb-10 text-center">How it works</h2>
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 relative">
+<!-- Line connector for desktop -->
+<div class="hidden md:block absolute top-1/2 left-[15%] right-[15%] h-0.5 bg-outline-variant -z-10"></div>
+<div class="flex flex-col items-center text-center max-w-[200px] bg-surface z-10">
+<div class="w-16 h-16 bg-surface-variant rounded-full flex items-center justify-center mb-4 border-4 border-surface">
+<span class="material-symbols-outlined text-2xl text-on-surface">upload_file</span>
+</div>
+<h3 class="font-bold text-lg mb-2">1. Upload</h3>
+<p class="text-sm text-on-surface-variant">Select documents from your device directly.</p>
+</div>
+<div class="flex flex-col items-center text-center max-w-[200px] bg-surface z-10">
+<div class="w-16 h-16 bg-surface-variant rounded-full flex items-center justify-center mb-4 border-4 border-surface">
+<span class="material-symbols-outlined text-2xl text-on-surface">tune</span>
+</div>
+<h3 class="font-bold text-lg mb-2">2. Edit</h3>
+<p class="text-sm text-on-surface-variant">Process locally with no server interaction.</p>
+</div>
+<div class="flex flex-col items-center text-center max-w-[200px] bg-surface z-10">
+<div class="w-16 h-16 bg-primary text-on-primary rounded-full flex items-center justify-center mb-4 border-4 border-surface shadow-md">
+<span class="material-symbols-outlined text-2xl">download</span>
+</div>
+<h3 class="font-bold text-lg mb-2">3. Download</h3>
+<p class="text-sm text-on-surface-variant">Save the securely processed files back.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface/90 backdrop-blur-xl dark:bg-surface-container-highest/90 fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)] flex justify-around items-center py-3 px-4 md:hidden">
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-body-sm font-body-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined">document_scanner</span>
+<span class="text-body-sm font-body-sm mt-1">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-body-sm font-body-sm mt-1">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="text-body-sm font-body-sm mt-1">Library</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest border-t border-outline-variant/30 full-width pb-20 md:pb-0">
+<div class="w-full py-stack-lg px-edge-padding max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface text-center md:text-left">
+                DocuScan
+                <p class="text-body-sm font-body-sm text-on-surface-variant mt-1 font-normal">© 2024 DocuScan. Privacy First Document Management.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-4 md:gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps hover:underline" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps hover:underline" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps hover:underline" href="#">Trust Center</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan Editor | Professional Document Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .ai-shimmer {
+            background: linear-gradient(90deg, rgba(132, 85, 239, 0.05) 0%, rgba(132, 85, 239, 0.15) 50%, rgba(132, 85, 239, 0.05) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#191b23",
+                    "on-primary-fixed": "#00174b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "inverse-surface": "#2e3039",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c3c6d7",
+                    "secondary-container": "#8455ef",
+                    "secondary": "#6b38d4",
+                    "on-primary-container": "#eeefff",
+                    "surface-bright": "#faf8ff",
+                    "surface-variant": "#e1e2ed",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#ffede6",
+                    "on-background": "#191b23",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#d9d9e5",
+                    "error": "#ba1a1a",
+                    "background": "#faf8ff",
+                    "surface-container-high": "#e7e7f3",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-fixed": "#360f00",
+                    "outline": "#737686",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "on-secondary-fixed": "#23005c",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "surface-container": "#ededf9",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "primary": "#004ac6",
+                    "surface-container-highest": "#e1e2ed",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "on-secondary-container": "#fffbff",
+                    "on-surface-variant": "#434655",
+                    "inverse-on-surface": "#f0f0fb",
+                    "tertiary": "#943700",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f3f3fe",
+                    "surface": "#faf8ff",
+                    "tertiary-fixed": "#ffdbcd",
+                    "tertiary-container": "#bc4800",
+                    "secondary-fixed": "#e9ddff",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "primary-container": "#2563eb",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#0053db"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "2rem",
+                    "stack-md": "1rem",
+                    "gutter": "1.5rem",
+                    "stack-sm": "0.5rem",
+                    "edge-padding": "1rem",
+                    "container-max": "1024px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Inter"], "body-lg": ["Inter"], "headline-xl-mobile": ["Inter"], "label-caps": ["Inter"], "headline-lg": ["Inter"], "body-sm": ["Inter"], "headline-sm": ["Inter"], "body-md": ["Inter"], "headline-md": ["Inter"], "headline-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-xl-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface flex flex-col min-h-screen overflow-hidden">
+<!-- TopAppBar from JSON -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-gutter">
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps" href="#">Documents</a>
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary text-label-caps font-label-caps" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps" href="#">AI Scan ✨</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-semibold hover:bg-primary-container transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[20px]">upload</span>
+<span class="text-label-caps font-label-caps">Upload</span>
+</button>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 p-2 rounded-lg transition-all">settings</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 p-2 rounded-lg transition-all">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-grow flex flex-col md:flex-row overflow-hidden relative">
+<!-- Center Content: Document Preview -->
+<section class="flex-grow bg-[#f8fafc] flex flex-col items-center justify-start p-stack-md md:p-stack-lg overflow-y-auto custom-scrollbar">
+<!-- Breadcrumbs / Active Doc Title -->
+<div class="w-full max-w-[800px] flex items-center justify-between mb-stack-md px-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">description</span>
+<span class="font-headline-sm text-headline-sm">Commercial_Lease_Agreement_2024.pdf</span>
+<span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Verified</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors"><span class="material-symbols-outlined">zoom_in</span></button>
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors"><span class="material-symbols-outlined">zoom_out</span></button>
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors"><span class="material-symbols-outlined">fullscreen</span></button>
+</div>
+</div>
+<!-- PDF Visual Representation -->
+<div class="w-full max-w-[800px] space-y-gutter pb-stack-lg">
+<!-- Page 1 -->
+<div class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] border border-outline-variant/30 overflow-hidden relative group">
+<img class="w-full h-auto" data-alt="A high-resolution photograph of a clean professional legal document resting on a minimalist white desk. The paper has black typography and clear headings with some highlighted areas in light blue indicating processing. The scene is brightly lit with natural light, creating a professional and trustworthy corporate atmosphere with soft ambient shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzMC4QqRhlBMwvk4zuzRioymGDXGGd6cXIcwtE8p8pKVS9YqbjlIU-Q0wyx_ViVtQ_K1Nj5Th4kF6JvIepeRQFuGB00B3-Oc-T5CGV1f76HH2J9-VKgWtcu6F_RRoPOSkHRnuVsOeiNjp49hA4dSm-fA5DaX41vp3PS4QhVu6EuwTVn6hoywcd7pcBCqx87ZG1kh911GFKUtw73JPc0C0RykmVrlI5AvK-9APBvioeOt0Coiu6WTo"/>
+<div class="absolute top-4 right-4 bg-on-surface/50 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">Page 1</div>
+</div>
+<!-- Page 2 (Partial Preview) -->
+<div class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] border border-outline-variant/30 overflow-hidden relative group">
+<img class="w-full h-auto" data-alt="A macro shot of a complex legal contract with clear professional layout and signature lines. Some text is partially blurred to emphasize depth. The lighting is crisp and even, echoing a high-end SaaS document editor interface with a color palette of whites, slates, and subtle blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq-NOPnxoY5P4_ZxOsm65b92LWcRmuOra8UT4HViQrdHa45DE_zTTAt_bLMI2VwhNhI1XSaHeblkkfTo5z3yzKCsBnegcHaHFugTB7kqakNVCRKgh875v7cLXvN1zKsdb87jefRy96H6K8YTGr9Ytcx-MhLzUKB-1rwdI35L8dFCI-vjlH32QRKM-wzTWjscF9GrZpOBjMXdIx-8JznbCO3P9HAzNbw8CcqGrOnYfeeZeQ0wxWQqc"/>
+<div class="absolute top-4 right-4 bg-on-surface/50 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">Page 2</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: AI Workspace -->
+<aside class="w-full md:w-[360px] bg-white border-l border-outline-variant/30 flex flex-col h-full z-10">
+<div class="p-stack-md border-b border-outline-variant/20 flex items-center justify-between ai-shimmer">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-headline-sm text-headline-sm text-secondary">AI Workspace</span>
+</div>
+<button class="p-1.5 hover:bg-secondary-container/10 rounded-full transition-colors text-outline">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-grow overflow-y-auto p-stack-md space-y-gutter custom-scrollbar">
+<!-- AI Chat with Doc -->
+<div class="space-y-stack-sm">
+<label class="text-label-caps font-label-caps text-outline uppercase tracking-widest">Chat with Doc</label>
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/10 text-body-sm text-on-surface-variant leading-relaxed">
+                        "I've analyzed the lease. The renewal clause is on page 4, section 12.2. Would you like me to summarize the notice period?"
+                    </div>
+<div class="relative group">
+<input class="w-full h-12 rounded-lg border-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary bg-white text-body-md pr-12 transition-all" placeholder="Ask anything about this document..." type="text"/>
+<button class="absolute right-2 top-1.5 p-2 text-secondary hover:bg-secondary/10 rounded-lg transition-all">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<!-- Extract Key Data -->
+<div class="space-y-stack-sm">
+<div class="flex items-center justify-between">
+<label class="text-label-caps font-label-caps text-outline uppercase tracking-widest">Key Insights</label>
+<button class="text-secondary text-[11px] font-bold hover:underline">Re-scan</button>
+</div>
+<div class="grid grid-cols-1 gap-2">
+<div class="p-3 border border-outline-variant/30 rounded-lg flex items-center justify-between hover:border-secondary transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary">calendar_today</span>
+<div>
+<div class="text-[11px] text-outline font-medium">Expiration Date</div>
+<div class="text-body-sm font-semibold">Dec 31, 2026</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</div>
+<div class="p-3 border border-outline-variant/30 rounded-lg flex items-center justify-between hover:border-secondary transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary">payments</span>
+<div>
+<div class="text-[11px] text-outline font-medium">Monthly Rent</div>
+<div class="text-body-sm font-semibold">$4,500.00</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</div>
+<div class="p-3 border border-outline-variant/30 rounded-lg flex items-center justify-between hover:border-secondary transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary">security</span>
+<div>
+<div class="text-[11px] text-outline font-medium">Liability Cap</div>
+<div class="text-body-sm font-semibold">$2,000,000</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Auto-Translate -->
+<div class="space-y-stack-sm">
+<label class="text-label-caps font-label-caps text-outline uppercase tracking-widest">Quick Actions</label>
+<button class="w-full flex items-center gap-3 p-3 bg-white border border-outline-variant/30 rounded-xl hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">translate</span>
+<span class="text-body-md">Auto-Translate to English</span>
+<span class="ml-auto material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="w-full flex items-center gap-3 p-3 bg-white border border-outline-variant/30 rounded-xl hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">draw</span>
+<span class="text-body-md">Request E-Signatures</span>
+<span class="ml-auto material-symbols-outlined text-outline">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- AI Progress / Status -->
+<div class="p-4 border-t border-outline-variant/20 bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[11px] font-bold text-outline">AI OCR INDEXING</span>
+<span class="text-[11px] font-bold text-secondary">93% Complete</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[93%] rounded-full"></div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="bg-white border-t border-outline-variant/30 h-16 flex items-center px-edge-padding relative z-20 shadow-[0_-4px_20px_rgba(15,23,42,0.05)]">
+<div class="max-w-container-max mx-auto w-full flex items-center justify-between">
+<div class="hidden md:flex items-center gap-gutter">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-low rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="text-body-sm font-medium">Standard Privacy Policy Applied</span>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-white border border-outline-variant text-on-surface font-semibold rounded-lg hover:bg-surface-container-low transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span class="text-body-md">Share</span>
+</button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-white border border-outline-variant text-on-surface font-semibold rounded-lg hover:bg-surface-container-low transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+<span class="text-body-md">Protect</span>
+</button>
+<button class="flex-[2] md:flex-none flex items-center justify-center gap-2 px-8 py-2.5 bg-primary text-on-primary font-bold rounded-lg hover:bg-primary/90 shadow-md transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="text-body-md">Download PDF</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Interactive ripple effect or subtle feedback could go here
+            console.log('DocuScan Editor Loaded');
+            
+            // Simple logic for input focus effects
+            const aiInput = document.querySelector('input[type="text"]');
+            aiInput.addEventListener('focus', () => {
+                aiInput.parentElement.classList.add('shadow-lg');
+            });
+            aiInput.addEventListener('blur', () => {
+                aiInput.parentElement.classList.remove('shadow-lg');
+            });
+        });
+    </script>
+</body></html>

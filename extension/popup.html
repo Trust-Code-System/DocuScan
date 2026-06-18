@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root { --brand: #2563eb; }
+      body { width: 240px; margin: 0; font-family: system-ui, sans-serif; color: #0f172a; }
+      header { display: flex; align-items: center; gap: 8px; padding: 12px; border-bottom: 1px solid #e2e8f0; font-weight: 700; }
+      .logo { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; background: var(--brand); color: #fff; }
+      nav { display: grid; gap: 4px; padding: 8px; }
+      a { display: block; padding: 8px 10px; border-radius: 8px; text-decoration: none; color: #334155; font-size: 14px; }
+      a:hover { background: #f1f5f9; }
+      footer { padding: 8px 12px; font-size: 11px; color: #64748b; border-top: 1px solid #e2e8f0; }
+    </style>
+  </head>
+  <body>
+    <header><span class="logo">D</span> DocuScan</header>
+    <nav id="tools"></nav>
+    <footer>Tools open at docuscan.app</footer>
+    <script src="popup.js"></script>
+  </body>
+</html>

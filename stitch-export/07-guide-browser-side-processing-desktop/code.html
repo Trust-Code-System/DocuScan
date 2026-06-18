@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Future of Browser-Side PDF Processing - DocuScan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "on-primary-fixed": "#00174b",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "on-surface-variant": "#434655",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#0053db",
+                      "surface-bright": "#faf8ff",
+                      "on-tertiary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed": "#ffdbcd",
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary-container": "#fffbff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#e1e2ed",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "secondary": "#6b38d4",
+                      "primary-container": "#2563eb",
+                      "inverse-on-surface": "#f0f0fb",
+                      "on-tertiary-container": "#ffede6",
+                      "tertiary-container": "#bc4800",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-secondary-fixed": "#23005c",
+                      "surface-container-highest": "#e1e2ed",
+                      "inverse-surface": "#2e3039",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#360f00",
+                      "background": "#faf8ff",
+                      "surface-container-low": "#f3f3fe",
+                      "outline-variant": "#c3c6d7",
+                      "surface-dim": "#d9d9e5",
+                      "secondary-container": "#8455ef",
+                      "outline": "#737686",
+                      "primary": "#004ac6",
+                      "surface-container": "#ededf9",
+                      "tertiary": "#943700",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "inverse-primary": "#b4c5ff",
+                      "surface": "#faf8ff",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e7e7f3",
+                      "secondary-fixed": "#e9ddff",
+                      "on-surface": "#191b23",
+                      "on-primary-container": "#eeefff",
+                      "on-background": "#191b23"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "1.5rem",
+                      "stack-md": "1rem",
+                      "stack-lg": "2rem",
+                      "container-max": "1024px",
+                      "edge-padding": "1rem",
+                      "stack-sm": "0.5rem"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "headline-xl-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-xl": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-caps": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-xl-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .ai-sparkle-bg {
+            background: linear-gradient(135deg, rgba(107, 56, 212, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid theme('colors.outline-variant');
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, theme('colors.primary'), theme('colors.secondary'));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<div class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">document_scanner</span>
+                DocuScan
+            </div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg px-3 py-2 text-headline-sm font-headline-sm" href="#">Documents</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg px-3 py-2 text-headline-sm font-headline-sm" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg px-3 py-2 text-headline-sm font-headline-sm flex items-center gap-1" href="#">AI Scan ✨</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-lg p-2 transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="hidden md:flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-lg p-2 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg px-4 py-2 transition-all font-semibold">Login</button>
+<button class="bg-primary text-on-primary hover:opacity-90 rounded-lg px-4 py-2 transition-all font-semibold shadow-sm">Upload</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-edge-padding py-8 md:py-12 flex flex-col lg:flex-row gap-gutter">
+<!-- Sidebar / Table of Contents (Desktop) -->
+<aside class="hidden lg:block w-64 flex-shrink-0 sticky top-24 self-start space-y-8">
+<nav class="glass-card rounded-xl p-6 shadow-lg shadow-slate-200/50">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">Table of Contents</h3>
+<ul class="space-y-3 text-body-sm font-body-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors block" href="#introduction">Introduction</a></li>
+<li><a class="hover:text-primary transition-colors block" href="#the-shift">The Shift to Browser-Side</a></li>
+<li><a class="hover:text-primary transition-colors block pl-4" href="#wasm">The Role of WebAssembly</a></li>
+<li><a class="hover:text-primary transition-colors block" href="#privacy">Privacy First Approach</a></li>
+<li><a class="hover:text-primary transition-colors block" href="#future">Looking Ahead</a></li>
+</ul>
+</nav>
+<div class="glass-card rounded-xl p-6 shadow-lg shadow-slate-200/50 flex flex-col gap-4">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Share Article</span>
+<div class="flex gap-2">
+<button class="p-2 rounded-full bg-surface-container-low hover:bg-primary hover:text-white transition-colors text-on-surface-variant flex items-center justify-center w-10 h-10">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button class="p-2 rounded-full bg-surface-container-low hover:bg-primary hover:text-white transition-colors text-on-surface-variant flex items-center justify-center w-10 h-10">
+<span class="material-symbols-outlined text-[20px]">link</span>
+</button>
+<button class="p-2 rounded-full bg-surface-container-low hover:bg-primary hover:text-white transition-colors text-on-surface-variant flex items-center justify-center w-10 h-10">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Article Container -->
+<article class="flex-grow max-w-[800px] bg-white rounded-2xl border border-outline-variant/30 shadow-sm p-6 md:p-10">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex text-body-sm font-body-sm text-on-surface-variant mb-6">
+<ol class="inline-flex items-center space-x-1 md:space-x-2">
+<li class="inline-flex items-center">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Guides</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<span class="text-on-surface font-medium">Privacy</span>
+</div>
+</li>
+</ol>
+</nav>
+<!-- Header -->
+<header class="mb-10">
+<h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl-mobile md:font-headline-xl text-on-surface mb-4">The Future of Browser-Side PDF Processing</h1>
+<div class="flex items-center gap-4 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img alt="Author Avatar" class="w-full h-full object-cover" data-alt="A small, professional headshot of a woman with dark hair against a soft, light background. The lighting is bright and modern, suitable for a light-mode corporate SaaS platform interface. The image is cropped cleanly into a circle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsWiulOBoHkamGa1mMV9KYB47uHsLY3oJ0hbC08icM8XCsxgN69ZCYmSxiSnZvCbtME0FGiaTUPmdafzqsUvta5KyTZcH-H8WyW97kTXmoAiENzFxr2uqYC6svcbVdszc7LJd7z-dCCp3NSxsVbnfR4AYCHbJbVvgxBkjMHfjI1OSEN7Ra6yURyk9lWjaNULHuXOqeylESWZS_tdp9vo478Q0qyJZdovhMw52AQ24GMa0wBlbUKG4"/>
+</div>
+<span>Sarah Jenkins</span>
+</div>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Oct 24, 2024</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>8 min read</span>
+</div>
+</header>
+<!-- AI Summary Box -->
+<div class="ai-sparkle-bg rounded-xl border border-primary/20 p-6 mb-10 relative overflow-hidden shadow-[0_4px_20px_rgba(37,99,235,0.05)]">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">AI Summary</h2>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                    Browser-side PDF processing represents a paradigm shift in document management, moving complex operations away from centralized servers directly to the user's device. Leveraging technologies like WebAssembly (Wasm), this approach ensures complete data privacy, reduces latency, and enables powerful features like OCR and local AI tagging without compromising sensitive information.
+                </p>
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10"></div>
+</div>
+<!-- Content Body -->
+<div class="prose prose-slate max-w-none prose-headings:font-headline-lg prose-headings:text-on-surface prose-p:font-body-md prose-p:text-on-surface-variant prose-p:leading-[1.8] prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+<h2 class="text-headline-lg font-headline-lg mt-8 mb-4" id="introduction">Introduction to Local Processing</h2>
+<p class="mb-6">
+                    For years, the standard architecture for handling complex document tasks—like merging PDFs, applying OCR, or extracting structured data—relied heavily on server-side processing. Users would upload their sensitive documents to a remote server, wait for the processing to finish, and download the result. While functional, this model introduces significant friction and, more importantly, privacy concerns.
+                </p>
+<figure class="my-8 rounded-xl overflow-hidden border border-outline-variant/30 shadow-sm">
+<img alt="Data visualization representing local processing" class="w-full object-cover" data-alt="A modern, abstract representation of data flowing securely within a localized network. The image features a light, airy background with soft blue and slate tones, illustrating geometric nodes connected by glowing lines. The style is clean, corporate glassmorphism, suitable for a high-end tech blog illustrating browser-side processing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxnFe_qvek0BI-FZF7b0kJcJGytV_0sl733dz4NMVp12Hkg7qLdC_voxdXrbJcGi--AgdspebPSDLxLhWAoHj48XEO7k8AFBNcGmw-YCWt60LLE6gsfl7qcj6-BTgr535O8eMH8mC8_alxB8_e91hwGzrN7uol8qrXdn_CyHJYVdXN67YtoDyQaK4asip0Okyr2an-gfVgznOXKKXcW9NX6OiNcpEaoDEcDuAlkpBgOeVvi52TqM4"/>
+<figcaption class="text-center text-body-sm font-body-sm text-on-surface-variant p-3 bg-surface-container-lowest border-t border-outline-variant/30">Visualizing the shift from server to client-side data flows.</figcaption>
+</figure>
+<h2 class="text-headline-lg font-headline-lg mt-10 mb-4" id="the-shift">The Shift to Browser-Side</h2>
+<p class="mb-6">
+                    The modern web browser is no longer just a document viewer; it's a powerful execution environment capable of running complex applications. This evolution enables tools like DocuScan to perform heavy lifting directly on your machine.
+                </p>
+<h3 class="text-headline-md font-headline-md mt-8 mb-3" id="wasm">The Role of WebAssembly (Wasm)</h3>
+<p class="mb-6">
+                    The catalyst for this revolution is WebAssembly. Wasm allows code written in languages like C++, Rust, or Go to run in the browser at near-native speeds. This means the same robust PDF libraries used on enterprise servers can now be compiled to run securely within your browser tab.
+                </p>
+<ul class="list-disc pl-6 mb-8 space-y-2 text-body-md font-body-md text-on-surface-variant">
+<li><strong>Speed:</strong> Zero upload/download time. Processing happens instantly.</li>
+<li><strong>Reliability:</strong> Works offline or with poor connections once the app is loaded.</li>
+<li><strong>Cost-Effective:</strong> Reduces server infrastructure overhead, allowing for more sustainable pricing models.</li>
+</ul>
+<div class="bg-surface-container-low border-l-4 border-primary p-6 rounded-r-xl my-8">
+<p class="text-body-lg font-body-lg italic text-on-surface">"By moving processing to the edge—right into the user's browser—we aren't just making things faster; we are fundamentally changing the trust model of SaaS applications."</p>
+</div>
+<h2 class="text-headline-lg font-headline-lg mt-10 mb-4" id="privacy">Privacy First Approach</h2>
+<p class="mb-6">
+                    When you process a document locally, the file never leaves your device. This is the cornerstone of a true "Privacy First" architecture. For professionals handling legal contracts, medical records, or sensitive financial data, this isn't just a feature—it's a requirement.
+                </p>
+<p class="mb-6">
+                    By eliminating the server intermediary, the risk of data interception during transit or a breach of the processing server is completely mitigated.
+                </p>
+<h2 class="text-headline-lg font-headline-lg mt-10 mb-4" id="future">Looking Ahead</h2>
+<p class="mb-6">
+                    As browser APIs continue to evolve, we can expect even more sophisticated local capabilities. The integration of local AI models via WebGPU will soon allow for complex semantic analysis and intelligent auto-tagging without ever exposing data to an external API.
+                </p>
+</div>
+<!-- Article Tags -->
+<div class="mt-12 pt-6 border-t border-outline-variant/30 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps rounded-full">PDF Processing</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps rounded-full">WebAssembly</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps rounded-full">Privacy</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps rounded-full">Engineering</span>
+</div>
+</article>
+</main>
+<!-- Related Articles Section -->
+<section class="w-full bg-surface-container-lowest border-t border-outline-variant/30 py-16">
+<div class="max-w-container-max mx-auto px-edge-padding">
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-8 text-center">Related Reading</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<a class="glass-card rounded-xl p-4 transition-all hover:shadow-md hover:-translate-y-1 group flex flex-col" href="#">
+<div class="aspect-video bg-surface-container-high rounded-lg mb-4 overflow-hidden">
+<img alt="Abstract security graphic" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist 3D rendering of a highly secure vault or lock mechanism in bright white and soft slate colors. The lighting is pristine and modern, suggesting advanced digital security in a light-mode environment. Soft shadows give depth to the geometric shapes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqv8H8Br5QCq51yexVgxAKxMXvjgw4PTdrZrRHpzHMTcVVXBb-joJQ0ynnIajLDubO9utYyenuQkIVXcdVnuMV113u3nbUXeYRS5mawZOanu8kKZemjX5mZ0oBRyFuvgogiuxANWBAyFOxYbNlADpdNYJ7ZkkatyZOLoQ2Pgfy-nZvr8I4biT2ogReSbhc5B5XgDuDt5M8ELV9Bnf_OclTwtkfSHCM97MX95BZxIab9kimONsgQx0"/>
+</div>
+<span class="text-label-caps font-label-caps text-primary mb-2 block">Security</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 group-hover:text-primary transition-colors">Understanding Zero-Knowledge Proofs in Document Sharing</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-auto">How modern cryptographic techniques are ensuring that your shared documents remain truly private.</p>
+</a>
+<!-- Card 2 -->
+<a class="glass-card rounded-xl p-4 transition-all hover:shadow-md hover:-translate-y-1 group flex flex-col" href="#">
+<div class="aspect-video bg-surface-container-high rounded-lg mb-4 overflow-hidden relative">
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur text-primary text-xs px-2 py-1 rounded-full flex items-center gap-1 z-10 font-medium border border-primary/20 shadow-sm">
+<span class="material-symbols-outlined text-[12px]">auto_awesome</span> AI
+                        </div>
+<img alt="Dog representing fast processing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sleek, modern depiction of high-speed data processing. A dynamic blur of blue and white light trails flowing horizontally across a clean, light-grey background. The image evokes a sense of efficiency, speed, and advanced technology suitable for a SaaS blog." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRDg4jwtmFwbz0bipzQBywIHxnYyOUMXSa6Mwjoy0hlCiVQj69Te_-zhn-ArhFKjm_XVO0GX7BEVCVy_ApU0-kkjbUm3d5ZImwMYbvOgucXarb9USyJq47duT-GxCQb2E8bmpynmUSfUgIbjgBVBxo5DtXfbdae3rhO8OXga282GoXrilupb69PIaf8LCaiKonQhJVYJC0mtaUZ2uYYsZ7jEnV6t7Oa0-Ck-k-7dJ_igkLKwjwK9k"/>
+</div>
+<span class="text-label-caps font-label-caps text-primary mb-2 block">AI &amp; OCR</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 group-hover:text-primary transition-colors">The Evolution of Optical Character Recognition</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-auto">From basic pattern matching to advanced machine learning models running locally.</p>
+</a>
+<!-- Card 3 -->
+<a class="glass-card rounded-xl p-4 transition-all hover:shadow-md hover:-translate-y-1 group flex flex-col" href="#">
+<div class="aspect-video bg-surface-container-high rounded-lg mb-4 overflow-hidden">
+<img alt="Person working on documents" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A bright, over-the-shoulder shot of a professional working on a laptop with digital document interfaces visible on screen. The setting is a clean, modern, well-lit office environment with plenty of white space and subtle blue accents, aligning with a corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiDZLwNEiXxy5LQg0KgbgiFYN9RpC8zwkg4hpU33SjOZmkVxaxR1n8EMZPXMsQ8zf9Prx80TBYrDivJKJWTMgAnZkYYx4COF2Kd15ExFCR8M4ohhrVOWJVVzCtNOiVdZHvrFutBCfOoKvCJwW9WaSZjhx9SfBq-SJhx-hRywLEQ7LAgqAuXg9rOSb1itg9ODNV0U_sopysqUo72sz7IT3PitH2c30VkZIaXZGlPKjwXgkXkH83qJU"/>
+</div>
+<span class="text-label-caps font-label-caps text-primary mb-2 block">Best Practices</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 group-hover:text-primary transition-colors">Organizing Your Digital Filing Cabinet</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-auto">Actionable strategies for maintaining a clean, searchable, and secure document hierarchy.</p>
+</a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest full-width border-t border-outline-variant/30 flat no shadows w-full py-stack-lg px-edge-padding mt-auto">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">document_scanner</span>
+                DocuScan
+            </div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-center md:text-left">
+                © 2024 DocuScan. Privacy First Document Management.
+            </div>
+<div class="flex flex-wrap justify-center gap-4 text-label-caps font-label-caps">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Trust Center</a>
+</div>
+</div>
+</footer>
+</body></html>

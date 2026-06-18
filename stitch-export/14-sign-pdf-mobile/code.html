@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan - Sign PDF</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0ea5e9",
+                        "primary-container": "#e0f2fe",
+                        "on-primary-container": "#0369a1",
+                        "on-surface": "#0f172a",
+                        "on-surface-variant": "#475569",
+                        surface: "#ffffff",
+                        "surface-variant": "#f1f5f9",
+                        "surface-container-low": "#f8fafc",
+                        "surface-container-highest": "#e2e8f0",
+                        "outline-variant": "#cbd5e1"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans", "sans-serif"],
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Public Sans", "sans-serif"],
+                        "label": ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-drag { cursor: grab; }
+        .signature-drag:active { cursor: grabbing; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-variant text-on-surface min-h-screen flex flex-col relative overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-4 max-w-7xl mx-auto h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">document_scanner</span>
+<span class="text-headline-md font-headline font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</span>
+</div>
+<nav class="hidden md:flex gap-6 h-full items-center">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all px-3 py-2 text-label-caps font-label font-medium flex items-center gap-2 h-max" href="#">Documents</a>
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary h-full flex items-center px-3 hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 transition-all text-label-caps font-label" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all px-3 py-2 text-label-caps font-label font-medium flex items-center gap-2 h-max" href="#">AI Scan ✨</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:block text-label-caps font-label font-medium text-on-surface-variant hover:text-on-surface">Login</button>
+<button class="hidden md:flex items-center justify-center bg-primary text-white rounded-full px-4 py-2 text-label-caps font-label font-medium hover:bg-primary/90 transition-colors">Upload</button>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant transition-colors"><span class="material-symbols-outlined">account_circle</span></button>
+<button class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant transition-colors"><span class="material-symbols-outlined">settings</span></button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content: PDF Viewer & Canvas -->
+<main class="flex-grow flex flex-col md:flex-row relative z-10 w-full max-w-7xl mx-auto md:p-6 gap-6 h-[calc(100vh-64px)] overflow-hidden">
+<!-- Document Canvas Area -->
+<div class="flex-grow bg-surface shadow-sm rounded-xl overflow-hidden relative flex items-center justify-center border border-outline-variant/50 m-4 md:m-0 h-full">
+<!-- Toolbar for PDF -->
+<div class="absolute top-4 left-1/2 -translate-x-1/2 bg-surface-container-highest/80 backdrop-blur rounded-full px-4 py-2 flex items-center gap-4 z-20 shadow-md border border-outline-variant/30">
+<button class="p-1.5 rounded-full hover:bg-surface/80 text-on-surface-variant"><span class="material-symbols-outlined text-sm">zoom_out</span></button>
+<span class="text-body-sm font-medium text-on-surface-variant">100%</span>
+<button class="p-1.5 rounded-full hover:bg-surface/80 text-on-surface-variant"><span class="material-symbols-outlined text-sm">zoom_in</span></button>
+<div class="w-px h-4 bg-outline-variant mx-1"></div>
+<button class="p-1.5 rounded-full hover:bg-surface/80 text-on-surface-variant"><span class="material-symbols-outlined text-sm">undo</span></button>
+<button class="p-1.5 rounded-full hover:bg-surface/80 text-on-surface-variant"><span class="material-symbols-outlined text-sm">redo</span></button>
+</div>
+<!-- PDF Page Mockup -->
+<div class="relative w-full max-w-2xl h-[80%] bg-white shadow-lg border border-outline-variant/20 mx-auto overflow-hidden">
+<img alt="Sample Contract Document" class="w-full h-full object-cover opacity-60" data-alt="A clean, professional legal contract document printed on crisp white paper, viewed from directly above. The text is dense but clearly laid out in typical corporate legal formatting. Soft, even studio lighting illuminates the page, emphasizing a bright, trustworthy, and modern light-mode aesthetic suitable for a document scanning application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBENhqMvs5rv4388K1ayQeqz1dYDGyDwE0BwAH9CvgfqGX_7ShGyBXF52cliVDOhKRCo9Zhn5y_LtQyfRSkENn4alxNLOc_ueP8wJTpj2jTwQRhhaB0LSAppm5-PxMwYsaKPcomKr5L4eroWqfSXAr14vc4tlHfsap5m4UbVU-MpDwHI5OccoGJhLwVPpIvgEEixRW6Kn612DtGVVibg_JT7bFzdUhmxjkjGIpRflhg8O90JW-eU4s"/>
+<!-- Draggable Signature Overlay -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-primary border-dashed rounded-lg p-4 bg-primary-container/20 signature-drag group" id="signature-element" style="width: 200px; height: 80px;">
+<div class="absolute -top-3 -right-3 bg-surface rounded-full shadow border border-outline-variant p-1 hidden group-hover:block cursor-pointer">
+<span class="material-symbols-outlined text-sm text-red-500">close</span>
+</div>
+<div class="absolute -bottom-3 -right-3 bg-primary rounded-full shadow p-1 hidden group-hover:block cursor-se-resize">
+<span class="material-symbols-outlined text-sm text-white">open_in_full</span>
+</div>
+<img alt="Signature" class="w-full h-full object-contain opacity-80" data-alt="A stylized, elegant cursive signature written in dark ink." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApJqjbbs04nyXnIAE5N3765wUoOKTsCjdpS2eM0RHkTbRlnDfIE6fosYZ-AkihsG1vx80_khFtQzeKjnL9gmxMWWRzmWK3h_9Kez_jU9cXVWsqdC-wCMm6Ue7BxTggQL2KMUiI3D2oe3Mcpmq0W9bq8qmR-KxS7p6j189GiIfNScWYu1lZcB7DLLl8Fy3jCB5cBBy1K8bMmmaUPiEkUQt8uGK0TpC4ME40qg6tNt8_zqoK5SPBegk"/>
+</div>
+</div>
+</div>
+<!-- Sidebar / Bottom Sheet for Signature Controls -->
+<aside class="w-full md:w-80 bg-surface shadow-lg rounded-t-2xl md:rounded-xl flex flex-col absolute bottom-0 md:relative md:h-full transition-transform duration-300 transform translate-y-0 z-30 border-t md:border border-outline-variant/50 pb-safe md:pb-0">
+<!-- Mobile Drag Handle -->
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mt-3 mb-2 md:hidden"></div>
+<div class="p-4 border-b border-outline-variant/30 flex justify-between items-center">
+<h2 class="text-headline-sm font-headline font-semibold text-on-surface">Add Signature</h2>
+<button class="md:hidden p-1 rounded-full text-on-surface-variant bg-surface-variant"><span class="material-symbols-outlined">expand_more</span></button>
+</div>
+<!-- Tabs -->
+<div class="flex p-2 bg-surface-container-low m-4 rounded-lg">
+<button class="flex-1 py-2 text-center rounded-md bg-surface shadow-sm text-primary font-medium text-body-sm transition-all">Draw</button>
+<button class="flex-1 py-2 text-center rounded-md text-on-surface-variant font-medium text-body-sm hover:text-on-surface transition-all">Type</button>
+</div>
+<!-- Draw Pad Area -->
+<div class="px-4 flex-grow flex flex-col">
+<div class="flex justify-between items-center mb-2">
+<span class="text-body-sm text-on-surface-variant">Sign below</span>
+<button class="text-body-sm text-primary hover:underline">Clear</button>
+</div>
+<div class="bg-surface-variant rounded-xl border border-outline-variant/50 flex-grow min-h-[150px] md:min-h-[200px] relative cursor-crosshair flex items-center justify-center">
+<span class="text-on-surface-variant/30 material-symbols-outlined text-4xl">draw</span>
+</div>
+<!-- Color/Thickness tools -->
+<div class="flex justify-between items-center mt-4">
+<div class="flex gap-2">
+<button class="w-6 h-6 rounded-full bg-black ring-2 ring-offset-1 ring-primary"></button>
+<button class="w-6 h-6 rounded-full bg-blue-600"></button>
+<button class="w-6 h-6 rounded-full bg-red-600"></button>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">line_weight</span>
+<input class="w-20 accent-primary" max="10" min="1" type="range" value="3"/>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="p-4 mt-auto border-t border-outline-variant/30 bg-surface md:rounded-b-xl flex flex-col gap-3">
+<button class="w-full py-2.5 rounded-lg border border-outline-variant text-on-surface font-medium hover:bg-surface-variant transition-colors">Apply Signature</button>
+<button class="w-full py-3 rounded-lg bg-primary text-white font-semibold shadow-md shadow-primary/20 hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm text-white">download</span>
+                    Download signed PDF
+                </button>
+</div>
+</aside>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface/90 backdrop-blur-xl dark:bg-surface-container-highest/90 fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)] flex justify-around items-center py-3 px-4 md:hidden pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 transition-all rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-body-sm font-label text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 transition-all rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined mb-1">document_scanner</span>
+<span class="text-body-sm font-label text-[10px]">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-body-sm font-label text-[10px]">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 transition-all rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined mb-1">folder_open</span>
+<span class="text-body-sm font-label text-[10px]">Library</span>
+</a>
+</nav>
+<script>
+        // Simple drag implementation for visual effect only
+        const dragElement = document.getElementById('signature-element');
+        let isDragging = false;
+        let startX, startY, initialX, initialY;
+
+        dragElement.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        function dragStart(e) {
+            if(e.target.closest('button') || e.target.closest('.cursor-se-resize')) return;
+            isDragging = true;
+            const style = window.getComputedStyle(dragElement);
+            // Quick hack for absolute positioning
+            initialX = e.clientX - parseInt(style.left || 0);
+            initialY = e.clientY - parseInt(style.top || 0);
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const currentX = e.clientX - initialX;
+            const currentY = e.clientY - initialY;
+            dragElement.style.transform = `translate(0, 0)`; // reset translate to use left/top simply
+            dragElement.style.left = `${currentX}px`;
+            dragElement.style.top = `${currentY}px`;
+        }
+
+        function dragEnd() {
+            isDragging = false;
+        }
+    </script>
+</body></html>

@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #fff7ed;
+  --color-brand-100: #ffedd5;
+  --color-brand-200: #fed7aa;
+  --color-brand-300: #fdba74;
+  --color-brand-500: #f97316;
+  --color-brand-600: #ea580c;
+  --color-brand-700: #c2410c;
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+
+  /* AI accent — violet, reserved for smart features (per DocuScan Design System). */
+  --color-ai-50: #f5f3ff;
+  --color-ai-100: #ede9fe;
+  --color-ai-200: #ddd6fe;
+  --color-ai-300: #c4b5fd;
+  --color-ai-500: #8b5cf6;
+  --color-ai-600: #7c3aed;
+  --color-ai-700: #6d28d9;
+
+  /* Inter, loaded via next/font (--font-inter is set on <html>). */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Soft ambient elevation — the "stacked paper" feel for floating surfaces. */
+  --shadow-card: 0 4px 20px rgb(15 23 42 / 0.05);
+
+  /* Stronger easing curves — the CSS built-ins are too weak to feel intentional. */
+  --ease-snappy: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-smooth: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background: #f8fafc;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--color-brand-100);
+  color: var(--color-brand-700);
+}
+
+/* Visible, consistent keyboard focus everywhere. Pointer interactions stay clean. */
+:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---- Press feedback ----------------------------------------------------- */
+/* Any pressable element. Buttons must feel like they heard the press. */
+.press {
+  transition: transform 150ms var(--ease-snappy);
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+/* ---- Select control ----------------------------------------------------- */
+/* Native <select> reskinned to the brand scheme: appearance reset, custom
+   chevron, brand hover/focus. Keeps native semantics & accessibility. Apply
+   alongside layout classes (sizing/padding) — see globals focus-visible. */
+.ds-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23ea580c'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpolyline%20points='6%209%2012%2015%2018%209'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.625rem center;
+  background-size: 1.1em;
+  padding-right: 2.25rem;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color 150ms var(--ease-snappy),
+    box-shadow 150ms var(--ease-snappy);
+}
+.ds-select:hover {
+  border-color: var(--color-brand-300);
+}
+.ds-select:focus {
+  border-color: var(--color-brand-500);
+}
+/* The popup list — supported where browsers honor option styling. */
+.ds-select option {
+  color: var(--color-ink);
+  background: #fff;
+}
+
+/* ---- Loading spinner ---------------------------------------------------- */
+/* Intentionally fast — a quick spinner makes loading feel faster. */
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: ds-spin 600ms linear infinite;
+  vertical-align: -0.125em;
+}
+
+/* ---- Entrance animations ------------------------------------------------ */
+.animate-overlay {
+  animation: ds-overlay 200ms ease both;
+}
+.animate-modal {
+  /* Modals stay centered — transform-origin: center is correct here. */
+  animation: ds-modal-in 220ms var(--ease-snappy) both;
+}
+.animate-pop {
+  animation: ds-pop 180ms var(--ease-snappy) both;
+}
+.animate-slide-up {
+  animation: ds-slide-up 260ms var(--ease-snappy) both;
+}
+.animate-rise {
+  animation: ds-rise 320ms var(--ease-snappy) both;
+}
+
+/* ---- Stitch design-system surfaces -------------------------------------- */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  line-height: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.glass-card {
+  background: rgb(255 255 255 / 0.7);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(255 255 255 / 0.3);
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0) 0%,
+    rgb(255 255 255 / 0.4) 50%,
+    rgb(255 255 255 / 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: ds-shimmer 3s infinite linear;
+}
+@keyframes ds-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes ds-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ds-overlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes ds-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ds-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ds-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ds-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Reduced motion ----------------------------------------------------- */
+/* Keep comprehension cues (opacity), drop movement. Spinner stays — it's
+   functional feedback, not decoration. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-modal,
+  .animate-pop,
+  .animate-slide-up,
+  .animate-rise {
+    animation: ds-overlay 160ms ease both;
+  }
+  .press:active {
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan - Guides &amp; Blog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#434655",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0053db",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e1e2ed",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary": "#6b38d4",
+                        "primary-container": "#2563eb",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-tertiary-container": "#ffede6",
+                        "tertiary-container": "#bc4800",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#23005c",
+                        "surface-container-highest": "#e1e2ed",
+                        "inverse-surface": "#2e3039",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#360f00",
+                        "background": "#faf8ff",
+                        "surface-container-low": "#f3f3fe",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d9d9e5",
+                        "secondary-container": "#8455ef",
+                        "outline": "#737686",
+                        "primary": "#004ac6",
+                        "surface-container": "#ededf9",
+                        "tertiary": "#943700",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "inverse-primary": "#b4c5ff",
+                        "surface": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e7e7f3",
+                        "secondary-fixed": "#e9ddff",
+                        "on-surface": "#191b23",
+                        "on-primary-container": "#eeefff",
+                        "on-background": "#191b23"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "1.5rem",
+                        "stack-md": "1rem",
+                        "stack-lg": "2rem",
+                        "container-max": "1024px",
+                        "edge-padding": "1rem",
+                        "stack-sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none hidden md:block">
+<div class="flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<!-- Brand -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</span>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps uppercase tracking-wider" href="#">Documents</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps uppercase tracking-wider" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps uppercase tracking-wider flex items-center gap-1" href="#">AI Scan ✨</a>
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary text-label-caps font-label-caps uppercase tracking-wider pb-1" href="#">Blog</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<div class="flex gap-2 text-on-surface-variant">
+<button class="hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all p-2 flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all p-2 flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<button class="text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface transition-colors">Login</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-label-caps font-label-caps hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm">
+                    Upload
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="w-full px-edge-padding max-w-container-max mx-auto py-stack-lg md:py-12 flex flex-col gap-stack-lg md:gap-12 pb-24 md:pb-12">
+<!-- Header Section -->
+<div class="text-center max-w-2xl mx-auto flex flex-col gap-stack-sm">
+<h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl-mobile md:font-headline-xl text-on-surface">Guides &amp; Blog</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Tips, tutorials, and insights for better document management and privacy.</p>
+</div>
+<!-- Featured Article (Hero) -->
+<section class="group cursor-pointer">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 grid md:grid-cols-2 gap-0 relative">
+<!-- Image -->
+<div class="relative h-64 md:h-full w-full overflow-hidden bg-surface-container">
+<img alt="A modern workspace with a computer screen showing digital documents and security icons, bathed in soft, cool blue and white light. The setting suggests a high-tech, professional environment focused on data privacy and digital security. The mood is analytical, clean, and forward-looking, utilizing a sleek light-mode color palette." class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700" data-alt="A modern workspace with a computer screen showing digital documents and security icons, bathed in soft, cool blue and white light. The setting suggests a high-tech, professional environment focused on data privacy and digital security. The mood is analytical, clean, and forward-looking, utilizing a sleek light-mode color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvAAqlIxXg0JyaCNYiEzC0xQVjZsjgvps3e9PQHhU3xJYU3_vzUStbL9C4pr1WNigHSbPvAtqsg6D8DwrX_OHejLrSoJLjcDT_-I2uoalwh5i1a4WQ6B19UdGb8OVGrnRmrMYgfsqeTddbHzd2I7pTNs-N7-Jhzorac73hM1AyJcQdLBI9m20bXAMwwMGAtOKAASqDNMWoMMtvDoRGGuToi9yhun_ubVG2kQ2n68-VcZhrI4XxgFM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<!-- Content -->
+<div class="p-6 md:p-10 flex flex-col justify-center gap-stack-md">
+<div class="flex items-center gap-3">
+<span class="bg-secondary-container/20 text-secondary-container px-3 py-1 rounded-full text-label-caps font-label-caps">Privacy</span>
+<span class="text-on-surface-variant text-body-sm font-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 8 min read
+                        </span>
+</div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface group-hover:text-primary transition-colors">How to redact PII from PDFs locally</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Learn how to securely remove Personally Identifiable Information from your documents without uploading them to the cloud. We explore local-first tools and techniques.</p>
+<div class="mt-4 flex items-center text-primary font-semibold text-body-md">
+                        Read Article <span class="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Filters -->
+<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-edge-padding px-edge-padding md:mx-0 md:px-0">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full text-body-sm font-body-sm whitespace-nowrap shadow-sm">All Articles</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-variant px-4 py-2 rounded-full text-body-sm font-body-sm whitespace-nowrap transition-colors border border-outline-variant/30">Privacy</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-variant px-4 py-2 rounded-full text-body-sm font-body-sm whitespace-nowrap transition-colors border border-outline-variant/30">AI Tips ✨</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-variant px-4 py-2 rounded-full text-body-sm font-body-sm whitespace-nowrap transition-colors border border-outline-variant/30">PDF Basics</button>
+</div>
+<!-- Article Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] transition-all duration-300 group flex flex-col cursor-pointer">
+<div class="relative h-48 w-full overflow-hidden bg-surface-container">
+<img alt="Abstract digital representation of artificial intelligence scanning documents. A glowing, soft violet aura surrounds abstract geometric paper shapes on a pristine white background. The style is modern, glassmorphic, and implies intelligent, automated processing in a clean, professional software environment." class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="Abstract digital representation of artificial intelligence scanning documents. A glowing, soft violet aura surrounds abstract geometric paper shapes on a pristine white background. The style is modern, glassmorphic, and implies intelligent, automated processing in a clean, professional software environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcHJagibgUtz70MFuC60bdLI_6Z6PqyppyYbc_GBquCJ5HxC2P1DUtTCZlp3MQVZ3hRi4aEyykK12qE9o7WAJY7w8FGc-wVMTWAL899QQ7VYv2zFoNOrvlgczTBFFZhGN7cI31dyIBF4fKf24Ui3W6mWeFV2TXo4qj6eq-PJfCcDzrOg3n-3YLBbZchZ9hIBKad4DOPmf1MKw3vnVGyQ_lsn7RNnU7MsyjJ1Xv5fnNhWhEHRyOHvI"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-[10px] font-bold text-secondary uppercase tracking-wider flex items-center gap-1">
+                        AI Tips ✨
+                    </div>
+</div>
+<div class="p-5 flex flex-col gap-3 flex-grow">
+<div class="text-on-surface-variant text-body-sm font-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 12 • 5 min read
+                    </div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface group-hover:text-primary transition-colors leading-tight">Mastering Auto-Tagging for Large Archives</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-3">Discover how to leverage on-device AI to automatically categorize and tag thousands of legacy documents quickly and accurately.</p>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] transition-all duration-300 group flex flex-col cursor-pointer">
+<div class="relative h-48 w-full overflow-hidden bg-surface-container">
+<img alt="A neatly organized stack of crisp white papers resting on a sleek, light grey desk. Soft, natural light casts gentle shadows, emphasizing the physical nature of documents before digitization. The overall aesthetic is minimalist, calm, and highly organized, reflecting efficient document management." class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="A neatly organized stack of crisp white papers resting on a sleek, light grey desk. Soft, natural light casts gentle shadows, emphasizing the physical nature of documents before digitization. The overall aesthetic is minimalist, calm, and highly organized, reflecting efficient document management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6IOf2_zKsxaNjZKIupevV_JjIEIkmEwkDNt2fFpptry4Eyq8hypbOp-iV24Ke0tlTqVh_5tQJTdHBGEwbLFdNKVs97QF2IpH36BOh4qUyZgJ0nynHeJ7Dmdf-vHpxx7O0QHkRUdNU5TCp9GgFRc_HmM07Jjjbo9hssYEeLeju_f-GT_Tr3cGKEIVwCfIb7pxqK4odncPMpT3QdmR2aHckm7FX1XWFW2dnSYkD5gtv3UE23Opa1KE"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-[10px] font-bold text-primary uppercase tracking-wider flex items-center gap-1">
+                        PDF Basics
+                    </div>
+</div>
+<div class="p-5 flex flex-col gap-3 flex-grow">
+<div class="text-on-surface-variant text-body-sm font-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 05 • 4 min read
+                    </div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface group-hover:text-primary transition-colors leading-tight">Compressing PDFs Without Losing Quality</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-3">A practical guide to reducing file sizes for easier sharing and storage, while maintaining crisp text and clear images.</p>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] transition-all duration-300 group flex flex-col cursor-pointer">
+<div class="relative h-48 w-full overflow-hidden bg-surface-container">
+<img alt="A close-up of a digital padlock icon illuminated on a bright screen, surrounded by subtle code elements. The color palette is strictly professional, featuring bright whites, soft grays, and a reassuring deep blue. The image conveys strong security, trust, and data protection in a modern software context." class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="A close-up of a digital padlock icon illuminated on a bright screen, surrounded by subtle code elements. The color palette is strictly professional, featuring bright whites, soft grays, and a reassuring deep blue. The image conveys strong security, trust, and data protection in a modern software context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkGnfjQJubj07rA-6D4NrEgTQoMl3a5Kzir7lo1v9PCkw_RF7nXGteGtUUZe4G0_IWHNBcqrDtxUde5ZpMNwz4Ky1-UeBC2sQLVBM4MXLtpER3nKljQmDIwxVbJ98hAPPACZxrvJc8U_FQe5exZvoOj4lEIBogTwy4TBA1XzvwD3C1DKI_uDGswU_-zM4MX1iyR077sy7XOIBB836tcZBkehUSzpxJ0mC1LQ1LfPPWBopASxzS-zc"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-[10px] font-bold text-secondary-container uppercase tracking-wider flex items-center gap-1">
+                        Privacy
+                    </div>
+</div>
+<div class="p-5 flex flex-col gap-3 flex-grow">
+<div class="text-on-surface-variant text-body-sm font-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span> Sep 28 • 6 min read
+                    </div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface group-hover:text-primary transition-colors leading-tight">Understanding Document Encryption Standards</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-3">Demystifying AES-256 and why it matters for your sensitive legal and financial documents stored locally.</p>
+</div>
+</article>
+</div>
+<!-- Load More -->
+<div class="flex justify-center mt-4">
+<button class="bg-surface-container text-on-surface px-6 py-3 rounded-lg text-body-md font-body-md hover:bg-surface-variant transition-colors border border-outline-variant/30 flex items-center gap-2">
+                Load More Articles <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface/90 backdrop-blur-xl dark:bg-surface-container-highest/90 fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)] md:hidden">
+<div class="flex justify-around items-center w-full py-3 px-4">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-[10px] mt-1 font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]">document_scanner</span>
+<span class="text-[10px] mt-1 font-medium">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]">grid_view</span>
+<span class="text-[10px] mt-1 font-medium">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+<span class="text-[10px] mt-1 font-medium">Library</span>
+</a>
+</div>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest border-t border-outline-variant/30 full-width mt-auto">
+<div class="w-full py-stack-lg px-edge-padding max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface">document_scanner</span>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">DocuScan</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps uppercase tracking-wider" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps uppercase tracking-wider" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps uppercase tracking-wider" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps uppercase tracking-wider" href="#">Trust Center</a>
+</nav>
+<div class="text-on-surface-variant text-body-sm font-body-sm text-center md:text-right">
+                © 2024 DocuScan. Privacy First Document Management.
+            </div>
+</div>
+</footer>
+</body></html>

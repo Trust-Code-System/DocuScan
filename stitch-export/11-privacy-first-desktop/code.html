@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan | How Privacy Works</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#191b23",
+                    "on-primary-fixed": "#00174b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "inverse-surface": "#2e3039",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c3c6d7",
+                    "secondary-container": "#8455ef",
+                    "secondary": "#6b38d4",
+                    "on-primary-container": "#eeefff",
+                    "surface-bright": "#faf8ff",
+                    "surface-variant": "#e1e2ed",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#ffede6",
+                    "on-background": "#191b23",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#d9d9e5",
+                    "error": "#ba1a1a",
+                    "background": "#faf8ff",
+                    "surface-container-high": "#e7e7f3",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-fixed": "#360f00",
+                    "outline": "#737686",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "on-secondary-fixed": "#23005c",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "surface-container": "#ededf9",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "primary": "#004ac6",
+                    "surface-container-highest": "#e1e2ed",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "on-secondary-container": "#fffbff",
+                    "on-surface-variant": "#434655",
+                    "inverse-on-surface": "#f0f0fb",
+                    "tertiary": "#943700",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f3f3fe",
+                    "surface": "#faf8ff",
+                    "tertiary-fixed": "#ffdbcd",
+                    "tertiary-container": "#bc4800",
+                    "secondary-fixed": "#e9ddff",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "primary-container": "#2563eb",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#0053db"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "2rem",
+                    "stack-md": "1rem",
+                    "gutter": "1.5rem",
+                    "stack-sm": "0.5rem",
+                    "edge-padding": "1rem",
+                    "container-max": "1024px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-xl-mobile": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-xl-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(225, 226, 237, 0.5);
+        }
+        .ai-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(132, 85, 239, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<div class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">
+                DocuScan
+            </div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps" href="#">Documents</a>
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary text-label-caps font-label-caps" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps" href="#">AI Scan ✨</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="hidden md:flex px-4 py-2 text-primary hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all font-semibold active:scale-95 duration-150 transition-transform">Login</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold shadow-md active:scale-95 duration-150 transition-transform">Upload</button>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer ml-2">account_circle</span>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-edge-padding pt-stack-lg pb-24">
+<!-- Hero Section -->
+<section class="py-16 md:py-24 text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container/10 border border-secondary-container/20 text-secondary mb-6 animate-pulse">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="text-label-caps font-label-caps">Privacy First Infrastructure</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-6 tracking-tight">
+                How Your Privacy is <br class="hidden md:block"/> <span class="text-primary">Guaranteed</span> by Design
+            </h1>
+<p class="max-w-2xl mx-auto text-body-lg font-body-lg text-on-surface-variant leading-relaxed">
+                We believe your documents should never leave your sight. DocuScan uses cutting-edge browser-side processing to ensure data sovereignty.
+            </p>
+</section>
+<!-- Bento Grid Features -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Feature 1: No Uploads -->
+<div class="md:col-span-8 glass-card rounded-xl p-8 flex flex-col justify-between relative overflow-hidden group shadow-sm">
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">cloud_off</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4">No Uploads to Servers</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6 max-w-lg leading-relaxed">
+                        Traditional scanners upload your private PDFs to their cloud for OCR. DocuScan breaks this cycle. Your browser acts as the engine, processing every pixel locally.
+                    </p>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 text-body-md">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-full text-sm font-bold">check</span>
+                            Zero-knowledge architecture
+                        </li>
+<li class="flex items-center gap-3 text-body-md">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-full text-sm font-bold">check</span>
+                            WASm powered local OCR engine
+                        </li>
+<li class="flex items-center gap-3 text-body-md">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-full text-sm font-bold">check</span>
+                            Instant deletion upon tab closure
+                        </li>
+</ul>
+</div>
+<div class="mt-8 border-t border-outline-variant/30 pt-6 flex items-center justify-between">
+<span class="text-label-caps font-label-caps text-on-surface-variant">TRUST SCORE: 99.9%</span>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-slate-200"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-slate-300"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-slate-400"></div>
+</div>
+</div>
+</div>
+<!-- Feature 2: Browser Only -->
+<div class="md:col-span-4 bg-on-surface text-on-primary rounded-xl p-8 flex flex-col justify-between shadow-xl">
+<div>
+<span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-6">browser_updated</span>
+<h2 class="font-headline-md text-headline-md mb-4 text-white">Browser-Only Scanning</h2>
+<p class="text-body-sm font-body-sm text-surface-variant/80 mb-6 leading-relaxed">
+                        Leveraging the latest WebAPI standards to turn your Chrome, Safari, or Firefox into a high-performance workstation.
+                    </p>
+</div>
+<div class="bg-surface-container-highest/10 rounded-lg p-4 border border-surface-variant/10">
+<div class="flex items-center justify-between text-label-caps font-label-caps mb-2 opacity-60">
+<span>Local RAM Usage</span>
+<span>42MB</span>
+</div>
+<div class="h-1 w-full bg-surface-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[35%]"></div>
+</div>
+</div>
+</div>
+<!-- Feature 3: Encryption -->
+<div class="md:col-span-12 glass-card rounded-xl p-8 border-2 border-primary/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+<div class="flex flex-col md:flex-row gap-gutter items-center">
+<div class="md:w-1/2">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">enhanced_encryption</span>
+                            AES-256 Encryption
+                        </h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-8">
+                            Any data that requires temporary storage for session persistence is scrambled using military-grade AES-256 encryption before it hits the local storage. Not even we can see it.
+                        </p>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 rounded-lg bg-surface-container-low border border-outline-variant/30">
+<h4 class="font-bold text-primary mb-1">256-bit</h4>
+<p class="text-body-sm opacity-70">Symmetric key depth</p>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low border border-outline-variant/30">
+<h4 class="font-bold text-primary mb-1">LocalOnly</h4>
+<p class="text-body-sm opacity-70">Key management</p>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 relative group">
+<img alt="Encryption visual" class="rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" data-alt="A macro photograph of high-tech circuit boards with glowing blue digital pathways representing military-grade encryption. The lighting is moody and cinematic, emphasizing secure technology and advanced data protection in a clean, modern lab setting with soft bokeh highlights. The aesthetic is professional and secure, using a palette of deep slates and electric blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjV-OaZwvR4dAccJQtjCfc1zR96UAQ4wVu9Y33bSbZxAx0BasPGF5jDcGyDWWBNnnNp4OT3-oWwDpA_8poYQMzs1PMpEAwn8xTjP86Xil7zpov5-lgJbntEWIW7D76ITdmB1LPT49SjO2w8CvBudWUkv9UVNzagE-98s0JdriGxUDb15jnmPQ5Nn2V3FZj2XO21z2d_2l0vmLYfP7X7a_QHBNdlq5mTvEyjpd7ZJei2K1cQAe6Ig4"/>
+<div class="absolute inset-0 bg-primary/10 rounded-xl mix-blend-overlay"></div>
+<div class="absolute bottom-4 left-4 right-4 p-4 glass-card rounded-lg flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">security</span>
+</div>
+<div>
+<p class="text-label-caps font-label-caps text-on-surface">Verified Secure</p>
+<p class="text-xs text-on-surface-variant">SOC2 Type II Compliant</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Icons -->
+<section class="mt-24 border-y border-outline-variant/30 py-12 flex flex-wrap justify-center md:justify-between items-center gap-8 grayscale opacity-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-4xl">shield_lock</span>
+<span class="font-bold text-headline-sm">PrivacySafe</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-4xl">verified</span>
+<span class="font-bold text-headline-sm">TrustCenter</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-4xl">gpp_good</span>
+<span class="font-bold text-headline-sm">GDPR Ready</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-4xl">lock_open</span>
+<span class="font-bold text-headline-sm">OpenAudit</span>
+</div>
+</section>
+<!-- Technical Deep Dive (Optional Engagement) -->
+<section class="mt-24 text-center">
+<h3 class="font-headline-md text-headline-md mb-8">Ready to experience privacy first?</h3>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all active:scale-95">Start Scanning Now</button>
+<button class="bg-white border border-outline-variant px-8 py-4 rounded-xl font-bold hover:bg-surface-container-low transition-all active:scale-95">View Security Whitepaper</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface/90 backdrop-blur-xl dark:bg-surface-container-highest/90 border-t border-outline-variant/50 shadow-lg md:hidden flex justify-around items-center py-3 px-4">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-body-sm font-body-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined active-fill">document_scanner</span>
+<span class="text-body-sm font-body-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-body-sm font-body-sm">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="text-body-sm font-body-sm">Library</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-edge-padding max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md bg-surface-container-low dark:bg-surface-container-highest border-t border-outline-variant/30">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface">DocuScan</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant dark:text-surface-variant">© 2024 DocuScan. Privacy First Document Management.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-gutter">
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Security</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Trust Center</a>
+</div>
+</footer>
+<script>
+        // Smooth reveal interaction for cards on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card, .bg-on-surface').forEach(card => {
+            card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

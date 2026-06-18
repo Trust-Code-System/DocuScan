@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing - DocuScan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#434655",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0053db",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e1e2ed",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary": "#6b38d4",
+                        "primary-container": "#2563eb",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-tertiary-container": "#ffede6",
+                        "tertiary-container": "#bc4800",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#23005c",
+                        "surface-container-highest": "#e1e2ed",
+                        "inverse-surface": "#2e3039",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#360f00",
+                        "background": "#faf8ff",
+                        "surface-container-low": "#f3f3fe",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d9d9e5",
+                        "secondary-container": "#8455ef",
+                        "outline": "#737686",
+                        "primary": "#004ac6",
+                        "surface-container": "#ededf9",
+                        "tertiary": "#943700",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "inverse-primary": "#b4c5ff",
+                        "surface": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e7e7f3",
+                        "secondary-fixed": "#e9ddff",
+                        "on-surface": "#191b23",
+                        "on-primary-container": "#eeefff",
+                        "on-background": "#191b23"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "1.5rem",
+                        "stack-md": "1rem",
+                        "stack-lg": "2rem",
+                        "container-max": "1024px",
+                        "edge-padding": "1rem",
+                        "stack-sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .sparkle-gradient {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(208, 188, 255, 0.3) 100%);
+        }
+        .pro-glow {
+            box-shadow: 0 0 40px rgba(107, 56, 212, 0.15), inset 0 0 0 1px rgba(107, 56, 212, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</span>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all px-3 py-2 text-label-caps font-label-caps" href="#">Documents</a>
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all px-3 py-2 text-label-caps font-label-caps" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all px-3 py-2 text-label-caps font-label-caps flex items-center gap-1" href="#">AI Scan ✨</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:inline-flex text-on-surface-variant hover:text-on-surface text-label-caps font-label-caps transition-colors">Login</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-label-caps font-label-caps hover:bg-on-primary-fixed-variant transition-colors shadow-sm">Upload</button>
+<div class="hidden md:flex gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">account_circle</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">settings</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-start w-full px-edge-padding py-12 md:py-20 relative overflow-hidden">
+<!-- Abstract Background Decoration -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary-fixed-dim blur-3xl mix-blend-multiply"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-secondary-fixed blur-3xl mix-blend-multiply"></div>
+</div>
+<div class="max-w-container-max w-full relative z-10">
+<!-- Header Section -->
+<div class="text-center mb-16">
+<h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl-mobile md:font-headline-xl text-on-surface mb-4">Simple, transparent pricing</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto">Choose the plan that fits your document management needs. Scale effortlessly as your requirements grow.</p>
+<!-- Toggle -->
+<div class="mt-8 flex items-center justify-center gap-4">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Monthly</span>
+<button aria-pressed="false" class="w-14 h-8 bg-surface-variant rounded-full p-1 flex items-center cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 relative" id="billing-toggle">
+<div class="w-6 h-6 bg-white rounded-full shadow-sm transform transition-transform duration-300 translate-x-0" id="toggle-knob"></div>
+</button>
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-body-sm text-on-surface">Yearly</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-label-caps px-2 py-0.5 rounded-full uppercase tracking-wider">Save 20%</span>
+</div>
+</div>
+</div>
+<!-- Pricing Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+<!-- Free Tier -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-8 flex flex-col h-full shadow-sm relative overflow-hidden">
+<div class="mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">Free</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-headline-lg font-headline-lg text-on-surface">$0</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">/mo</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2">Perfect for casual users needing basic scanning.</p>
+</div>
+<ul class="flex flex-col gap-4 mb-8 flex-grow">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant">Basic tools</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant">20MB storage limit</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant">5 AI scans per day</span>
+</li>
+</ul>
+<button class="w-full bg-surface-container-high text-on-surface-variant hover:bg-outline-variant hover:text-on-surface py-3 rounded-lg text-label-caps font-label-caps transition-colors border border-outline-variant/30">Get Started</button>
+</div>
+<!-- Pro Tier (Highlighted) -->
+<div class="bg-surface-container-lowest border-2 border-primary rounded-xl p-8 flex flex-col h-full pro-glow relative transform md:-translate-y-4">
+<div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+<span class="bg-primary text-on-primary text-label-caps font-label-caps px-4 py-1 rounded-full shadow-md uppercase tracking-wider">Most Popular</span>
+</div>
+<div class="mb-6 mt-2 relative z-10">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Pro</h3>
+<span class="material-symbols-outlined text-secondary text-[24px]">magic_button</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-headline-xl font-headline-xl text-on-surface">$9</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">/mo</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2">Advanced features for power users and professionals.</p>
+</div>
+<div class="absolute inset-0 sparkle-gradient opacity-50 pointer-events-none"></div>
+<ul class="flex flex-col gap-4 mb-8 flex-grow relative z-10">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">Unlimited tools</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">2GB storage limit</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant font-medium flex items-center gap-1">Priority AI <span class="text-secondary text-xs">✨</span></span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">Batch processing</span>
+</li>
+</ul>
+<button class="w-full bg-primary text-on-primary hover:bg-on-primary-fixed-variant py-3 rounded-lg text-label-caps font-label-caps transition-colors shadow-md relative z-10">Get Started</button>
+</div>
+<!-- Team Tier -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-8 flex flex-col h-full shadow-sm relative overflow-hidden">
+<div class="mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2">Team</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-headline-lg font-headline-lg text-on-surface">$29</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">/mo</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2">Collaborative workspace for teams and small businesses.</p>
+</div>
+<ul class="flex flex-col gap-4 mb-8 flex-grow">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant">Shared workspace</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant">Audit logs</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant">API access</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+<span class="text-body-md font-body-md text-on-surface-variant">Everything in Pro</span>
+</li>
+</ul>
+<button class="w-full bg-surface-container-high text-on-surface-variant hover:bg-outline-variant hover:text-on-surface py-3 rounded-lg text-label-caps font-label-caps transition-colors border border-outline-variant/30">Contact Sales</button>
+</div>
+</div>
+<!-- Trusted By Section -->
+<div class="mt-24 text-center border-t border-outline-variant/30 pt-12">
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-8 uppercase tracking-widest">Trusted by 50,000+ professionals</p>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<!-- Placeholders for logos -->
+<div class="h-8 w-24 bg-surface-variant rounded flex items-center justify-center text-xs text-outline font-medium">Acme Corp</div>
+<div class="h-8 w-24 bg-surface-variant rounded flex items-center justify-center text-xs text-outline font-medium">Global Tech</div>
+<div class="h-8 w-24 bg-surface-variant rounded flex items-center justify-center text-xs text-outline font-medium">Innovate LLC</div>
+<div class="h-8 w-24 bg-surface-variant rounded flex items-center justify-center text-xs text-outline font-medium">Nexus Systems</div>
+<div class="h-8 w-24 bg-surface-variant rounded flex items-center justify-center text-xs text-outline font-medium hidden md:flex">Pinnacle AI</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest border-t border-outline-variant/30 w-full py-stack-lg px-edge-padding max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md mt-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">DocuScan</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+            © 2024 DocuScan. Privacy First Document Management.
+        </div>
+<nav class="flex flex-wrap gap-4 justify-center md:justify-end text-label-caps font-label-caps">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Trust Center</a>
+</nav>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface/90 backdrop-blur-xl dark:bg-surface-container-highest/90 fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)] shadow-lg flex justify-around items-center py-3 px-4 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-body-sm font-body-sm text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">document_scanner</span>
+<span class="text-body-sm font-body-sm text-[10px]">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-body-sm font-body-sm text-[10px]">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">folder_open</span>
+<span class="text-body-sm font-body-sm text-[10px]">Library</span>
+</a>
+</nav>
+<script>
+        // Simple toggle logic for visual effect
+        const toggle = document.getElementById('billing-toggle');
+        const knob = document.getElementById('toggle-knob');
+        let isYearly = false;
+
+        toggle.addEventListener('click', () => {
+            isYearly = !isYearly;
+            toggle.setAttribute('aria-pressed', isYearly);
+            
+            if (isYearly) {
+                toggle.classList.add('bg-primary');
+                toggle.classList.remove('bg-surface-variant');
+                knob.classList.add('translate-x-6');
+                knob.classList.remove('translate-x-0');
+            } else {
+                toggle.classList.remove('bg-primary');
+                toggle.classList.add('bg-surface-variant');
+                knob.classList.remove('translate-x-6');
+                knob.classList.add('translate-x-0');
+            }
+            // In a real app, update pricing numbers here
+        });
+    </script>
+</body></html>

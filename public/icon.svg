@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="DocuScan logo">
+  <defs>
+    <linearGradient id="ds-bg" x1="86" y1="63" x2="426" y2="449" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb923c"/>
+      <stop offset="0.54" stop-color="#f97316"/>
+      <stop offset="1" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="ds-paper" x1="181" y1="112" x2="332" y2="390" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#fff7ed"/>
+    </linearGradient>
+    <filter id="ds-shadow" x="94" y="80" width="324" height="352" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#7c2d12" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="116" fill="url(#ds-bg)"/>
+  <path d="M101 336c42 44 99 70 161 70 68 0 129-31 171-79" fill="none" stroke="#fed7aa" stroke-width="20" stroke-linecap="round" opacity="0.45"/>
+  <path d="M82 174c43-44 101-68 164-68 66 0 127 28 169 74" fill="none" stroke="#fff7ed" stroke-width="18" stroke-linecap="round" opacity="0.24"/>
+
+  <g filter="url(#ds-shadow)">
+    <path d="M170 103h127l65 67v228c0 15-12 27-27 27H170c-15 0-27-12-27-27V130c0-15 12-27 27-27Z" fill="url(#ds-paper)"/>
+    <path d="M296 104v48c0 15 12 27 27 27h39l-66-75Z" fill="#fed7aa"/>
+    <path d="M296 104v48c0 15 12 27 27 27h39" fill="none" stroke="#fdba74" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+
+  <path d="M183 218h146M183 264h146M183 310h99" fill="none" stroke="#9a3412" stroke-width="18" stroke-linecap="round" opacity="0.22"/>
+  <rect x="121" y="238" width="270" height="50" rx="25" fill="#0f172a" opacity="0.14"/>
+  <rect x="113" y="227" width="286" height="50" rx="25" fill="#14b8a6"/>
+  <path d="M149 252h214" fill="none" stroke="#ecfeff" stroke-width="14" stroke-linecap="round"/>
+
+  <path d="M132 170v-31c0-18 15-33 33-33h30M380 170v-31c0-18-15-33-33-33h-30M132 342v31c0 18 15 33 33 33h30M380 342v31c0 18-15 33-33 33h-30" fill="none" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

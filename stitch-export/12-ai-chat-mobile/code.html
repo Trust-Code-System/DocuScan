@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan - AI Chat with PDF</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6366f1",
+                        "primary-container": "#e0e7ff",
+                        "on-primary-container": "#312e81",
+                        "surface": "#ffffff",
+                        "on-surface": "#0f172a",
+                        "on-surface-variant": "#64748b",
+                        "surface-variant": "#f1f5f9",
+                        "outline": "#cbd5e1",
+                        "outline-variant": "#e2e8f0",
+                        "ai-accent": "#8b5cf6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans", "sans-serif"],
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Public Sans", "sans-serif"],
+                        "label": ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined { font-family: 'Material Symbols Outlined'; }
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-variant text-on-surface h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md text-primary flex justify-between items-center w-full px-4 max-w-7xl mx-auto h-16 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 shadow-sm shrink-0">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-on-surface">DocuScan</span>
+<nav class="hidden md:flex gap-6 ml-6">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-medium" href="#">Documents</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-medium" href="#">Tools</a>
+<a class="text-primary font-semibold border-b-2 border-primary h-16 flex items-center" href="#">AI Scan ✨</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center gap-2 hover:bg-surface-variant/20 px-3 py-1.5 rounded-lg transition-all">
+<span class="material-symbols-outlined">upload</span>
+<span class="font-medium">Upload</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined hover:bg-surface-variant/20 p-2 rounded-lg cursor-pointer">settings</span>
+<span class="material-symbols-outlined hover:bg-surface-variant/20 p-2 rounded-lg cursor-pointer">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Content Split Layout -->
+<main class="flex-1 flex flex-col md:flex-row overflow-hidden w-full max-w-7xl mx-auto">
+<!-- Document Preview Panel (Top/Left) -->
+<section class="h-[353px] md:h-full md:w-1/2 lg:w-[55%] flex flex-col border-b md:border-b-0 md:border-r border-outline p-4 bg-surface relative overflow-hidden">
+<div class="flex justify-between items-center mb-3 shrink-0">
+<h2 class="font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">description</span>
+                    Quarterly_Report_2023.pdf
+                </h2>
+<div class="flex gap-2 text-on-surface-variant">
+<button class="hover:bg-surface-variant p-1.5 rounded-md"><span class="material-symbols-outlined text-sm">zoom_out</span></button>
+<button class="hover:bg-surface-variant p-1.5 rounded-md"><span class="material-symbols-outlined text-sm">zoom_in</span></button>
+</div>
+</div>
+<div class="flex-1 overflow-auto rounded-xl border border-outline-variant relative bg-surface-variant/50 p-4 custom-scrollbar">
+<!-- Faux PDF Content -->
+<img alt="PDF Preview" class="w-full h-auto shadow-md rounded border border-outline-variant mb-6" data-alt="A clean, highly legible mock PDF document page displayed on a screen. The document features a modern sans-serif header reading 'Quarterly Report' and several paragraphs of structured text indicating financial data. The aesthetic is extremely clean, light-mode corporate UI with high contrast between the white document background and the dark text. Soft drop shadows give the document depth against a slightly darker grey canvas." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_l7X8YvW3Z50iLOvSfi4QV34ye2-VL0tFSPSXYV7DY7yTbSotyBoqqeCGV735iUspyNXgmnDCbayRYjg3t5LCxlWUHzZ1EhsEebsmKGVQjN12UVuC2KYaa8USSWf3P475EoQtiLfck-33IQjvN42AaXeai4jkRyfiUFGBDPMk7feIN3MH01EbP6cckOPTIVlVofKDwHWlbJoZCaYlzjZyymru_csbZg6TNf0nvbqR0YG0gk2UAyU"/>
+<img alt="PDF Preview" class="w-full h-auto shadow-md rounded border border-outline-variant" data-alt="The second page of a sleek mock PDF document, displaying bar charts and bulleted lists representing key performance metrics. The visual style matches the first page: a pristine white background, crisp dark text, and subtle shadows creating a realistic digital document viewing experience within a light-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXVoBxfYX-dvhTJlyZwJtXTpjyhNMm1a5Bh0XZutd4TxInOsqnpgxFBzXmME6Ed4J5ZpgjIF3-opikirHm1cJnNcoTZZ6NpoHpkyUQy59frSBLl43mZR02joYjaPmtQ2UT3SeS9bGrYxHP0tB1aIsMlWQFrEbkhrw4I_bPlNAsUWDDW6aTQbFNzBvH9qtrlzXG4cyv3ipwzd_Y9ueUmt0rkMbuRDxsCKiewkmjaJNvxkP_yEzf7KQ"/>
+</div>
+</section>
+<!-- Chat Panel (Bottom/Right) -->
+<section class="flex-1 flex flex-col bg-surface-variant/30 relative">
+<!-- Chat Header -->
+<div class="px-6 py-4 border-b border-outline-variant bg-surface/50 backdrop-blur-sm shrink-0 flex items-center gap-3">
+<div class="bg-ai-accent/10 p-2 rounded-full text-ai-accent">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-semibold text-on-surface text-sm">AI Document Assistant</h3>
+<p class="text-xs text-on-surface-variant">Ask anything about this document</p>
+</div>
+</div>
+<!-- Chat Messages Area -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 flex flex-col">
+<!-- Bot Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-ai-accent text-white flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-surface border border-outline-variant rounded-2xl rounded-tl-sm p-4 shadow-sm">
+<p class="text-sm text-on-surface leading-relaxed">
+                            I've analyzed <span class="font-medium text-primary">Quarterly_Report_2023.pdf</span>. It's a 12-page financial summary focusing on Q3 metrics, revenue growth, and operational costs. What would you like to know?
+                        </p>
+</div>
+</div>
+<!-- Suggested Chips -->
+<div class="flex flex-wrap gap-2 pl-12">
+<button class="text-xs bg-surface border border-outline text-on-surface hover:bg-surface-variant px-3 py-1.5 rounded-full transition-colors font-medium">Summarize key findings</button>
+<button class="text-xs bg-surface border border-outline text-on-surface hover:bg-surface-variant px-3 py-1.5 rounded-full transition-colors font-medium">What was the total revenue?</button>
+<button class="text-xs bg-surface border border-outline text-on-surface hover:bg-surface-variant px-3 py-1.5 rounded-full transition-colors font-medium">Extract actionable items</button>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-[85%] self-end flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<div class="bg-primary text-white rounded-2xl rounded-tr-sm p-4 shadow-sm">
+<p class="text-sm leading-relaxed">What was the total revenue for Q3?</p>
+</div>
+</div>
+<!-- Bot Typing Indicator -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-ai-accent text-white flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-surface border border-outline-variant rounded-2xl rounded-tl-sm p-4 shadow-sm flex items-center gap-1 h-12 w-16 justify-center">
+<div class="w-2 h-2 bg-ai-accent/60 rounded-full typing-dot"></div>
+<div class="w-2 h-2 bg-ai-accent/60 rounded-full typing-dot"></div>
+<div class="w-2 h-2 bg-ai-accent/60 rounded-full typing-dot"></div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 bg-surface border-t border-outline-variant shrink-0">
+<div class="relative flex items-end gap-2 bg-surface-variant/50 border border-outline rounded-2xl p-2 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors shrink-0 rounded-full hover:bg-surface">
+<span class="material-symbols-outlined text-xl">attach_file</span>
+</button>
+<textarea class="w-full bg-transparent border-none focus:ring-0 resize-none text-sm py-2 max-h-32 min-h-[40px] text-on-surface placeholder-on-surface-variant outline-none" placeholder="Ask about the document..." rows="1"></textarea>
+<button class="p-2 bg-primary text-white hover:bg-primary/90 transition-colors shrink-0 rounded-full shadow-sm flex items-center justify-center h-10 w-10">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+<div class="text-center mt-2">
+<span class="text-[10px] text-on-surface-variant">AI can make mistakes. Verify important information.</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface/90 backdrop-blur-xl flex justify-around items-center w-full py-3 px-4 md:hidden fixed bottom-0 z-50 rounded-t-xl border-t border-outline-variant/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary font-bold bg-primary-container/10 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="text-xs mt-1">Scan</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-xs mt-1">Tools</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="text-xs mt-1">Library</span>
+</div>
+</nav>
+</body></html>

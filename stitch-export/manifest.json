@@ -1,0 +1,87 @@
+[
+  {
+    "dir": "01-smart-scan-mobile",
+    "html": "01-smart-scan-mobile/code.html",
+    "screenshot": "01-smart-scan-mobile/screenshot.png"
+  },
+  {
+    "dir": "02-all-tools-desktop",
+    "html": "02-all-tools-desktop/code.html",
+    "screenshot": "02-all-tools-desktop/screenshot.png"
+  },
+  {
+    "dir": "03-home-mobile",
+    "html": "03-home-mobile/code.html",
+    "screenshot": "03-home-mobile/screenshot.png"
+  },
+  {
+    "dir": "04-developers-desktop",
+    "html": "04-developers-desktop/code.html",
+    "screenshot": "04-developers-desktop/screenshot.png"
+  },
+  {
+    "dir": "05-upload-mobile",
+    "html": "05-upload-mobile/code.html",
+    "screenshot": "05-upload-mobile/screenshot.png"
+  },
+  {
+    "dir": "06-home-desktop",
+    "html": "06-home-desktop/code.html",
+    "screenshot": "06-home-desktop/screenshot.png"
+  },
+  {
+    "dir": "07-guide-browser-side-processing-desktop",
+    "html": "07-guide-browser-side-processing-desktop/code.html",
+    "screenshot": "07-guide-browser-side-processing-desktop/screenshot.png"
+  },
+  {
+    "dir": "08-overlay-components-desktop",
+    "html": "08-overlay-components-desktop/code.html",
+    "screenshot": "08-overlay-components-desktop/screenshot.png"
+  },
+  {
+    "dir": "09-editor-mobile",
+    "html": "09-editor-mobile/code.html",
+    "screenshot": "09-editor-mobile/screenshot.png"
+  },
+  {
+    "dir": "10-guides-blog-desktop",
+    "html": "10-guides-blog-desktop/code.html",
+    "screenshot": "10-guides-blog-desktop/screenshot.png"
+  },
+  {
+    "dir": "11-privacy-first-desktop",
+    "html": "11-privacy-first-desktop/code.html",
+    "screenshot": "11-privacy-first-desktop/screenshot.png"
+  },
+  {
+    "dir": "12-ai-chat-mobile",
+    "html": "12-ai-chat-mobile/code.html",
+    "screenshot": "12-ai-chat-mobile/screenshot.png"
+  },
+  {
+    "dir": "13-editor-desktop",
+    "html": "13-editor-desktop/code.html",
+    "screenshot": "13-editor-desktop/screenshot.png"
+  },
+  {
+    "dir": "14-sign-pdf-mobile",
+    "html": "14-sign-pdf-mobile/code.html",
+    "screenshot": "14-sign-pdf-mobile/screenshot.png"
+  },
+  {
+    "dir": "15-image-png-asset",
+    "html": null,
+    "screenshot": "15-image-png-asset/screenshot.png"
+  },
+  {
+    "dir": "16-success-mobile",
+    "html": "16-success-mobile/code.html",
+    "screenshot": "16-success-mobile/screenshot.png"
+  },
+  {
+    "dir": "17-pricing-desktop",
+    "html": "17-pricing-desktop/code.html",
+    "screenshot": "17-pricing-desktop/screenshot.png"
+  }
+]

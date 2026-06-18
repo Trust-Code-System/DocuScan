@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compress PDF - DocuScan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {},
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Public Sans"
+                    ],
+                    "display": [
+                            "Public Sans"
+                    ],
+                    "body": [
+                            "Public Sans"
+                    ],
+                    "label": [
+                            "Public Sans"
+                    ]
+            },
+            "fontSize": {}
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md text-blue-600 docked full-width top-0 sticky z-50 border-b border-slate-200/50 shadow-sm flex justify-between items-center w-full px-6 max-w-[1440px] mx-auto h-16">
+<div class="flex items-center gap-8">
+<a class="text-xl font-bold tracking-tight text-slate-900" href="#">DocuScan</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors" href="#">Documents</a>
+<a class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600 pb-1" href="#">Tools</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors" href="#">AI Scan ✨</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 rounded-lg transition-all">
+                Login
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all hover:scale-95 duration-150">
+                Upload
+            </button>
+<div class="hidden md:flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined text-xl">account_circle</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center p-6 md:p-12 w-full max-w-4xl mx-auto">
+<!-- Breadcrumbs & Header -->
+<div class="w-full mb-8 text-center md:text-left">
+<nav class="flex items-center justify-center md:justify-start text-sm text-slate-500 mb-4 space-x-2">
+<a class="hover:text-blue-600 transition-colors" href="#">Tools</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-900 font-medium">Compress PDF</span>
+</nav>
+<h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">Compress PDF</h1>
+<p class="text-slate-600 max-w-2xl mx-auto md:mx-0">Reduce the file size of your PDF documents while maintaining visual quality. Perfect for email attachments or web uploads.</p>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-16 mb-8 text-center relative overflow-hidden group cursor-pointer hover:border-blue-400 hover:shadow-md transition-all duration-300">
+<!-- Decorative background pattern -->
+<div class="absolute inset-0 opacity-5 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<div class="relative z-10 flex flex-col items-center justify-center border-2 border-dashed border-slate-300 rounded-xl p-12 bg-slate-50/50 group-hover:bg-blue-50/30 group-hover:border-blue-300 transition-all">
+<div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-2">Drop your PDF here or browse</h3>
+<p class="text-slate-500 mb-6 text-sm">Supports PDF files only.</p>
+<button class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-sm hover:bg-blue-700 hover:shadow transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">folder_open</span>
+                    Select File
+                </button>
+<p class="mt-6 text-xs text-slate-400 font-medium">Max 20MB / 20-page limit for free users.</p>
+</div>
+<input accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" type="file"/>
+</div>
+<!-- Tool Options Bento Box -->
+<div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="md:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+<h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600 text-lg">tune</span>
+                    Compression Level
+                </h4>
+<div class="space-y-3">
+<label class="flex items-start gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50 cursor-pointer hover:border-blue-300 transition-colors">
+<input checked="" class="mt-1 text-blue-600 focus:ring-blue-500" name="compression" type="radio"/>
+<div>
+<span class="block font-semibold text-slate-900">Recommended Compression</span>
+<span class="block text-sm text-slate-600">Good quality, smaller file size. Ideal for most uses.</span>
+</div>
+</label>
+<label class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer hover:border-slate-300 transition-colors">
+<input class="mt-1 text-blue-600 focus:ring-blue-500" name="compression" type="radio"/>
+<div>
+<span class="block font-semibold text-slate-900">Extreme Compression</span>
+<span class="block text-sm text-slate-600">Lowest quality, smallest file size. Images may appear blurry.</span>
+</div>
+</label>
+</div>
+</div>
+<div class="bg-slate-900 rounded-2xl shadow-md p-6 text-white flex flex-col justify-center items-center text-center relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
+<span class="material-symbols-outlined text-4xl text-green-400 mb-4" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<h4 class="font-bold text-lg mb-2">Privacy First</h4>
+<p class="text-sm text-slate-300 text-balance">Processed securely in your browser. Nothing is uploaded to our servers.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-white/90 backdrop-blur-xl border-t border-slate-200/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)] flex justify-around items-center py-3 px-4">
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-70 hover:bg-slate-100/20 rounded-lg p-2 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-xs font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-70 hover:bg-slate-100/20 rounded-lg p-2 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">document_scanner</span>
+<span class="text-xs font-medium">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-blue-600 font-bold bg-blue-50 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-xs">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-70 hover:bg-slate-100/20 rounded-lg p-2 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">folder_open</span>
+<span class="text-xs font-medium">Library</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-slate-50 border-t border-slate-200/30 w-full py-8 px-6 max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 mt-auto mb-16 md:mb-0">
+<div class="text-lg font-bold text-slate-900">DocuScan</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors" href="#">Privacy Policy</a>
+<a class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors" href="#">Terms of Service</a>
+<a class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors" href="#">Security</a>
+<a class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors" href="#">Trust Center</a>
+</div>
+<div class="text-sm text-slate-500">© 2024 DocuScan. Privacy First Document Management.</div>
+</footer>
+</body></html>

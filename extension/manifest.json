@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "DocuScan — Scan & PDF tools",
+  "version": "0.1.0",
+  "description": "Open DocuScan's PDF tools from your toolbar, or send the current page's PDF to DocuScan.",
+  "icons": { "128": "icon128.png" },
+  "action": {
+    "default_title": "DocuScan",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["contextMenus", "tabs"],
+  "host_permissions": ["https://docuscan.app/*"],
+  "background": { "service_worker": "background.js" }
+}

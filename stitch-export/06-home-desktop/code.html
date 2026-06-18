@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan | Privacy-First Document Management</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#191b23",
+                        "on-primary-fixed": "#00174b",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-surface": "#2e3039",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c3c6d7",
+                        "secondary-container": "#8455ef",
+                        "secondary": "#6b38d4",
+                        "on-primary-container": "#eeefff",
+                        "surface-bright": "#faf8ff",
+                        "surface-variant": "#e1e2ed",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ffede6",
+                        "on-background": "#191b23",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d9d9e5",
+                        "error": "#ba1a1a",
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e7e7f3",
+                        "inverse-primary": "#b4c5ff",
+                        "on-tertiary-fixed": "#360f00",
+                        "outline": "#737686",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-secondary-fixed": "#23005c",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container": "#ededf9",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "primary": "#004ac6",
+                        "surface-container-highest": "#e1e2ed",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-secondary-container": "#fffbff",
+                        "on-surface-variant": "#434655",
+                        "inverse-on-surface": "#f0f0fb",
+                        "tertiary": "#943700",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f3f3fe",
+                        "surface": "#faf8ff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "tertiary-container": "#bc4800",
+                        "secondary-fixed": "#e9ddff",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#0053db"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "2rem",
+                        "stack-md": "1rem",
+                        "gutter": "1.5rem",
+                        "stack-sm": "0.5rem",
+                        "edge-padding": "1rem",
+                        "container-max": "1024px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .drop-zone:hover {
+            border-color: #004ac6;
+            background-color: rgba(37, 99, 235, 0.03);
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-stack-md">
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</span>
+<nav class="hidden md:flex gap-6 items-center ml-8">
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary text-label-caps font-label-caps" href="#">Documents</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps" href="#">AI Scan ✨</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block text-on-surface-variant hover:text-primary transition-all p-2 rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="bg-surface-container-low hover:bg-surface-variant/20 px-4 py-2 rounded-xl text-primary font-semibold transition-all">Login</button>
+<button class="bg-primary hover:bg-blue-700 text-on-primary px-6 py-2 rounded-xl font-bold shadow-md active:scale-95 transition-all">Upload</button>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-edge-padding py-stack-lg min-h-screen">
+<!-- Hero Section -->
+<section class="text-center py-12 md:py-20">
+<div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-secondary-container/10 border border-secondary-container/20 mb-6">
+<span class="text-secondary font-semibold text-body-sm">New AI Processing Engine</span>
+<span class="text-secondary-container">✨</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-6">
+                Privacy-First Document Scanning.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
+                Scan, manage, and transform your documents locally on your device. Securely process private information with enterprise-grade encryption.
+            </p>
+<!-- Drop Zone / Upload Area -->
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative drop-zone bg-surface-container-lowest border-2 border-dashed border-outline-variant/60 rounded-xl p-12 md:p-24 flex flex-col items-center justify-center transition-all cursor-pointer">
+<div class="w-16 h-16 bg-primary-container/10 text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl">document_scanner</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Drop your files here</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-8">PDF, PNG, JPG or HEIC (Up to 25MB)</p>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold text-body-md shadow-lg shadow-primary/20 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all">
+<span>Start Scanning</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Sub-hero: Quick Tools Row -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-20">
+<div class="bg-white p-6 rounded-xl border border-outline-variant/30 hover:shadow-xl hover:-translate-y-1 transition-all group">
+<div class="w-10 h-10 rounded-lg bg-surface-container mb-4 flex items-center justify-center group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">merge</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Merge</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Combine multiple PDFs into one.</p>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant/30 hover:shadow-xl hover:-translate-y-1 transition-all group">
+<div class="w-10 h-10 rounded-lg bg-surface-container mb-4 flex items-center justify-center group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">compress</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Compress</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Reduce file size without quality loss.</p>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant/30 hover:shadow-xl hover:-translate-y-1 transition-all group">
+<div class="w-10 h-10 rounded-lg bg-surface-container mb-4 flex items-center justify-center group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">splitscreen</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Split</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Extract pages into separate files.</p>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant/30 hover:shadow-xl hover:-translate-y-1 transition-all group">
+<div class="w-10 h-10 rounded-lg bg-surface-container mb-4 flex items-center justify-center group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">published_with_changes</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Convert</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Switch between file formats instantly.</p>
+</div>
+</section>
+<!-- Bento Layout: AI & Security Features -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-20">
+<div class="md:col-span-2 relative h-[360px] rounded-xl overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A professional workspace with a sleek laptop displaying complex digital encryption algorithms and document scanning interfaces. The lighting is cool and professional, with blue and violet neon accents reflecting on a glass surface. The atmosphere communicates high-end digital security and advanced AI technology within a corporate modern setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXyhsdQ3WfOJI7S-ZV2rnEhthGpQXMtQPcvJqzUYEtB-MwNMlwIGLeXrDlEpaeEV0kWtLrMmPAadjWfaAh8aulrUjQCq-0qMHXg85nOz_XO0kQIhnAZCc6qBmG1Za7MNxLIaleGI_t6neGenAK8raO10COizfLgoKa8EaqJPOMfQ7ZBIvvMPBklVr07R4TQRfpUqzdccFzSA7L62-J1JGoqTUMNbc6wG6w3UrpFst329hTdpg06q4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent p-8 flex flex-col justify-end">
+<span class="bg-secondary-container text-on-primary text-label-caps font-label-caps px-3 py-1 rounded-full w-fit mb-4">AI Vision</span>
+<h3 class="font-headline-lg text-white mb-2">Automated Field Detection</h3>
+<p class="text-white/80 font-body-md max-w-lg">Our AI instantly identifies key information like invoice dates, totals, and signatures for automatic tagging.</p>
+</div>
+</div>
+<div class="bg-primary rounded-xl p-8 flex flex-col justify-center items-center text-center text-on-primary">
+<div class="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-5xl">shield_lock</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-4">Zero-Cloud Policy</h3>
+<p class="text-on-primary/70 font-body-sm mb-8">Documents never leave your browser. Processing is done locally via WebAssembly and On-Device ML.</p>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface">GDPR</div>
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface">SOC2</div>
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface">HIPAA</div>
+</div>
+</div>
+<div class="bg-white p-8 rounded-xl border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Smart Organization</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Auto-categorize documents based on content analysis using our lightweight transformer models.</p>
+</div>
+<div class="mt-8 space-y-3">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="text-body-sm font-semibold">Tax_Return_2024.pdf</span>
+<span class="ml-auto text-[10px] font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded">Financial</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg border border-outline-variant/10 opacity-60">
+<span class="material-symbols-outlined text-primary">assignment</span>
+<span class="text-body-sm font-semibold">Rent_Agreement.doc</span>
+<span class="ml-auto text-[10px] font-bold text-blue-600 bg-blue-100 px-2 py-0.5 rounded">Legal</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 glass-card rounded-xl p-8 flex flex-col md:flex-row gap-8 items-center overflow-hidden">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Multi-Language OCR ✨</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Support for over 120 languages with high-fidelity text extraction. Perfect for international business travel and receipt management.</p>
+<button class="text-primary font-bold flex items-center gap-2 hover:translate-x-1 transition-transform">
+<span>Explore OCR capabilities</span>
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+<div class="flex-1 w-full relative">
+<div class="absolute inset-0 shimmer rounded-lg opacity-20"></div>
+<div class="bg-surface-container-high h-40 rounded-lg p-4 font-mono text-[10px] text-on-surface-variant overflow-hidden">
+                        [Scanning text...]<br/>
+                        "INVOICE #45290"<br/>
+                        "DATE: 2024-10-12"<br/>
+                        "CLIENT: ACME CORP"<br/>
+                        "TOTAL: $1,450.00"<br/>
+                        [Extraction complete]
+                    </div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest border-t border-outline-variant/30 full-width">
+<div class="w-full py-stack-lg px-edge-padding max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">DocuScan</span>
+<p class="text-on-surface-variant dark:text-surface-variant text-body-sm font-body-sm">© 2024 DocuScan. Privacy First Document Management.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps" href="#">Trust Center</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface/90 backdrop-blur-xl border-t border-outline-variant/50 shadow-lg flex justify-around items-center py-3 px-4">
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-body-sm font-body-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">document_scanner</span>
+<span class="text-body-sm font-body-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-body-sm font-body-sm">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="text-body-sm font-body-sm">Library</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for drop zone
+        const dropZone = document.querySelector('.drop-zone');
+        if (dropZone) {
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('scale-[1.02]', 'bg-primary-container/5', 'border-primary');
+            });
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('scale-[1.02]', 'bg-primary-container/5', 'border-primary');
+            });
+        }
+    </script>
+</body></html>

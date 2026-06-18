@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan - UI Components</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#434655",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0053db",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e1e2ed",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary": "#6b38d4",
+                        "primary-container": "#2563eb",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-tertiary-container": "#ffede6",
+                        "tertiary-container": "#bc4800",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#23005c",
+                        "surface-container-highest": "#e1e2ed",
+                        "inverse-surface": "#2e3039",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#360f00",
+                        "background": "#faf8ff",
+                        "surface-container-low": "#f3f3fe",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d9d9e5",
+                        "secondary-container": "#8455ef",
+                        "outline": "#737686",
+                        "primary": "#004ac6",
+                        "surface-container": "#ededf9",
+                        "tertiary": "#943700",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "inverse-primary": "#b4c5ff",
+                        "surface": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e7e7f3",
+                        "secondary-fixed": "#e9ddff",
+                        "on-surface": "#191b23",
+                        "on-primary-container": "#eeefff",
+                        "on-background": "#191b23"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "1.5rem",
+                        "stack-md": "1rem",
+                        "stack-lg": "2rem",
+                        "container-max": "1024px",
+                        "edge-padding": "1rem",
+                        "stack-sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col relative overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 text-primary dark:text-inverse-primary docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16 transition-all">
+<div class="flex items-center gap-4">
+<h1 class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</h1>
+<nav class="hidden md:flex gap-6 ml-8">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all px-3 py-2" href="#">Documents</a>
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary text-label-caps font-label-caps hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all px-3 py-2" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors text-label-caps font-label-caps hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all px-3 py-2" href="#">AI Scan ✨</a>
+</nav>
+</div>
+<div class="flex items-center gap-2">
+<button class="hidden md:flex items-center justify-center text-label-caps font-label-caps px-4 py-2 text-on-surface-variant border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors">Login</button>
+<button class="flex items-center justify-center text-label-caps font-label-caps px-4 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-opacity shadow-sm">Upload</button>
+<div class="hidden md:flex items-center gap-2 text-on-surface-variant ml-2">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors" style="font-variation-settings: 'FILL' 0;">settings</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow p-edge-padding md:p-gutter max-w-container-max mx-auto w-full relative z-10">
+<section class="mt-stack-lg mb-stack-lg text-center max-w-2xl mx-auto">
+<h2 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl-mobile md:font-headline-xl text-on-surface mb-stack-md">Intelligent Document Management</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Streamline your workflow with AI-powered scanning, organization, and security.</p>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-stack-md auto-rows-[minmax(200px,_auto)]">
+<!-- Hero Card -->
+<div class="md:col-span-8 bg-surface rounded-xl border border-outline-variant p-stack-lg shadow-[0_4px_20px_rgba(15,23,42,0.05)] flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-50"></div>
+<div class="relative z-10">
+<div class="inline-flex items-center gap-2 bg-primary-container/10 text-primary px-3 py-1 rounded-full mb-stack-md">
+<span class="material-symbols-outlined text-[16px]">document_scanner</span>
+<span class="text-label-caps font-label-caps">Smart Scan ✨</span>
+</div>
+<h3 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface mb-stack-sm">Auto-categorize in seconds</h3>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-md">Our AI engine instantly recognizes document types, extracts key data, and tags it for effortless retrieval.</p>
+</div>
+<div class="relative z-10 mt-stack-lg flex justify-end">
+<img alt="" class="w-64 h-auto rounded-lg shadow-sm border border-outline-variant/30 transform group-hover:-translate-y-2 transition-transform duration-500" data-alt="A clean, abstract 3D rendering of floating white paper sheets with soft shadows and glowing violet data lines connecting them, representing intelligent document scanning in a bright, modern corporate SaaS environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr65_YWzyUKh6WW63nqn_t5CpQeCgl4dKIxl4GEVYbzPgN3QoOIuEcGqx4ykjIIcu6r8tkUZ5zJjtbUmUciXAkt9OyfqeKeS03oqQoPsma8TiFII-4pdWwfw-9tzLMDT76hL_2iwjLSbXaVbWgzRblXMDDRMVo5hap3TgHGMK1zoj0q4pvjj0DBY1s2o8RliQwsjYmNLa3f6JBEprHkGumKZRpuYZw-e8ItJUdyuO9vzq4ATjxxw0"/>
+</div>
+</div>
+<!-- Stats Card -->
+<div class="md:col-span-4 bg-primary text-on-primary rounded-xl p-stack-lg shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-[120px]">speed</span>
+</div>
+<div class="relative z-10">
+<h4 class="text-headline-sm font-headline-sm mb-stack-sm opacity-90">Processing Speed</h4>
+<div class="text-headline-xl font-headline-xl font-black mb-1">0.4s</div>
+<p class="text-body-sm font-body-sm opacity-80">Average extraction time per page.</p>
+</div>
+<div class="relative z-10 mt-stack-md">
+<button class="w-full py-3 bg-on-primary text-primary rounded-lg text-label-caps font-label-caps hover:bg-surface-bright transition-colors font-semibold">View Benchmarks</button>
+</div>
+</div>
+<!-- Security Card -->
+<div class="md:col-span-6 bg-surface rounded-xl border border-outline-variant p-stack-md shadow-[0_4px_20px_rgba(15,23,42,0.05)] flex items-center gap-stack-md">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-on-surface-variant">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+</div>
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface">End-to-End Encryption</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Your documents are secured with enterprise-grade AES-256 encryption at rest and in transit.</p>
+</div>
+</div>
+<!-- Recent Activity Card -->
+<div class="md:col-span-6 bg-surface rounded-xl border border-outline-variant p-stack-md shadow-[0_4px_20px_rgba(15,23,42,0.05)] flex flex-col justify-center">
+<h4 class="text-label-caps font-label-caps text-on-surface-variant mb-stack-sm uppercase tracking-wider">Recent Activity</h4>
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-2 mb-2 last:border-0 last:pb-0 last:mb-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">description</span>
+<span class="text-body-sm font-body-sm text-on-surface">Q3_Financial_Report.pdf</span>
+</div>
+<span class="text-label-caps font-label-caps px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant">Processed</span>
+</div>
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-2 mb-2 last:border-0 last:pb-0 last:mb-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">image</span>
+<span class="text-body-sm font-body-sm text-on-surface">Receipt_Dinner_0912.jpg</span>
+</div>
+<span class="text-label-caps font-label-caps px-2 py-0.5 rounded-full bg-primary/10 text-primary">Tagging ✨</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Feedback Popup Modal -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-on-background/20 backdrop-blur-sm" id="feedback-modal">
+<div class="bg-surface w-full max-w-md rounded-xl border border-outline-variant shadow-[0_8px_30px_rgba(15,23,42,0.12)] p-stack-md relative transform transition-all">
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('feedback-modal').style.display='none'">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="flex items-center gap-2 mb-stack-md">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">What should we build next?</h2>
+<span class="text-primary/70 absolute top-4 right-12">✨</span>
+</div>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 text-body-md font-body-md text-on-surface focus:ring-2 focus:ring-primary focus:border-transparent resize-none h-32 mb-stack-md" placeholder="Share your ideas or feature requests..."></textarea>
+<div class="flex justify-end gap-3">
+<button class="px-4 py-2 text-label-caps font-label-caps text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" onclick="document.getElementById('feedback-modal').style.display='none'">Cancel</button>
+<button class="px-4 py-2 text-label-caps font-label-caps bg-primary text-on-primary rounded-lg hover:opacity-90 transition-opacity shadow-sm flex items-center gap-2">
+                    Submit Feedback
+                    <span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Cookie Consent Banner -->
+<div class="fixed bottom-0 left-0 w-full z-[70] p-4 pointer-events-none md:bottom-auto md:top-20 md:right-4 md:left-auto md:w-auto">
+<div class="bg-inverse-surface text-inverse-on-surface rounded-xl p-4 shadow-lg pointer-events-auto border border-outline/20 max-w-lg mx-auto flex flex-col md:flex-row items-center justify-between gap-stack-md">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-inverse-primary mt-0.5">cookie</span>
+<p class="text-body-sm font-body-sm">
+<strong>Privacy First:</strong> We only use essential cookies to ensure the basic functionality of DocuScan.
+                </p>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto justify-end">
+<button class="px-4 py-2 text-label-caps font-label-caps text-inverse-on-surface border border-outline/30 hover:bg-surface-container-highest/20 rounded-lg transition-colors whitespace-nowrap">Manage</button>
+<button class="px-4 py-2 text-label-caps font-label-caps bg-primary text-on-primary rounded-lg hover:opacity-90 transition-opacity shadow-sm whitespace-nowrap">Accept</button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="bg-surface/90 backdrop-blur-xl dark:bg-surface-container-highest/90 text-primary dark:text-inverse-primary fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)] flex justify-around items-center py-3 px-4 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-body-sm font-body-sm text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined mb-1">document_scanner</span>
+<span class="text-body-sm font-body-sm text-[10px]">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-body-sm font-body-sm text-[10px]">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined mb-1">folder_open</span>
+<span class="text-body-sm font-body-sm text-[10px]">Library</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest text-on-surface-variant dark:text-surface-variant full-width border-t border-outline-variant/30 w-full py-stack-lg px-edge-padding max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md mt-auto hidden md:flex">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface">
+            DocuScan
+        </div>
+<div class="text-body-sm font-body-sm">
+            © 2024 DocuScan. Privacy First Document Management.
+        </div>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps hover:underline" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps hover:underline" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps hover:underline" href="#">Trust Center</a>
+</div>
+</footer>
+</body></html>

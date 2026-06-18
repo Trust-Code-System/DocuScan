@@ -1,0 +1,156 @@
+{
+  "designSystems": [
+    {
+      "designSystem": {
+        "displayName": "DocuScan Design System",
+        "styleGuidelines": "## Brand & Style\n\nThe design system is centered on the intersection of high-utility SaaS and approachable privacy. It targets professionals and individuals who require a secure, reliable tool for digital document management. The visual language evokes feelings of **Trust, Efficiency, and Clarity.**\n\nThe aesthetic combines **Corporate Modern** with subtle **Glassmorphism** cues from the reference material. It utilizes a spacious, light-mode-first interface that prioritizes content legibility. Key characteristics include high-quality white space, soft shadows that suggest physical stacking of documents, and a refined \"AI-first\" layer indicated by shimmering gradients and the sparkle motif for intelligent features like OCR or auto-tagging.\n\n## Layout & Spacing\n\nThe layout follows a **Mobile-First** philosophy, transitioning to a centered **Fixed Grid** on larger displays.\n\n- **Desktop:** The content area is capped at 1024px, centered horizontally. This prevents line lengths from becoming too long and keeps controls within a focused scanning area.\n- **Mobile:** A consistent 16px (1rem) side padding is maintained.\n- **Rhythm:** An 8px linear scale is used for all internal spacing. Vertical stacks of document cards should use `stack-md` (16px) spacing, while grouping related metadata uses `stack-sm` (8px).\n\n## Elevation & Depth\n\nVisual hierarchy is established through **Tonal Layers** and **Ambient Shadows**, drawing inspiration from the soft glassmorphism in the reference image.\n\n- **Level 0 (Background):** Slate-50 (#f8fafc).\n- **Level 1 (Cards/Surfaces):** Pure white with a thin 1px border in Slate-200. This provides a crisp, paper-like boundary.\n- **Level 2 (Floating/Interactive):** Soft, diffused shadows (0px 4px 20px rgba(15, 23, 42, 0.05)). \n- **AI Elements:** Utilize a background blur (12px) and a semi-transparent violet tint to create a \"smart layer\" that appears to sit slightly above the document content.\n\n## Components\n\n- **Buttons:** Primary buttons are solid Blue-600 with white text. Secondary buttons use a white background with the Slate-200 border. AI-specific buttons use a subtle violet gradient.\n- **Document Cards:** White background, 16px padding, 12px rounded corners, and a 1px Slate-200 border. They should feature a small thumbnail of the document.\n- **Chips/Status Tags:** Small, low-contrast pills (e.g., \"Draft\", \"Signed\"). Background colors should be 10% opacity of the status color (Blue for info, Green for success).\n- **Input Fields:** Large tap targets (min 48px height) with 8px corner radius. Focus state uses a 2px Blue-600 ring.\n- **The AI Sparkle:** A ✨ icon (16px) is placed as a suffix in buttons or as an overlay badge on thumbnails where AI processing is active.\n- **Scan Trigger:** On mobile, the primary \"Scan\" action should be a floating action button (FAB) or a prominent bottom-centered bar for easy thumb access.",
+        "theme": {
+          "bodyFont": "INTER",
+          "bodyFontFamily": "Inter",
+          "colorMode": "LIGHT",
+          "colorVariant": "FIDELITY",
+          "customColor": "#2563eb",
+          "designMd": "---\nname: DocuScan Design System\ncolors:\n  surface: '#faf8ff'\n  surface-dim: '#d9d9e5'\n  surface-bright: '#faf8ff'\n  surface-container-lowest: '#ffffff'\n  surface-container-low: '#f3f3fe'\n  surface-container: '#ededf9'\n  surface-container-high: '#e7e7f3'\n  surface-container-highest: '#e1e2ed'\n  on-surface: '#191b23'\n  on-surface-variant: '#434655'\n  inverse-surface: '#2e3039'\n  inverse-on-surface: '#f0f0fb'\n  outline: '#737686'\n  outline-variant: '#c3c6d7'\n  surface-tint: '#0053db'\n  primary: '#004ac6'\n  on-primary: '#ffffff'\n  primary-container: '#2563eb'\n  on-primary-container: '#eeefff'\n  inverse-primary: '#b4c5ff'\n  secondary: '#6b38d4'\n  on-secondary: '#ffffff'\n  secondary-container: '#8455ef'\n  on-secondary-container: '#fffbff'\n  tertiary: '#943700'\n  on-tertiary: '#ffffff'\n  tertiary-container: '#bc4800'\n  on-tertiary-container: '#ffede6'\n  error: '#ba1a1a'\n  on-error: '#ffffff'\n  error-container: '#ffdad6'\n  on-error-container: '#93000a'\n  primary-fixed: '#dbe1ff'\n  primary-fixed-dim: '#b4c5ff'\n  on-primary-fixed: '#00174b'\n  on-primary-fixed-variant: '#003ea8'\n  secondary-fixed: '#e9ddff'\n  secondary-fixed-dim: '#d0bcff'\n  on-secondary-fixed: '#23005c'\n  on-secondary-fixed-variant: '#5516be'\n  tertiary-fixed: '#ffdbcd'\n  tertiary-fixed-dim: '#ffb596'\n  on-tertiary-fixed: '#360f00'\n  on-tertiary-fixed-variant: '#7d2d00'\n  background: '#faf8ff'\n  on-background: '#191b23'\n  surface-variant: '#e1e2ed'\ntypography:\n  headline-xl:\n    fontFamily: Inter\n    fontSize: 48px\n    fontWeight: '700'\n    lineHeight: '1.1'\n    letterSpacing: -0.02em\n  headline-lg:\n    fontFamily: Inter\n    fontSize: 32px\n    fontWeight: '700'\n    lineHeight: '1.2'\n    letterSpacing: -0.02em\n  headline-md:\n    fontFamily: Inter\n    fontSize: 24px\n    fontWeight: '600'\n    lineHeight: '1.3'\n    letterSpacing: -0.01em\n  headline-sm:\n    fontFamily: Inter\n    fontSize: 20px\n    fontWeight: '600'\n    lineHeight: '1.4'\n    letterSpacing: -0.01em\n  body-lg:\n    fontFamily: Inter\n    fontSize: 18px\n    fontWeight: '400'\n    lineHeight: '1.6'\n    letterSpacing: '0'\n  body-md:\n    fontFamily: Inter\n    fontSize: 16px\n    fontWeight: '400'\n    lineHeight: '1.5'\n    letterSpacing: '0'\n  body-sm:\n    fontFamily: Inter\n    fontSize: 14px\n    fontWeight: '400'\n    lineHeight: '1.5'\n    letterSpacing: '0'\n  label-caps:\n    fontFamily: Inter\n    fontSize: 12px\n    fontWeight: '600'\n    lineHeight: '1'\n    letterSpacing: 0.08em\n  headline-lg-mobile:\n    fontFamily: Inter\n    fontSize: 28px\n    fontWeight: '700'\n    lineHeight: '1.2'\n  headline-xl-mobile:\n    fontFamily: Inter\n    fontSize: 36px\n    fontWeight: '700'\n    lineHeight: '1.1'\nrounded:\n  sm: 0.25rem\n  DEFAULT: 0.5rem\n  md: 0.75rem\n  lg: 1rem\n  xl: 1.5rem\n  full: 9999px\nspacing:\n  container-max: 1024px\n  edge-padding: 1rem\n  stack-sm: 0.5rem\n  stack-md: 1rem\n  stack-lg: 2rem\n  gutter: 1.5rem\n---\n\n## Brand & Style\n\nThe design system is centered on the intersection of high-utility SaaS and approachable privacy. It targets professionals and individuals who require a secure, reliable tool for digital document management. The visual language evokes feelings of **Trust, Efficiency, and Clarity.**\n\nThe aesthetic combines **Corporate Modern** with subtle **Glassmorphism** cues from the reference material. It utilizes a spacious, light-mode-first interface that prioritizes content legibility. Key characteristics include high-quality white space, soft shadows that suggest physical stacking of documents, and a refined \"AI-first\" layer indicated by shimmering gradients and the sparkle motif for intelligent features like OCR or auto-tagging.\n\n## Colors\n\nThe palette is rooted in a professional \"Slate\" foundation to provide a clean, paper-like environment. \n\n- **Primary:** A vivid blue (#2563eb) is used for primary actions, signifying reliability.\n- **AI Accent:** A violet-to-blue gradient is reserved exclusively for smart features, often paired with a 10% opacity background of the same hue to distinguish AI-generated content.\n- **Neutrals:** The background uses a very soft Slate-50 (#f8fafc) to reduce eye strain compared to pure white. Pure white (#ffffff) is reserved for cards and interactive surfaces to create a \"layered paper\" effect.\n\n## Typography\n\nThis design system utilizes **Inter** across all levels to maintain a systematic, technical feel. \n\n- **Headlines:** Use bold weights with tight tracking (negative letter spacing) to appear modern and impactful.\n- **Section Labels:** Distinctive uppercase labels with generous letter spacing are used to categorize document metadata and sidebar sections.\n- **Body:** Standardized at 16px for optimal legibility on mobile and web.\n\n## Layout & Spacing\n\nThe layout follows a **Mobile-First** philosophy, transitioning to a centered **Fixed Grid** on larger displays.\n\n- **Desktop:** The content area is capped at 1024px, centered horizontally. This prevents line lengths from becoming too long and keeps controls within a focused scanning area.\n- **Mobile:** A consistent 16px (1rem) side padding is maintained.\n- **Rhythm:** An 8px linear scale is used for all internal spacing. Vertical stacks of document cards should use `stack-md` (16px) spacing, while grouping related metadata uses `stack-sm` (8px).\n\n## Elevation & Depth\n\nVisual hierarchy is established through **Tonal Layers** and **Ambient Shadows**, drawing inspiration from the soft glassmorphism in the reference image.\n\n- **Level 0 (Background):** Slate-50 (#f8fafc).\n- **Level 1 (Cards/Surfaces):** Pure white with a thin 1px border in Slate-200. This provides a crisp, paper-like boundary.\n- **Level 2 (Floating/Interactive):** Soft, diffused shadows (0px 4px 20px rgba(15, 23, 42, 0.05)). \n- **AI Elements:** Utilize a background blur (12px) and a semi-transparent violet tint to create a \"smart layer\" that appears to sit slightly above the document content.\n\n## Shapes\n\nThe shape language is consistently **Rounded-XL**. \n\n- **Standard Containers:** Use a radius of 12px (0.75rem) to 16px (1rem) to feel friendly and modern.\n- **Inputs & Small Buttons:** Use 8px (0.5rem) to maintain structural integrity at smaller scales.\n- **Interactive States:** On hover, document cards may subtly \"lift\" using the shadows described in the Elevation section, while maintaining their corner radius.\n\n## Components\n\n- **Buttons:** Primary buttons are solid Blue-600 with white text. Secondary buttons use a white background with the Slate-200 border. AI-specific buttons use a subtle violet gradient.\n- **Document Cards:** White background, 16px padding, 12px rounded corners, and a 1px Slate-200 border. They should feature a small thumbnail of the document.\n- **Chips/Status Tags:** Small, low-contrast pills (e.g., \"Draft\", \"Signed\"). Background colors should be 10% opacity of the status color (Blue for info, Green for success).\n- **Input Fields:** Large tap targets (min 48px height) with 8px corner radius. Focus state uses a 2px Blue-600 ring.\n- **The AI Sparkle:** A ✨ icon (16px) is placed as a suffix in buttons or as an overlay badge on thumbnails where AI processing is active.\n- **Scan Trigger:** On mobile, the primary \"Scan\" action should be a floating action button (FAB) or a prominent bottom-centered bar for easy thumb access.",
+          "font": "INTER",
+          "headlineFont": "INTER",
+          "headlineFontFamily": "Inter",
+          "labelFont": "INTER",
+          "labelFontFamily": "Inter",
+          "namedColors": {
+            "background": "#faf8ff",
+            "error": "#ba1a1a",
+            "error_container": "#ffdad6",
+            "inverse_on_surface": "#f0f0fb",
+            "inverse_primary": "#b4c5ff",
+            "inverse_surface": "#2e3039",
+            "on_background": "#191b23",
+            "on_error": "#ffffff",
+            "on_error_container": "#93000a",
+            "on_primary": "#ffffff",
+            "on_primary_container": "#eeefff",
+            "on_primary_fixed": "#00174b",
+            "on_primary_fixed_variant": "#003ea8",
+            "on_secondary": "#ffffff",
+            "on_secondary_container": "#fffbff",
+            "on_secondary_fixed": "#23005c",
+            "on_secondary_fixed_variant": "#5516be",
+            "on_surface": "#191b23",
+            "on_surface_variant": "#434655",
+            "on_tertiary": "#ffffff",
+            "on_tertiary_container": "#ffede6",
+            "on_tertiary_fixed": "#360f00",
+            "on_tertiary_fixed_variant": "#7d2d00",
+            "outline": "#737686",
+            "outline_variant": "#c3c6d7",
+            "primary": "#004ac6",
+            "primary_container": "#2563eb",
+            "primary_fixed": "#dbe1ff",
+            "primary_fixed_dim": "#b4c5ff",
+            "secondary": "#6b38d4",
+            "secondary_container": "#8455ef",
+            "secondary_fixed": "#e9ddff",
+            "secondary_fixed_dim": "#d0bcff",
+            "surface": "#faf8ff",
+            "surface_bright": "#faf8ff",
+            "surface_container": "#ededf9",
+            "surface_container_high": "#e7e7f3",
+            "surface_container_highest": "#e1e2ed",
+            "surface_container_low": "#f3f3fe",
+            "surface_container_lowest": "#ffffff",
+            "surface_dim": "#d9d9e5",
+            "surface_tint": "#0053db",
+            "surface_variant": "#e1e2ed",
+            "tertiary": "#943700",
+            "tertiary_container": "#bc4800",
+            "tertiary_fixed": "#ffdbcd",
+            "tertiary_fixed_dim": "#ffb596"
+          },
+          "overridePrimaryColor": "#2563eb",
+          "overrideSecondaryColor": "#8b5cf6",
+          "roundness": "ROUND_EIGHT",
+          "spacing": {
+            "container-max": "1024px",
+            "edge-padding": "1rem",
+            "gutter": "1.5rem",
+            "stack-lg": "2rem",
+            "stack-md": "1rem",
+            "stack-sm": "0.5rem"
+          },
+          "spacingScale": 2,
+          "typography": {
+            "body-lg": {
+              "fontFamily": "Inter",
+              "fontSize": "18px",
+              "fontWeight": "400",
+              "letterSpacing": "0",
+              "lineHeight": "1.6"
+            },
+            "body-md": {
+              "fontFamily": "Inter",
+              "fontSize": "16px",
+              "fontWeight": "400",
+              "letterSpacing": "0",
+              "lineHeight": "1.5"
+            },
+            "body-sm": {
+              "fontFamily": "Inter",
+              "fontSize": "14px",
+              "fontWeight": "400",
+              "letterSpacing": "0",
+              "lineHeight": "1.5"
+            },
+            "headline-lg": {
+              "fontFamily": "Inter",
+              "fontSize": "32px",
+              "fontWeight": "700",
+              "letterSpacing": "-0.02em",
+              "lineHeight": "1.2"
+            },
+            "headline-lg-mobile": {
+              "fontFamily": "Inter",
+              "fontSize": "28px",
+              "fontWeight": "700",
+              "lineHeight": "1.2"
+            },
+            "headline-md": {
+              "fontFamily": "Inter",
+              "fontSize": "24px",
+              "fontWeight": "600",
+              "letterSpacing": "-0.01em",
+              "lineHeight": "1.3"
+            },
+            "headline-sm": {
+              "fontFamily": "Inter",
+              "fontSize": "20px",
+              "fontWeight": "600",
+              "letterSpacing": "-0.01em",
+              "lineHeight": "1.4"
+            },
+            "headline-xl": {
+              "fontFamily": "Inter",
+              "fontSize": "48px",
+              "fontWeight": "700",
+              "letterSpacing": "-0.02em",
+              "lineHeight": "1.1"
+            },
+            "headline-xl-mobile": {
+              "fontFamily": "Inter",
+              "fontSize": "36px",
+              "fontWeight": "700",
+              "lineHeight": "1.1"
+            },
+            "label-caps": {
+              "fontFamily": "Inter",
+              "fontSize": "12px",
+              "fontWeight": "600",
+              "letterSpacing": "0.08em",
+              "lineHeight": "1"
+            }
+          }
+        }
+      },
+      "name": "assets/6fd48a605be84cf192e52af0a0c5d8bc",
+      "version": "1"
+    }
+  ]
+}

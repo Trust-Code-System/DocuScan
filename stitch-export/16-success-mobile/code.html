@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuScan - PDF Ready</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#dbeafe",
+                        "on-primary-container": "#1e3a8a",
+                        "surface": "#ffffff",
+                        "on-surface": "#0f172a",
+                        "surface-variant": "#f1f5f9",
+                        "on-surface-variant": "#475569",
+                        "outline": "#cbd5e1",
+                        "outline-variant": "#e2e8f0",
+                        success: "#16a34a",
+                        "on-success": "#ffffff",
+                        "success-container": "#dcfce7",
+                        "on-success-container": "#14532d"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans", "sans-serif"],
+                        display: ["Public Sans", "sans-serif"],
+                        body: ["Public Sans", "sans-serif"],
+                        label: ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .success-animation {
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .popover-enter {
+            animation: fadeUp 0.2s ease-out forwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-variant text-on-surface min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Suppressed TopAppBar and BottomNavBar as this is a success/transactional screen -->
+<main class="w-full max-w-md w-full relative z-10 success-animation">
+<!-- Success Card -->
+<div class="bg-surface rounded-xl shadow-xl border border-outline-variant overflow-hidden mb-6">
+<!-- Header Status -->
+<div class="bg-success-container px-6 py-8 flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 bg-success text-on-success rounded-full flex items-center justify-center mb-4 shadow-md">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-headline font-bold text-2xl text-on-success-container mb-2">Your PDF is ready</h1>
+<p class="font-body text-success-container text-opacity-80">Document successfully scanned and processed.</p>
+</div>
+<!-- Document Details -->
+<div class="p-6">
+<div class="flex items-center gap-4 bg-surface-variant p-4 rounded-lg mb-6 border border-outline-variant">
+<div class="w-12 h-16 bg-white rounded shadow-sm flex items-center justify-center relative overflow-hidden flex-shrink-0">
+<div class="absolute top-0 right-0 w-4 h-4 bg-primary-container rounded-bl-lg"></div>
+<span class="material-symbols-outlined text-primary text-3xl">picture_as_pdf</span>
+</div>
+<div class="flex-grow min-w-0">
+<h3 class="font-headline font-semibold text-on-surface truncate">Q3_Financial_Report_Final.pdf</h3>
+<p class="font-body text-sm text-on-surface-variant mt-1">4 Pages • 2.4 MB</p>
+</div>
+</div>
+<!-- Primary Actions -->
+<div class="flex flex-col gap-3 mb-6">
+<button class="w-full bg-primary hover:bg-primary/90 text-on-primary font-label font-bold py-3 px-6 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                        Download PDF
+                    </button>
+<div class="relative w-full" id="shareContainer">
+<button class="w-full bg-surface border border-outline hover:bg-surface-variant text-on-surface font-label font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2" id="shareButton">
+<span class="material-symbols-outlined">share</span>
+                            Share Document
+                        </button>
+<!-- Share Popover (Hidden by default) -->
+<div class="hidden absolute top-full left-0 right-0 mt-2 bg-surface rounded-lg shadow-lg border border-outline-variant z-20 overflow-hidden popover-enter" id="sharePopover">
+<div class="p-2 flex flex-col">
+<button class="flex items-center gap-3 p-3 hover:bg-surface-variant rounded-md text-left transition-colors">
+<span class="material-symbols-outlined text-[#25D366]">forum</span>
+<span class="font-label font-medium text-on-surface">WhatsApp</span>
+</button>
+<button class="flex items-center gap-3 p-3 hover:bg-surface-variant rounded-md text-left transition-colors">
+<span class="material-symbols-outlined text-[#EA4335]">mail</span>
+<span class="font-label font-medium text-on-surface">Gmail</span>
+</button>
+<button class="flex items-center gap-3 p-3 hover:bg-surface-variant rounded-md text-left transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">qr_code_2</span>
+<span class="font-label font-medium text-on-surface">Show QR Code</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Cloud Save Options -->
+<div class="border-t border-outline-variant pt-6">
+<p class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-3">Save to Cloud</p>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 bg-surface border border-outline hover:bg-surface-variant text-on-surface py-2 px-3 rounded-md transition-colors text-sm font-label">
+<span class="material-symbols-outlined text-[#0061FF]">cloud</span>
+                            Dropbox
+                        </button>
+<button class="flex items-center justify-center gap-2 bg-surface border border-outline hover:bg-surface-variant text-on-surface py-2 px-3 rounded-md transition-colors text-sm font-label">
+<span class="material-symbols-outlined text-[#0F9D58]">add_to_drive</span>
+                            Drive
+                        </button>
+</div>
+</div>
+</div>
+<!-- Footer Credit -->
+<div class="bg-surface-variant p-4 text-center border-t border-outline-variant">
+<p class="font-body text-xs text-on-surface-variant flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-xs">document_scanner</span>
+                    Created with <span class="font-bold">DocuScan</span>
+</p>
+</div>
+</div>
+<button class="w-full text-center text-on-surface-variant hover:text-on-surface font-label font-medium text-sm transition-colors py-2">
+            Back to Home
+        </button>
+</main>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shareBtn = document.getElementById('shareButton');
+            const popover = document.getElementById('sharePopover');
+            let isPopoverOpen = false;
+
+            shareBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isPopoverOpen = !isPopoverOpen;
+                if(isPopoverOpen) {
+                    popover.classList.remove('hidden');
+                } else {
+                    popover.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (isPopoverOpen && !document.getElementById('shareContainer').contains(e.target)) {
+                    popover.classList.add('hidden');
+                    isPopoverOpen = false;
+                }
+            });
+        });
+    </script>
+</body></html>

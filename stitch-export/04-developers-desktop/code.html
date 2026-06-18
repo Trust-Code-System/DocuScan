@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer API - DocuScan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#434655",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0053db",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e1e2ed",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary": "#6b38d4",
+                        "primary-container": "#2563eb",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-tertiary-container": "#ffede6",
+                        "tertiary-container": "#bc4800",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#23005c",
+                        "surface-container-highest": "#e1e2ed",
+                        "inverse-surface": "#2e3039",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#360f00",
+                        "background": "#faf8ff",
+                        "surface-container-low": "#f3f3fe",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d9d9e5",
+                        "secondary-container": "#8455ef",
+                        "outline": "#737686",
+                        "primary": "#004ac6",
+                        "surface-container": "#ededf9",
+                        "tertiary": "#943700",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "inverse-primary": "#b4c5ff",
+                        "surface": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e7e7f3",
+                        "secondary-fixed": "#e9ddff",
+                        "on-surface": "#191b23",
+                        "on-primary-container": "#eeefff",
+                        "on-background": "#191b23"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "1.5rem",
+                        "stack-md": "1rem",
+                        "stack-lg": "2rem",
+                        "container-max": "1024px",
+                        "edge-padding": "1rem",
+                        "stack-sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .code-bg {
+            background-color: #0f172a; /* Slate 900 equivalent for code blocks to match prompt request */
+        }
+        .code-text {
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-on-background/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none flex justify-between items-center w-full px-edge-padding max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">DocuScan</span>
+<nav class="hidden md:flex gap-6 ml-6 text-label-caps font-label-caps">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg py-2 px-3" href="#">Documents</a>
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg py-2 px-3 flex items-center gap-1" href="#">Tools <span class="material-symbols-outlined text-[16px]">code</span></a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg py-2 px-3" href="#">AI Scan ✨</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-label-caps font-label-caps text-primary dark:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg px-3 py-2 transition-all">Login</button>
+<button class="bg-primary text-on-primary text-label-caps font-label-caps px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">Upload</button>
+<div class="hidden md:flex gap-2 text-primary dark:text-inverse-primary">
+<button class="p-2 hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+<button class="p-2 hover:bg-surface-container-low dark:hover:bg-inverse-surface/50 rounded-lg transition-all"><span class="material-symbols-outlined" data-icon="settings">settings</span></button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-edge-padding py-stack-lg flex flex-col md:flex-row gap-gutter">
+<!-- Left Column: Documentation -->
+<div class="flex-1 flex flex-col gap-stack-lg">
+<div class="mb-4">
+<h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl-mobile md:font-headline-xl text-on-surface mb-2">Developer API</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Integrate secure, on-device document processing into your applications.</p>
+</div>
+<!-- Internal Nav -->
+<div class="flex gap-4 border-b border-outline-variant/30 pb-2 mb-stack-md text-label-caps font-label-caps">
+<a class="text-primary font-bold border-b-2 border-primary px-1 pb-2 -mb-[9px]" href="#">Documentation</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors px-1 pb-2" href="#">Reference</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors px-1 pb-2" href="#">Changelog</a>
+</div>
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-6 shadow-sm">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+                    Introduction
+                </h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">
+                    The DocuScan API provides programmatic access to our core document scanning and analysis engine. 
+                    Built with a privacy-first architecture, it ensures your sensitive data is handled securely.
+                </p>
+<div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">shield_locked</span>
+<div>
+<p class="text-body-sm font-body-sm font-semibold text-on-surface">Privacy Note</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">API requests are processed on-device via WebAssembly where possible, ensuring minimal data transmission.</p>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-6 shadow-sm">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">key</span>
+                    Authentication
+                </h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">
+                    Authenticate your API requests by including your secret API key in the request header. Do not share your secret key in publicly accessible areas.
+                </p>
+<!-- API Key Card -->
+<div class="border border-outline-variant/50 rounded-lg p-4 bg-surface-bright mt-4 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex justify-between items-center mb-2">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Your Secret Key</span>
+<span class="text-[10px] font-label-caps bg-surface-container-high px-2 py-1 rounded text-on-surface-variant">Live Environment</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="flex-grow bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface font-mono" readonly="" type="password" value="sk_live_51Nx1...8vXyZ"/>
+<button aria-label="Copy to clipboard" class="p-2 border border-outline-variant/50 rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant group relative">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-inverse-surface text-inverse-on-surface text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Copy Key</div>
+</button>
+<button class="px-4 py-2 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg text-body-sm font-body-sm font-medium transition-colors">Roll Key</button>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-6 shadow-sm">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">api</span>
+                    Endpoint: /v1/scan
+                </h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">
+                    Submit a document image for processing. Returns extracted text, structural analysis, and AI-derived metadata ✨.
+                </p>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 border-b border-outline-variant/20 pb-3">
+<span class="px-2 py-1 bg-surface-tint/10 text-surface-tint rounded text-label-caps font-label-caps font-bold">POST</span>
+<code class="text-body-sm font-body-sm text-on-surface font-mono">https://api.docuscan.app/v1/scan</code>
+</div>
+<div class="pt-2">
+<p class="text-body-sm font-body-sm font-semibold text-on-surface mb-1">Parameters</p>
+<ul class="text-body-sm font-body-sm text-on-surface-variant space-y-2 list-disc list-inside">
+<li><code class="font-mono bg-surface-container-high px-1 rounded">file</code> (required): The document image (JPG, PNG, PDF).</li>
+<li><code class="font-mono bg-surface-container-high px-1 rounded">extract_tables</code> (optional): Boolean to enable table parsing.</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Code Snippet Container -->
+<div class="md:w-5/12 flex flex-col gap-stack-md sticky top-24 self-start">
+<div class="code-bg rounded-xl overflow-hidden border border-outline-variant/20 shadow-lg flex flex-col h-full min-h-[500px]">
+<!-- Code Header -->
+<div class="flex items-center justify-between px-4 py-3 bg-black/20 border-b border-white/10">
+<div class="flex gap-2">
+<button class="text-label-caps font-label-caps text-white border-b-2 border-primary pb-1">cURL</button>
+<button class="text-label-caps font-label-caps text-white/50 hover:text-white transition-colors pb-1">Node.js</button>
+<button class="text-label-caps font-label-caps text-white/50 hover:text-white transition-colors pb-1">Python</button>
+</div>
+<button class="text-white/50 hover:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">content_copy</span></button>
+</div>
+<!-- Request Snippet -->
+<div class="p-4 overflow-x-auto text-body-sm font-body-sm font-mono code-text">
+<pre><code>curl -X POST https://api.docuscan.app/v1/scan \
+  -H "Authorization: Bearer sk_live_..." \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@invoice_october.pdf" \
+  -F "extract_tables=true"</code></pre>
+</div>
+<!-- Response Header -->
+<div class="px-4 py-2 bg-black/20 border-t border-white/10 border-b flex justify-between items-center text-label-caps font-label-caps">
+<span class="text-white/70">Response</span>
+<span class="text-green-400 bg-green-400/10 px-2 py-0.5 rounded">200 OK</span>
+</div>
+<!-- Response Snippet -->
+<div class="p-4 overflow-x-auto text-body-sm font-body-sm font-mono text-[#a5b4fc] flex-grow">
+<pre><code>{
+  "id": "scn_9x8y7z",
+  "status": "completed",
+  "document_type": "invoice",
+  "confidence_score": 0.98,
+  "data": {
+    "text_raw": "Invoice #1042...",
+    "entities": {
+      "total_amount": 1450.00,
+      "date": "2023-10-15",
+      "vendor": "Acme Corp"
+    }
+  },
+  "processing_time_ms": 420
+}</code></pre>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface/90 backdrop-blur-xl dark:bg-surface-container-highest/90 text-primary dark:text-inverse-primary Labels: text-body-sm font-body-sm text-headline-sm font-headline-sm font-black text-primary fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/50 shadow-[0_-4px_20px_rgba(15,23,42,0.05)] flex justify-around items-center w-full py-3 px-4 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+<span class="text-[10px] mt-1">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/10 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-[10px] mt-1">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-variant/20 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="text-[10px] mt-1">Library</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest text-on-surface-variant dark:text-surface-variant Body: text-body-sm font-body-sm. Labels: text-label-caps font-label-caps text-headline-sm font-headline-sm font-bold text-on-surface full-width border-t border-outline-variant/30 flat no shadows w-full py-stack-lg px-edge-padding max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md mt-auto pb-24 md:pb-stack-lg">
+<div class="text-body-sm font-body-sm">
+            © 2024 DocuScan. Privacy First Document Management.
+        </div>
+<div class="flex gap-4 text-label-caps font-label-caps">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Trust Center</a>
+</div>
+</footer>
+</body></html>
