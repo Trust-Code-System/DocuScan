@@ -11,7 +11,8 @@ import { purgeExpired } from "@/lib/share";
  *
  * Schedule it however you deploy:
  *   - Vercel Cron: add to vercel.json → { "crons": [{ "path": "/api/cron/cleanup",
- *     "schedule": "*\/15 * * * *" }] } (Vercel sends an authorized request).
+ *     "schedule": "0 3 * * *" }] } (Vercel sends an authorized request; Hobby
+ *     plan allows daily crons only, so use a tighter interval on Pro).
  *   - External cron / uptime pinger: GET this URL with
  *     `Authorization: Bearer $CRON_SECRET` or `?key=$CRON_SECRET`.
  *
