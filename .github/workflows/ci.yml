@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel superseded runs on the same ref to save minutes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Reproducible install from the committed lockfile.
+      - name: Install dependencies
+        run: npm ci
+
+      # Pure-logic Node tests (no DOM/network). Runs every scripts/test-*.mjs so
+      # new test files are picked up automatically; fails the job on first error.
+      - name: Run Node tests
+        run: |
+          status=0
+          for f in scripts/test-*.mjs; do
+            echo "::group::$f"
+            node --experimental-strip-types "$f" || status=1
+            echo "::endgroup::"
+          done
+          exit $status
+
+      # Production build = compile + type-check + lint. Runs with no secrets;
+      # the app falls back to in-memory backends, so this must stay green.
+      - name: Build
+        run: npm run build

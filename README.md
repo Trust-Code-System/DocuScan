@@ -1,5 +1,7 @@
 # DocuScan
 
+[![CI](https://github.com/Trust-Code-System/DocuScan/actions/workflows/ci.yml/badge.svg)](https://github.com/Trust-Code-System/DocuScan/actions/workflows/ci.yml)
+
 The simple, private, AI-native place to **scan, edit, convert, organize, sign,
 summarize, fill, share and extract data from documents** — web-first and
 mobile-first, no signup needed for basic use.
@@ -32,13 +34,22 @@ with no keys set the app runs fully (AI features return 503 until a key is added
 ### Pure-logic tests
 
 ```bash
-node --experimental-strip-types scripts/test-smartnotes.mjs
-node --experimental-strip-types scripts/test-templates.mjs
-node --experimental-strip-types scripts/test-invoice.mjs
-node --experimental-strip-types scripts/test-printready.mjs
-node --experimental-strip-types scripts/test-expenses-reminders.mjs
-# (plus the existing test-editor / test-docexport / test-deck scripts)
+# Run one:
+node --experimental-strip-types scripts/test-share.mjs
+
+# Run them all (same loop CI uses):
+for f in scripts/test-*.mjs; do node --experimental-strip-types "$f"; done
 ```
+
+Covers `share`, `smartnotes`, `templates`, `invoice`, `printready`,
+`expenses-reminders`, `editor`, `docexport`, `deck`.
+
+### Continuous integration
+
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on every push/PR to
+`main`: `npm ci`, all `scripts/test-*.mjs`, then `npm run build` (compile +
+type-check + lint). It needs no secrets — the app falls back to in-memory
+backends — so the build must stay green.
 
 ## Tools
 
