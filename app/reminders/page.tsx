@@ -8,8 +8,9 @@
  * device (lib/reminders.ts); notifications fire at most once per reminder.
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Select from "@/components/Select";
+import { ACCEPT_ANY_DOC } from "@/lib/limits";
 import {
   addReminder,
   deleteReminder,
@@ -49,6 +50,7 @@ export default function RemindersPage() {
   const [dueDate, setDueDate] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [notifyOn, setNotifyOn] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const refresh = () => setReminders(listReminders());
@@ -103,11 +105,45 @@ export default function RemindersPage() {
         <label className="text-sm">
           <span className="mb-1 block font-medium text-ink">Document (optional)</span>
           <input
-            value={documentName}
-            onChange={(e) => setDocumentName(e.target.value)}
-            placeholder="insurance-policy.pdf"
-            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand-500"
+            ref={fileRef}
+            type="file"
+            accept={ACCEPT_ANY_DOC}
+            hidden
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) setDocumentName(f.name);
+              e.target.value = ""; // allow re-picking the same file
+            }}
           />
+          {documentName ? (
+            <div className="flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm">
+              <span className="material-symbols-outlined text-[18px] text-brand-600" aria-hidden>
+                description
+              </span>
+              <span className="min-w-0 flex-1 truncate text-ink">{documentName}</span>
+              <button
+                type="button"
+                onClick={() => setDocumentName("")}
+                aria-label="Remove document"
+                className="shrink-0 text-slate-400 hover:text-red-600"
+              >
+                <span className="material-symbols-outlined text-[18px]" aria-hidden>
+                  close
+                </span>
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => fileRef.current?.click()}
+              className="press flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:border-brand-500 hover:text-brand-600"
+            >
+              <span className="material-symbols-outlined text-[18px]" aria-hidden>
+                upload_file
+              </span>
+              Choose document
+            </button>
+          )}
         </label>
         <label className="text-sm">
           <span className="mb-1 block font-medium text-ink">Type</span>

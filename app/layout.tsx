@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { cookies } from "next/headers";
 import Pwa from "@/components/Pwa";
 import DropGuard from "@/components/DropGuard";
+import Haptics from "@/components/Haptics";
 import FeedbackPopup from "@/components/FeedbackPopup";
 import Analytics from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
@@ -66,17 +67,20 @@ export default async function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col">
         <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur-md backdrop-saturate-150">
-          <div className="flex w-full items-center justify-between px-4 py-3 sm:px-6">
-            <Link href="/" className="press flex items-center gap-2 font-bold text-lg">
+          <div className="flex w-full flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+            <Link
+              href="/"
+              className="press flex items-center gap-2 self-start whitespace-nowrap text-xl font-bold sm:text-lg"
+            >
               {BRAND.isDefault ? (
                 <img
                   src="/icon.svg"
                   alt=""
                   aria-hidden="true"
-                  className="h-8 w-8 rounded-lg shadow-sm"
+                  className="h-9 w-9 rounded-xl shadow-sm sm:h-8 sm:w-8 sm:rounded-lg"
                 />
               ) : (
-                <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-white">
+                <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-500 text-white sm:h-8 sm:w-8 sm:rounded-lg">
                   {BRAND.logoLetter}
                 </span>
               )}
@@ -85,22 +89,28 @@ export default async function RootLayout({
                 <span className="text-brand-500">{tail}</span>
               </span>
             </Link>
-            <nav className="flex items-center gap-1 text-sm">
+            <nav className="grid w-full grid-cols-4 gap-1 rounded-xl bg-slate-100 p-1 text-xs sm:flex sm:w-auto sm:items-center sm:bg-transparent sm:p-0 sm:text-sm">
               <Link
                 href="/image-to-pdf"
-                className="rounded-lg px-3 py-2 font-medium text-slate-600 transition-colors duration-150 hover:bg-slate-100 hover:text-ink"
+                className="rounded-lg px-2 py-2 text-center font-semibold text-slate-600 transition-colors duration-150 hover:bg-white hover:text-ink sm:px-3 sm:font-medium sm:hover:bg-slate-100"
               >
                 {t(locale, "nav.scan")}
               </Link>
               <Link
                 href="/tools"
-                className="rounded-lg px-3 py-2 font-medium text-slate-600 transition-colors duration-150 hover:bg-slate-100 hover:text-ink"
+                className="rounded-lg px-2 py-2 text-center font-semibold text-slate-600 transition-colors duration-150 hover:bg-white hover:text-ink sm:px-3 sm:font-medium sm:hover:bg-slate-100"
               >
                 Tools
               </Link>
               <Link
+                href="/recents"
+                className="rounded-lg px-2 py-2 text-center font-semibold text-slate-600 transition-colors duration-150 hover:bg-white hover:text-ink sm:px-3 sm:font-medium sm:hover:bg-slate-100"
+              >
+                Recents
+              </Link>
+              <Link
                 href="/privacy"
-                className="rounded-lg px-3 py-2 font-medium text-slate-600 transition-colors duration-150 hover:bg-slate-100 hover:text-ink"
+                className="rounded-lg px-2 py-2 text-center font-semibold text-slate-600 transition-colors duration-150 hover:bg-white hover:text-ink sm:px-3 sm:font-medium sm:hover:bg-slate-100"
               >
                 {t(locale, "nav.privacy")}
               </Link>
@@ -114,6 +124,7 @@ export default async function RootLayout({
         </main>
 
         <DropGuard />
+        <Haptics />
         <Pwa />
         <FeedbackPopup />
         <CookieConsent />

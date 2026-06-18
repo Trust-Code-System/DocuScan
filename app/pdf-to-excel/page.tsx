@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import ExtractTool from "@/app/extract/page";
 
 export default function PdfToExcelPage() {
   return (
@@ -6,7 +7,6 @@ export default function PdfToExcelPage() {
       eyebrow="Convert"
       title="Convert PDF tables to Excel"
       description="Extract tables, invoices, statements, and custom fields from PDFs into spreadsheet-ready data."
-      primary={{ href: "/extract", label: "Extract to table", icon: "table" }}
       secondary={{ href: "/convert", label: "Open converter", icon: "sync_alt" }}
       ai
       steps={[
@@ -20,6 +20,8 @@ export default function PdfToExcelPage() {
         "CSV opens directly in Excel and spreadsheet tools.",
         "Confidence markers for extracted rows.",
       ]}
-    />
+    >
+      <ExtractTool />
+    </WorkspaceToolPage>
   );
 }

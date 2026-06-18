@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { track, Events, toolFromPath } from "@/lib/analytics";
 import { brandingEnabled, setBranding, BRANDING_EVENT } from "@/lib/branding";
+import { nativeShareFile } from "@/lib/nativeBridge";
+import { addRecentDoc } from "@/lib/recentDocs";
+import { hapticSuccess, hapticError } from "@/lib/haptics";
 import ShareActions from "@/components/ShareActions";
 
 export default function PdfResult({
@@ -43,13 +46,20 @@ export default function PdfResult({
     const u = URL.createObjectURL(blob);
     setUrl(u);
     setShareUrl(null);
+    void addRecentDoc({ name: fileName, type: "application/pdf", bytes });
     track(Events.ToolResult, { tool: toolFromPath(window.location.pathname) });
     return () => URL.revokeObjectURL(u);
-  }, [bytes]);
+  }, [bytes, fileName]);
 
-  function download() {
+  async function download() {
     if (!url) return;
+    hapticSuccess();
     track(Events.Download, { tool: toolFromPath(window.location.pathname) });
+    try {
+      if (await nativeShareFile(bytes, fileName)) return;
+    } catch {
+      /* fall back to browser download */
+    }
     const a = document.createElement("a");
     a.href = url;
     a.download = fileName;
@@ -77,12 +87,14 @@ export default function PdfResult({
         tool: toolFromPath(window.location.pathname),
         public: isPublic,
       });
+      hapticSuccess();
       setShareUrl(data.url);
       setSharePublic(isPublic);
       setManageToken(data.manageToken ?? null);
       setShareLimit(typeof data.maxDownloads === "number" ? data.maxDownloads : null);
       setSharePassword(!!data.passwordProtected);
     } catch (e) {
+      hapticError();
       setError(e instanceof Error ? e.message : "Could not create share link.");
     } finally {
       setBusy(false);

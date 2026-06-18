@@ -32,9 +32,22 @@ export default function Home() {
     <div className="mx-auto max-w-5xl px-4 pb-8">
       {/* Hero */}
       <section className="pb-12 pt-6 text-center md:pb-20 md:pt-10">
-        <div className="mb-6 inline-flex animate-pop items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1">
-          <Sym name="auto_awesome" className="text-base text-brand-600" />
-          <span className="text-sm font-semibold text-brand-700">New AI Processing Engine</span>
+        <div className="mb-7 flex justify-center">
+          <div className="ai-flow" aria-label="AI document processing">
+            <span className="ai-flow__document" aria-hidden>
+              <Sym name="description" className="text-[22px] text-brand-600" />
+              <span className="ai-flow__scan" />
+            </span>
+            <span className="ai-flow__rail" aria-hidden>
+              <span className="ai-flow__pulse" />
+              <span className="ai-flow__pulse ai-flow__pulse--late" />
+            </span>
+            <span className="ai-flow__core" aria-hidden>
+              <Sym name="auto_awesome" className="text-[22px] text-ai-600" />
+              <span className="ai-flow__orbit ai-flow__orbit--one" />
+              <span className="ai-flow__orbit ai-flow__orbit--two" />
+            </span>
+          </div>
         </div>
 
         <h1 className="mx-auto max-w-3xl text-balance text-[36px] font-bold leading-[1.1] tracking-tight text-ink md:text-5xl">
@@ -187,15 +200,41 @@ export default function Home() {
             </Link>
           </div>
           <div className="relative w-full flex-1">
-            <div aria-hidden className="shimmer absolute inset-0 rounded-lg opacity-20" />
-            <pre className="h-40 overflow-hidden rounded-lg bg-slate-100 p-4 font-mono text-[10px] leading-5 text-slate-600">
-              {`[Scanning text...]
-"INVOICE #45290"
-"DATE: 2024-10-12"
-"CLIENT: ACME CORP"
-"TOTAL: $1,450.00"
-[Extraction complete]`}
-            </pre>
+            <div className="relative overflow-hidden rounded-xl border border-slate-200/70 bg-white shadow-sm">
+              {/* soft beam sweeping down implies live OCR scanning */}
+              <div
+                aria-hidden
+                className="scan-beam pointer-events-none absolute inset-x-0 top-0 z-10 h-14 bg-gradient-to-b from-ai-500/20 via-ai-500/5 to-transparent"
+              />
+              <div className="flex items-center gap-2 border-b border-slate-100 px-4 py-2.5">
+                <Sym name="document_scanner" className="text-[18px] text-ai-500" />
+                <span className="min-w-0 flex-1 truncate text-xs font-semibold text-ink">
+                  invoice_45290.pdf
+                </span>
+                <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-bold text-green-600">
+                  <Sym name="check_circle" className="text-[12px]" />
+                  Extracted
+                </span>
+              </div>
+              <dl className="grid grid-cols-2 gap-px bg-slate-100">
+                <div className="bg-white p-3">
+                  <dt className="text-[10px] font-bold uppercase tracking-wide text-slate-400">Invoice</dt>
+                  <dd className="mt-0.5 text-sm font-semibold text-ink">#45290</dd>
+                </div>
+                <div className="bg-white p-3">
+                  <dt className="text-[10px] font-bold uppercase tracking-wide text-slate-400">Date</dt>
+                  <dd className="mt-0.5 text-sm font-semibold text-ink">Oct 12, 2024</dd>
+                </div>
+                <div className="col-span-2 bg-white p-3">
+                  <dt className="text-[10px] font-bold uppercase tracking-wide text-slate-400">Client</dt>
+                  <dd className="mt-0.5 text-sm font-semibold text-ink">ACME Corp</dd>
+                </div>
+                <div className="col-span-2 flex items-center justify-between bg-brand-50 p-3">
+                  <dt className="text-[10px] font-bold uppercase tracking-wide text-brand-600">Total</dt>
+                  <dd className="text-base font-bold text-brand-700">$1,450.00</dd>
+                </div>
+              </dl>
+            </div>
           </div>
         </div>
       </section>

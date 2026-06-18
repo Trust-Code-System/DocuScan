@@ -18,6 +18,7 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
     shortcuts: [
       { name: "Scan to PDF", url: "/image-to-pdf" },
+      { name: "Recent scans", url: "/recents" },
       { name: "Edit PDF", url: "/edit" },
       { name: "Compress PDF", url: "/compress-pdf" },
     ],

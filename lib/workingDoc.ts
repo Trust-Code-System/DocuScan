@@ -6,9 +6,9 @@
  * under separate keys so frequent edit-autosaves don't rewrite the whole file.
  */
 
-const DB_NAME = "docuscan";
-const DB_VERSION = 2;
-const STORE = "working-doc";
+import { STORES, runLocalDb } from "@/lib/localDb";
+
+const STORE = STORES.workingDoc;
 const KEY_DOC = "doc";
 const KEY_STATE = "state";
 
@@ -25,33 +25,11 @@ export interface StoredState {
   ts: number;
 }
 
-function openDb(): Promise<IDBDatabase> {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = () => {
-      const db = req.result;
-      if (db.objectStoreNames.contains(STORE)) db.deleteObjectStore(STORE);
-      if (!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE);
-    };
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
 function run<T>(
   mode: IDBTransactionMode,
   fn: (store: IDBObjectStore) => IDBRequest<T>,
 ): Promise<T> {
-  return openDb().then(
-    (db) =>
-      new Promise<T>((resolve, reject) => {
-        const t = db.transaction(STORE, mode);
-        const req = fn(t.objectStore(STORE));
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-        t.oncomplete = () => db.close();
-      }),
-  );
+  return runLocalDb(STORE, mode, fn);
 }
 
 /** Persist the file bytes + metadata. Called once when a document is opened. */

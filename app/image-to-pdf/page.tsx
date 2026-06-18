@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { buildPdfFromImages, type ScanPage } from "@/lib/pdf";
 import { validateImageFile, MAX_PAGES } from "@/lib/limits";
 import ScanEditor from "@/components/ScanEditor";
+import {
+  nativeShareFile,
+  pickNativeCameraImages,
+  pickNativeDocumentFiles,
+} from "@/lib/nativeBridge";
+import { addRecentDoc } from "@/lib/recentDocs";
 
 type Usage = { used: number; limit: number; remaining: number };
 
@@ -64,7 +70,7 @@ export default function ImageToPdfPage() {
     setShareUrl(null);
   }
 
-  function addFiles(files: FileList | null) {
+  function addFiles(files: FileList | File[] | null) {
     if (!files) return;
     setError(null);
     resetOutput();
@@ -99,6 +105,32 @@ export default function ImageToPdfPage() {
     } else if (next.length === 0) {
       setError("Please choose image files (JPG, PNG, etc.).");
     }
+  }
+
+  async function openCamera() {
+    try {
+      const files = await pickNativeCameraImages();
+      if (files) {
+        addFiles(files);
+        return;
+      }
+    } catch {
+      setError("Could not open the native camera. Try the browser camera instead.");
+    }
+    cameraRef.current?.click();
+  }
+
+  async function openUpload() {
+    try {
+      const files = await pickNativeDocumentFiles();
+      if (files) {
+        addFiles(files);
+        return;
+      }
+    } catch {
+      setError("Could not open the native file picker. Try the browser file picker instead.");
+    }
+    uploadRef.current?.click();
   }
 
   function rotate(id: string) {
@@ -148,6 +180,11 @@ export default function ImageToPdfPage() {
       const blob = new Blob([bytes as BlobPart], { type: "application/pdf" });
       setPdfBytes(bytes);
       setPdfUrl(URL.createObjectURL(blob));
+      await addRecentDoc({
+        name: "docuscan.pdf",
+        type: "application/pdf",
+        bytes,
+      });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong.");
     } finally {
@@ -155,8 +192,13 @@ export default function ImageToPdfPage() {
     }
   }
 
-  function download() {
+  async function download() {
     if (!pdfUrl) return;
+    try {
+      if (pdfBytes && (await nativeShareFile(pdfBytes, "docuscan.pdf"))) return;
+    } catch {
+      /* fall back to browser download */
+    }
     const a = document.createElement("a");
     a.href = pdfUrl;
     a.download = "docuscan.pdf";
@@ -241,14 +283,14 @@ export default function ImageToPdfPage() {
         <div className="mt-3 flex flex-col items-center justify-center gap-2 sm:flex-row">
           <button
             type="button"
-            onClick={() => cameraRef.current?.click()}
+            onClick={openCamera}
             className="press w-full rounded-xl bg-brand-500 px-5 py-2.5 font-semibold text-white transition-colors duration-150 hover:bg-brand-600 sm:w-auto"
           >
             Take photo
           </button>
           <button
             type="button"
-            onClick={() => uploadRef.current?.click()}
+            onClick={openUpload}
             className="press w-full rounded-xl border border-slate-300 px-5 py-2.5 font-semibold text-ink transition-colors duration-150 hover:bg-slate-50 sm:w-auto"
           >
             Upload images

@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import ScanTool from "@/app/image-to-pdf/page";
 
 export default function AutoCropPage() {
   return (
@@ -6,7 +7,6 @@ export default function AutoCropPage() {
       eyebrow="Scan cleanup"
       title="Auto crop document scans"
       description="Find document edges, straighten the page, and turn phone photos into clean PDF pages."
-      primary={{ href: "/image-to-pdf", label: "Open scanner", icon: "document_scanner" }}
       secondary={{ href: "/enhance-scan", label: "Enhance scans", icon: "tune" }}
       steps={[
         "Upload images or take a photo with your camera.",
@@ -19,6 +19,8 @@ export default function AutoCropPage() {
         "Perspective correction before PDF export.",
         "Works inside the existing scan-to-PDF flow.",
       ]}
-    />
+    >
+      <ScanTool />
+    </WorkspaceToolPage>
   );
 }

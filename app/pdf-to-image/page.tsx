@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import ConvertTool from "@/app/convert/page";
 
 export default function PdfToImagePage() {
   return (
@@ -6,7 +7,6 @@ export default function PdfToImagePage() {
       eyebrow="Convert"
       title="Convert PDF to images"
       description="Export PDF pages as image files for sharing, previews, or downstream editing."
-      primary={{ href: "/convert", label: "Open converter", icon: "image" }}
       secondary={{ href: "/split-pdf", label: "Split pages first", icon: "call_split" }}
       steps={[
         "Upload your PDF in the universal converter.",
@@ -19,6 +19,8 @@ export default function PdfToImagePage() {
         "Pairs with Split PDF when users need page-level control.",
         "Keeps the conversion workflow centralized.",
       ]}
-    />
+    >
+      <ConvertTool />
+    </WorkspaceToolPage>
   );
 }

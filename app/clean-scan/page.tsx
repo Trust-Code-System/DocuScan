@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import ScanTool from "@/app/image-to-pdf/page";
 
 export default function CleanScanPage() {
   return (
@@ -6,7 +7,6 @@ export default function CleanScanPage() {
       eyebrow="AI cleanup"
       title="Clean shadows, fingers, and stains from scans"
       description="Prepare scan photos for AI cleanup and export cleaner document pages."
-      primary={{ href: "/image-to-pdf", label: "Start with scanner", icon: "cleaning_services" }}
       secondary={{ href: "/edit", label: "Patch in PDF editor", icon: "edit" }}
       ai
       steps={[
@@ -21,6 +21,8 @@ export default function CleanScanPage() {
         "Ready for a future AI inpainting backend for finger/stain removal.",
       ]}
       note="The current app can crop, enhance, and manually patch scan artifacts. Fully automatic finger/stain removal needs an image inpainting model, which should be added as a backend service before promising one-click cleanup."
-    />
+    >
+      <ScanTool />
+    </WorkspaceToolPage>
   );
 }

@@ -169,6 +169,206 @@ body {
   }
 }
 
+/* Hero AI flow: a compact CSS-only processing scene. */
+.ai-flow {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: min(16rem, calc(100vw - 2rem));
+  height: 4.5rem;
+  overflow: visible;
+  padding: 0 0.2rem;
+}
+.ai-flow::before {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  z-index: -1;
+  height: 2.8rem;
+  transform: translateY(-50%) scaleX(0.9);
+  border-radius: 9999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgb(249 115 22 / 0.16),
+    rgb(139 92 246 / 0.1) 45%,
+    transparent 72%
+  );
+  filter: blur(8px);
+  animation: ds-flow-glow 2.8s var(--ease-smooth) infinite;
+}
+.ai-flow__document,
+.ai-flow__core {
+  position: relative;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 1rem;
+}
+.ai-flow__document {
+  background: rgb(255 237 213 / 0.92);
+  box-shadow:
+    0 10px 22px rgb(249 115 22 / 0.16),
+    inset 0 0 0 1px rgb(249 115 22 / 0.12);
+  animation: ds-flow-float 3.4s var(--ease-smooth) infinite;
+}
+.ai-flow__core {
+  background: rgb(245 243 255 / 0.96);
+  box-shadow:
+    0 0 0 1px rgb(139 92 246 / 0.12) inset,
+    0 10px 26px rgb(139 92 246 / 0.18),
+    0 0 28px rgb(139 92 246 / 0.18);
+  animation: ds-core-breathe 2.4s var(--ease-smooth) infinite;
+}
+.ai-flow__scan {
+  position: absolute;
+  right: 0.55rem;
+  left: 0.55rem;
+  top: 0.65rem;
+  height: 2px;
+  border-radius: 9999px;
+  background: rgb(234 88 12 / 0.85);
+  box-shadow: 0 0 12px rgb(249 115 22 / 0.45);
+  animation: ds-document-scan 1.8s var(--ease-smooth) infinite;
+}
+.ai-flow__rail {
+  position: relative;
+  height: 2px;
+  flex: 1 1 auto;
+  overflow: visible;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    rgb(249 115 22 / 0.16),
+    rgb(139 92 246 / 0.28)
+  );
+}
+.ai-flow__pulse {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-brand-500);
+  box-shadow: 0 0 16px rgb(249 115 22 / 0.55);
+  animation: ds-flow-pulse 1.9s var(--ease-snappy) infinite;
+}
+.ai-flow__pulse--late {
+  background: var(--color-ai-500);
+  box-shadow: 0 0 16px rgb(139 92 246 / 0.5);
+  animation-delay: 0.75s;
+}
+.ai-flow__orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin: -0.175rem;
+  border-radius: 9999px;
+  background: var(--color-ai-500);
+  box-shadow: 0 0 10px rgb(139 92 246 / 0.6);
+  animation: ds-ai-orbit 2.5s linear infinite;
+}
+.ai-flow__orbit--two {
+  width: 0.28rem;
+  height: 0.28rem;
+  margin: -0.14rem;
+  background: var(--color-brand-500);
+  animation-delay: -1.25s;
+}
+
+@keyframes ds-flow-glow {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translateY(-50%) scaleX(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scaleX(1);
+  }
+}
+@keyframes ds-flow-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes ds-core-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+@keyframes ds-document-scan {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  14%,
+  86% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1.45rem);
+    opacity: 0;
+  }
+}
+@keyframes ds-flow-pulse {
+  0% {
+    transform: translate(-50%, -50%) translateX(0) scale(0.72);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(8.8rem) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes ds-ai-orbit {
+  to {
+    transform: rotate(360deg) translateX(1.35rem) rotate(-360deg);
+  }
+}
+
+/* OCR scan beam — sweeps a soft band down a result panel to imply live
+   extraction. Decorative; disabled under reduced-motion. */
+.scan-beam {
+  animation: ds-scan 2.6s var(--ease-snappy) infinite;
+}
+@keyframes ds-scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(420%);
+    opacity: 0;
+  }
+}
+
 @keyframes ds-spin {
   to {
     transform: rotate(360deg);
@@ -232,6 +432,24 @@ body {
   .animate-slide-up,
   .animate-rise {
     animation: ds-overlay 160ms ease both;
+  }
+  .scan-beam {
+    animation: none;
+    opacity: 0;
+  }
+  .ai-flow,
+  .ai-flow::before,
+  .ai-flow__document,
+  .ai-flow__core,
+  .ai-flow__scan,
+  .ai-flow__pulse,
+  .ai-flow__orbit {
+    animation: none;
+  }
+  .ai-flow__scan,
+  .ai-flow__pulse,
+  .ai-flow__orbit {
+    opacity: 0;
   }
   .press:active {
     transform: none;

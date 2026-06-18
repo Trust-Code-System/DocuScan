@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import ReconstructTool from "@/app/reconstruct/page";
 
 export default function PdfToWordPage() {
   return (
@@ -6,7 +7,6 @@ export default function PdfToWordPage() {
       eyebrow="Convert"
       title="Convert PDF to Word"
       description="Create an editable Word document from a PDF or scan."
-      primary={{ href: "/reconstruct", label: "Convert with AI", icon: "auto_awesome" }}
       secondary={{ href: "/convert", label: "Open converter", icon: "sync_alt" }}
       ai
       steps={[
@@ -20,6 +20,8 @@ export default function PdfToWordPage() {
         "Keeps headings, paragraphs, lists, and simple tables.",
         "Universal converter remains available for server-backed Office paths.",
       ]}
-    />
+    >
+      <ReconstructTool />
+    </WorkspaceToolPage>
   );
 }

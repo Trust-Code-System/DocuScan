@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import SmartTool from "@/app/smart/page";
 
 export default function DetectDocumentTypePage() {
   return (
@@ -6,7 +7,6 @@ export default function DetectDocumentTypePage() {
       eyebrow="Smart organization"
       title="Detect document type automatically"
       description="Classify a file as an invoice, receipt, contract, resume, report, ID, or another document type."
-      primary={{ href: "/smart", label: "Classify document", icon: "category" }}
       secondary={{ href: "/smart-rename", label: "Smart rename", icon: "drive_file_rename_outline" }}
       ai
       steps={[
@@ -20,6 +20,8 @@ export default function DetectDocumentTypePage() {
         "Works with PDFs, images, Word files, and text documents.",
         "Pairs with smart file naming and structured extraction.",
       ]}
-    />
+    >
+      <SmartTool />
+    </WorkspaceToolPage>
   );
 }

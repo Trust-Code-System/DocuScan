@@ -5,9 +5,18 @@
  *  - Navigations: network-first, fall back to cached shell when offline.
  * Bump CACHE on changes to invalidate old entries.
  */
-const CACHE = "docuscan-v3";
+const CACHE = "docuscan-v4";
 const SHARE_CACHE = "docuscan-share";
-const SHELL = ["/", "/image-to-pdf", "/merge-pdf", "/compress-pdf", "/split-pdf", "/edit"];
+const SHELL = [
+  "/",
+  "/image-to-pdf",
+  "/recents",
+  "/merge-pdf",
+  "/compress-pdf",
+  "/split-pdf",
+  "/edit",
+  "/share-target",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -18,8 +27,10 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))),
+        caches.keys().then((keys) =>
+      Promise.all(
+        keys.filter((k) => k !== CACHE && k !== SHARE_CACHE).map((k) => caches.delete(k)),
+      ),
     ),
   );
   self.clients.claim();

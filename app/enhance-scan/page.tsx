@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import ScanTool from "@/app/image-to-pdf/page";
 
 export default function EnhanceScanPage() {
   return (
@@ -6,7 +7,6 @@ export default function EnhanceScanPage() {
       eyebrow="Scan cleanup"
       title="Enhance scanned images"
       description="Improve scans before export with color, grayscale, and black-and-white document filters."
-      primary={{ href: "/image-to-pdf", label: "Enhance a scan", icon: "tune" }}
       secondary={{ href: "/ocr-pdf", label: "Run OCR after export", icon: "document_search" }}
       steps={[
         "Add one or more photos in Scan to PDF.",
@@ -19,6 +19,8 @@ export default function EnhanceScanPage() {
         "Local browser processing for private scans.",
         "OCR handoff for searchable PDFs after export.",
       ]}
-    />
+    >
+      <ScanTool />
+    </WorkspaceToolPage>
   );
 }

@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import ReconstructTool from "@/app/reconstruct/page";
 
 export default function HandwritingPage() {
   return (
@@ -6,7 +7,6 @@ export default function HandwritingPage() {
       eyebrow="AI OCR"
       title="Extract handwritten notes to Word or PDF"
       description="Turn photos of notes, notebooks, and marked-up pages into editable text you can export."
-      primary={{ href: "/reconstruct", label: "Make editable", icon: "auto_awesome" }}
       secondary={{ href: "/ocr-pdf", label: "Try OCR first", icon: "text_fields" }}
       ai
       steps={[
@@ -21,6 +21,8 @@ export default function HandwritingPage() {
         "Review step is explicit because handwriting confidence varies.",
       ]}
       note="Printed OCR runs locally. High-accuracy handwriting recognition should use an AI vision/OCR model; this page routes into the editable-document workflow until that backend is connected."
-    />
+    >
+      <ReconstructTool />
+    </WorkspaceToolPage>
   );
 }

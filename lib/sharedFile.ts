@@ -9,23 +9,15 @@
  * (a Blob can't ride in a query string or sessionStorage).
  */
 
-const DB = "docuscan";
-const STORE = "shared";
+import { STORES, openLocalDb } from "@/lib/localDb";
+
+const STORE = STORES.shared;
 const KEY = "file";
 
 type Stashed = { blob: Blob; name: string };
 
-function open(): Promise<IDBDatabase> {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB, 1);
-    req.onupgradeneeded = () => req.result.createObjectStore(STORE);
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
 export async function putSharedFile(blob: Blob, name: string): Promise<void> {
-  const db = await open();
+  const db = await openLocalDb();
   await new Promise<void>((resolve, reject) => {
     const tx = db.transaction(STORE, "readwrite");
     tx.objectStore(STORE).put({ blob, name } satisfies Stashed, KEY);
@@ -37,7 +29,7 @@ export async function putSharedFile(blob: Blob, name: string): Promise<void> {
 
 /** Read and clear the stashed file (one-shot handoff). */
 export async function takeSharedFile(): Promise<File | null> {
-  const db = await open();
+  const db = await openLocalDb();
   const data = await new Promise<Stashed | undefined>((resolve, reject) => {
     const tx = db.transaction(STORE, "readwrite");
     const get = tx.objectStore(STORE).get(KEY);

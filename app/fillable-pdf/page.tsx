@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import EditorTool from "@/app/edit/page";
 
 export default function FillablePdfPage() {
   return (
@@ -6,7 +7,6 @@ export default function FillablePdfPage() {
       eyebrow="Forms"
       title="Turn forms into fillable PDFs"
       description="Prepare scanned forms for typing, signing, and structured data capture."
-      primary={{ href: "/edit", label: "Open PDF editor", icon: "edit_document" }}
       secondary={{ href: "/extract", label: "Extract form fields", icon: "table" }}
       ai
       steps={[
@@ -21,6 +21,8 @@ export default function FillablePdfPage() {
         "Ready for automatic AcroForm field generation in a future backend pass.",
       ]}
       note="The current editor can add text and signatures to forms. True automatic fillable PDF field generation needs an AcroForm generation layer, so this route separates the product surface from that deeper implementation."
-    />
+    >
+      <EditorTool />
+    </WorkspaceToolPage>
   );
 }

@@ -1,4 +1,5 @@
 import WorkspaceToolPage from "@/components/WorkspaceToolPage";
+import SmartTool from "@/app/smart/page";
 
 export default function SmartRenamePage() {
   return (
@@ -6,7 +7,6 @@ export default function SmartRenamePage() {
       eyebrow="Smart organization"
       title="Rename files smartly"
       description="Generate short, descriptive, filesystem-safe names from document content."
-      primary={{ href: "/smart", label: "Suggest a name", icon: "drive_file_rename_outline" }}
       secondary={{ href: "/detect-document-type", label: "Detect type", icon: "category" }}
       ai
       steps={[
@@ -20,6 +20,8 @@ export default function SmartRenamePage() {
         "Avoids unsafe filename characters.",
         "Works alongside auto-tagging and document type detection.",
       ]}
-    />
+    >
+      <SmartTool />
+    </WorkspaceToolPage>
   );
 }
