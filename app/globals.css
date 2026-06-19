@@ -347,6 +347,276 @@ body {
   }
 }
 
+/* AI bento card: document scan turns into answer snippets. */
+.doc-ai-card {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, #07111f 0%, #0f172a 48%, #1e1b4b 100%),
+    #0f172a;
+}
+.doc-ai-card::before {
+  content: "";
+  position: absolute;
+  inset: 1.5rem 2rem auto auto;
+  width: 16rem;
+  height: 12rem;
+  transform: rotate(-8deg);
+  border: 1px solid rgb(148 163 184 / 0.18);
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.025));
+  opacity: 0.65;
+}
+.doc-ai-card__paper,
+.doc-ai-card__answer {
+  position: absolute;
+  top: 3.25rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: rgb(15 23 42 / 0.84);
+  box-shadow: 0 22px 50px rgb(0 0 0 / 0.32);
+  backdrop-filter: blur(10px);
+}
+.doc-ai-card__paper {
+  left: 2.25rem;
+  width: 10.5rem;
+  height: 13rem;
+  transform: rotate(-4deg);
+  border-radius: 1.1rem;
+  padding: 1rem;
+  animation: ds-doc-paper 4.4s var(--ease-smooth) infinite;
+}
+.doc-ai-card__paper::before,
+.doc-ai-card__paper::after {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  z-index: -1;
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 0.08);
+  transform: translate(0.55rem, 0.45rem) rotate(3deg);
+}
+.doc-ai-card__paper::after {
+  transform: translate(1rem, 0.9rem) rotate(6deg);
+  opacity: 0.5;
+}
+.doc-ai-card__paper-head {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+.doc-ai-card__paper-head span {
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 0.45rem;
+  background: rgb(249 115 22 / 0.2);
+}
+.doc-ai-card__paper-head span:nth-child(2) {
+  background: rgb(139 92 246 / 0.22);
+}
+.doc-ai-card__paper-head span:nth-child(3) {
+  background: rgb(20 184 166 / 0.18);
+}
+.doc-ai-card__line,
+.doc-ai-card__answer-line {
+  height: 0.5rem;
+  margin-top: 0.7rem;
+  border-radius: 9999px;
+  background: rgb(226 232 240 / 0.22);
+}
+.doc-ai-card__line--wide,
+.doc-ai-card__answer-line--wide {
+  width: 84%;
+}
+.doc-ai-card__line {
+  width: 68%;
+}
+.doc-ai-card__line--short {
+  width: 46%;
+}
+.doc-ai-card__scan {
+  position: absolute;
+  right: 0.8rem;
+  left: 0.8rem;
+  top: 3.2rem;
+  height: 0.18rem;
+  border-radius: 9999px;
+  background: rgb(20 184 166 / 0.92);
+  box-shadow: 0 0 18px rgb(20 184 166 / 0.68);
+  animation: ds-doc-scan-card 2.2s var(--ease-smooth) infinite;
+}
+.doc-ai-card__stream {
+  position: absolute;
+  top: 6rem;
+  left: 13.25rem;
+  right: 16rem;
+  height: 7.5rem;
+}
+.doc-ai-card__stream::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgb(20 184 166 / 0.16), rgb(139 92 246 / 0.52));
+}
+.doc-ai-card__stream-line {
+  position: absolute;
+  left: 0;
+  width: 3.25rem;
+  height: 0.3rem;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(20 184 166 / 0), rgb(20 184 166 / 0.86));
+  opacity: 0;
+  animation: ds-doc-stream 2.4s var(--ease-snappy) infinite;
+}
+.doc-ai-card__stream-line--one {
+  top: 1.25rem;
+}
+.doc-ai-card__stream-line--two {
+  top: 3.65rem;
+  animation-delay: 0.42s;
+}
+.doc-ai-card__stream-line--three {
+  top: 5.95rem;
+  animation-delay: 0.84s;
+}
+.doc-ai-card__answer {
+  right: 2.2rem;
+  width: 14rem;
+  height: 11.25rem;
+  border-radius: 1.25rem;
+  padding: 1rem;
+  animation: ds-answer-panel 4.4s var(--ease-smooth) infinite;
+}
+.doc-ai-card__answer-top {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.doc-ai-card__answer-top > span:last-child {
+  display: block;
+  width: 5.5rem;
+  height: 0.55rem;
+  border-radius: 9999px;
+  background: rgb(196 181 253 / 0.36);
+}
+.doc-ai-card__answer-line {
+  width: 72%;
+  background: rgb(255 255 255 / 0.2);
+  transform-origin: left;
+  animation: ds-answer-lines 2.8s var(--ease-snappy) infinite;
+}
+.doc-ai-card__answer-line--wide {
+  width: 92%;
+}
+.doc-ai-card__answer-line--short {
+  width: 52%;
+}
+
+@keyframes ds-doc-paper {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-2.5deg);
+  }
+}
+@keyframes ds-doc-scan-card {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  12%,
+  86% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(8.5rem);
+    opacity: 0;
+  }
+}
+@keyframes ds-doc-stream {
+  0% {
+    transform: translateX(0) scaleX(0.45);
+    opacity: 0;
+  }
+  14%,
+  76% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) scaleX(1);
+    opacity: 0;
+  }
+}
+@keyframes ds-answer-panel {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+@keyframes ds-answer-lines {
+  0%,
+  20% {
+    transform: scaleX(0.55);
+    opacity: 0.45;
+  }
+  58%,
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .doc-ai-card::before {
+    right: 1rem;
+    width: 11rem;
+    height: 9rem;
+  }
+  .doc-ai-card__paper {
+    top: 2.4rem;
+    left: 1.15rem;
+    width: 8rem;
+    height: 10.25rem;
+    padding: 0.8rem;
+  }
+  .doc-ai-card__paper-head span {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+  .doc-ai-card__scan {
+    top: 2.6rem;
+  }
+  .doc-ai-card__stream {
+    top: 5.1rem;
+    left: 9.35rem;
+    right: 10.9rem;
+  }
+  .doc-ai-card__answer {
+    top: 3.7rem;
+    right: 1.15rem;
+    width: 9.8rem;
+    height: 9.35rem;
+    padding: 0.85rem;
+  }
+  .doc-ai-card__answer-top > span:last-child {
+    width: 3.8rem;
+  }
+  .doc-ai-card__line,
+  .doc-ai-card__answer-line {
+    height: 0.42rem;
+    margin-top: 0.58rem;
+  }
+}
+
 /* OCR scan beam — sweeps a soft band down a result panel to imply live
    extraction. Decorative; disabled under reduced-motion. */
 .scan-beam {
@@ -450,6 +720,17 @@ body {
   .ai-flow__pulse,
   .ai-flow__orbit {
     opacity: 0;
+  }
+  .doc-ai-card__paper,
+  .doc-ai-card__scan,
+  .doc-ai-card__stream-line,
+  .doc-ai-card__answer,
+  .doc-ai-card__answer-line {
+    animation: none;
+  }
+  .doc-ai-card__scan,
+  .doc-ai-card__stream-line {
+    opacity: 0.7;
   }
   .press:active {
     transform: none;

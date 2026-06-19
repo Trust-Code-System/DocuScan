@@ -107,17 +107,40 @@ export default function Home() {
           href="/smart"
           className="group relative h-[360px] overflow-hidden rounded-2xl bg-slate-900 md:col-span-2"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXyhsdQ3WfOJI7S-ZV2rnEhthGpQXMtQPcvJqzUYEtB-MwNMlwIGLeXrDlEpaeEV0kWtLrMmPAadjWfaAh8aulrUjQCq-0qMHXg85nOz_XO0kQIhnAZCc6qBmG1Za7MNxLIaleGI_t6neGenAK8raO10COizfLgoKa8EaqJPOMfQ7ZBIvvMPBklVr07R4TQRfpUqzdccFzSA7L62-J1JGoqTUMNbc6wG6w3UrpFst329hTdpg06q4"
-            alt=""
-            className="h-full w-full object-cover transition-transform duration-700 ease-snappy group-hover:scale-105"
-          />
+          <div className="doc-ai-card" aria-hidden>
+            <div className="doc-ai-card__paper">
+              <div className="doc-ai-card__paper-head">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="doc-ai-card__line doc-ai-card__line--wide" />
+              <div className="doc-ai-card__line" />
+              <div className="doc-ai-card__line doc-ai-card__line--short" />
+              <div className="doc-ai-card__scan" />
+            </div>
+            <div className="doc-ai-card__stream">
+              <span className="doc-ai-card__stream-line doc-ai-card__stream-line--one" />
+              <span className="doc-ai-card__stream-line doc-ai-card__stream-line--two" />
+              <span className="doc-ai-card__stream-line doc-ai-card__stream-line--three" />
+            </div>
+            <div className="doc-ai-card__answer">
+              <div className="doc-ai-card__answer-top">
+                <Sym name="auto_awesome" className="text-[20px] text-ai-300" />
+                <span />
+              </div>
+              <div className="doc-ai-card__answer-line doc-ai-card__answer-line--wide" />
+              <div className="doc-ai-card__answer-line" />
+              <div className="doc-ai-card__answer-line doc-ai-card__answer-line--short" />
+            </div>
+          </div>
           <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-ink/90 via-ink/30 to-transparent p-8">
             <span className="mb-4 w-fit rounded-full bg-ai-500 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white">
               AI Assistant
             </span>
-            <h3 className="text-2xl font-bold text-white md:text-[32px]">Ask Your Documents Anything</h3>
+            <h3 className="max-w-[18rem] text-2xl font-bold leading-tight text-white md:max-w-lg md:text-[32px]">
+              Ask Your Documents Anything
+            </h3>
             <p className="mt-2 max-w-lg text-white/80">
               Get plain-language answers, summaries, and key takeaways from any file — no scrolling
               through pages to find what matters.
@@ -285,7 +308,7 @@ export default function Home() {
             View all <Sym name="arrow_forward" className="text-base" />
           </Link>
         </div>
-        <ToolGrid />
+        <ToolGrid limit={8} />
       </section>
     </div>
   );

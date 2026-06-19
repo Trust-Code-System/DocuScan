@@ -88,11 +88,14 @@ function ToolIcon({ tool }: { tool: Tool }) {
   );
 }
 
-export default function ToolGrid() {
-  const tools = [...ALL_TOOLS, ...EXPANSION_TOOLS];
+export default function ToolGrid({ limit }: { limit?: number } = {}) {
+  const sorted = [...ALL_TOOLS, ...EXPANSION_TOOLS].sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
+  const tools = typeof limit === "number" ? sorted.slice(0, limit) : sorted;
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {tools.sort((a, b) => a.name.localeCompare(b.name)).map((tool, i) => (
+      {tools.map((tool, i) => (
         <Link
           key={tool.name}
           href={tool.href}
