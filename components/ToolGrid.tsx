@@ -94,7 +94,10 @@ export default function ToolGrid({ limit }: { limit?: number } = {}) {
   );
   const tools = typeof limit === "number" ? sorted.slice(0, limit) : sorted;
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div
+      data-translate="tools"
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    >
       {tools.map((tool, i) => (
         <Link
           key={tool.name}

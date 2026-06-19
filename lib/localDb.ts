@@ -1,12 +1,13 @@
 "use client";
 
 const DB_NAME = "docuscan";
-const DB_VERSION = 3;
+const DB_VERSION = 4;
 
 export const STORES = {
   shared: "shared",
   workingDoc: "working-doc",
   recentDocs: "recent-docs",
+  batchSession: "batch-session",
 } as const;
 
 type StoreName = (typeof STORES)[keyof typeof STORES];
@@ -23,6 +24,7 @@ export function openLocalDb(): Promise<IDBDatabase> {
       ensureStore(db, STORES.shared);
       ensureStore(db, STORES.workingDoc);
       ensureStore(db, STORES.recentDocs);
+      ensureStore(db, STORES.batchSession);
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);

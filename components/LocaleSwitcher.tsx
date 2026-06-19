@@ -1,25 +1,58 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { LOCALES, LOCALE_NAMES, LOCALE_COOKIE, type Locale } from "@/lib/i18n";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  LANGUAGES,
+  LOCALE_COOKIE,
+  SCOPE_COOKIE,
+  DEFAULT_LOCALE,
+  getLanguage,
+  type Language,
+} from "@/lib/i18n";
+import LanguageDialog from "@/components/LanguageDialog";
 
 /**
- * Custom language dropdown styled to the site scheme. A native <select> can't
- * restyle its open option list cross-browser, so we render our own listbox.
- * Sets the locale cookie and reloads so the server re-renders translated chrome.
+ * Footer language picker. Opens a searchable list of all supported languages;
+ * choosing one (other than English) opens <LanguageDialog/> to ask how much to
+ * translate. Choosing English clears the locale and reloads (turns it off).
+ * Marked data-no-translate so the native language names are never translated.
  */
-export default function LocaleSwitcher({ current }: { current: Locale }) {
+export default function LocaleSwitcher({
+  current,
+  placement = "up",
+}: {
+  current: string;
+  placement?: "up" | "down";
+}) {
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [chosen, setChosen] = useState<Language | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  function select(value: Locale) {
+  const currentLabel = getLanguage(current)?.label ?? "English";
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return LANGUAGES;
+    return LANGUAGES.filter(
+      (l) => l.label.toLowerCase().includes(q) || l.name.toLowerCase().includes(q),
+    );
+  }, [query]);
+
+  function select(lang: Language) {
     setOpen(false);
-    if (value === current) return;
-    document.cookie = `${LOCALE_COOKIE}=${value}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
-    window.location.reload();
+    setQuery("");
+    if (lang.code === current) return;
+    if (lang.code === DEFAULT_LOCALE) {
+      // Turn translation off.
+      document.cookie = `${LOCALE_COOKIE}=; path=/; max-age=0; samesite=lax`;
+      document.cookie = `${SCOPE_COOKIE}=; path=/; max-age=0; samesite=lax`;
+      window.location.reload();
+      return;
+    }
+    setChosen(lang);
   }
 
-  // Close on outside click or Escape.
   useEffect(() => {
     if (!open) return;
     function onPointer(e: PointerEvent) {
@@ -37,16 +70,19 @@ export default function LocaleSwitcher({ current }: { current: Locale }) {
   }, [open]);
 
   return (
-    <div ref={rootRef} className="relative">
+    <div ref={rootRef} className="relative" data-no-translate>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
-        aria-expanded={open ? "true" : "false"}
+        aria-expanded={open}
         aria-label="Language"
         className="press flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-ink transition-colors duration-150 ease-snappy hover:border-brand-300"
       >
-        {LOCALE_NAMES[current]}
+        <span className="material-symbols-outlined text-base text-muted" aria-hidden>
+          language
+        </span>
+        {currentLabel}
         <span
           className={`material-symbols-outlined text-base text-muted transition-transform duration-200 ease-snappy ${open ? "rotate-180" : ""}`}
           aria-hidden
@@ -57,36 +93,55 @@ export default function LocaleSwitcher({ current }: { current: Locale }) {
 
       {open && (
         <div
-          role="listbox"
-          aria-label="Language"
-          className="animate-pop absolute bottom-full right-0 z-40 mb-1.5 min-w-[9rem] origin-bottom-right overflow-hidden rounded-xl border border-slate-200 bg-white p-1 shadow-card"
+          className={`animate-pop absolute right-0 z-40 w-64 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-card ${
+            placement === "down"
+              ? "top-full mt-1.5 origin-top-right"
+              : "bottom-full mb-1.5 origin-bottom-right"
+          }`}
         >
-          {LOCALES.map((l) => {
-            const active = l === current;
-            return (
-              <button
-                key={l}
-                type="button"
-                role="option"
-                aria-selected={active}
-                onClick={() => select(l)}
-                className={`flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-left text-sm transition-colors duration-100 ${
-                  active
-                    ? "bg-brand-50 font-semibold text-brand-700"
-                    : "text-ink hover:bg-slate-100"
-                }`}
-              >
-                {LOCALE_NAMES[l]}
-                {active && (
-                  <span className="material-symbols-outlined text-base text-brand-600" aria-hidden>
-                    check
-                  </span>
-                )}
-              </button>
-            );
-          })}
+          <div className="border-b border-slate-100 p-2">
+            <input
+              autoFocus
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search language…"
+              className="w-full rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-ink outline-none focus:border-brand-400"
+            />
+          </div>
+          <div role="listbox" aria-label="Language" className="max-h-72 overflow-auto p-1">
+            {filtered.map((l) => {
+              const active = l.code === current;
+              return (
+                <button
+                  key={l.code}
+                  type="button"
+                  role="option"
+                  aria-selected={active}
+                  onClick={() => select(l)}
+                  className={`flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-left text-sm transition-colors duration-100 ${
+                    active
+                      ? "bg-brand-50 font-semibold text-brand-700"
+                      : "text-ink hover:bg-slate-100"
+                  }`}
+                >
+                  {l.label}
+                  {active && (
+                    <span className="material-symbols-outlined text-base text-brand-600" aria-hidden>
+                      check
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+            {!filtered.length && (
+              <p className="px-2.5 py-3 text-center text-sm text-muted">No matches</p>
+            )}
+          </div>
         </div>
       )}
+
+      {chosen && <LanguageDialog language={chosen} onCancel={() => setChosen(null)} />}
     </div>
   );
 }

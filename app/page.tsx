@@ -83,7 +83,7 @@ export default function Home() {
       </section>
 
       {/* Quick tools row */}
-      <section className="mb-20 grid grid-cols-2 gap-4 md:grid-cols-4">
+      <section data-translate="tools" className="mb-20 grid grid-cols-2 gap-4 md:grid-cols-4">
         {quickTools.map((tool, i) => (
           <Link
             key={tool.name}
@@ -151,23 +151,46 @@ export default function Home() {
         {/* Zero-Cloud Policy */}
         <Link
           href="/security"
-          className="flex flex-col items-center justify-center rounded-2xl bg-brand-600 p-8 text-center text-white transition-colors duration-200 hover:bg-brand-700"
+          className="group flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-7 text-left transition duration-200 ease-snappy hover:border-brand-300 hover:shadow-card motion-safe:hover:-translate-y-0.5"
         >
-          <span className="mb-6 grid h-20 w-20 place-items-center rounded-full bg-white/10">
-            <Sym name="shield_lock" className="text-5xl" />
-          </span>
-          <h3 className="text-2xl font-bold">Private by Design</h3>
-          <p className="mt-4 text-sm text-white/70">
-            Your documents stay under your control from upload to export. Sensitive files are never
-            shared or used without your permission.
-          </p>
-          <div className="mt-8 flex -space-x-2">
-            {["GDPR", "SOC2", "HIPAA"].map((b) => (
-              <span
-                key={b}
-                className="grid h-8 w-8 place-items-center rounded-full border-2 border-brand-600 bg-slate-100 text-[10px] font-bold text-ink"
-              >
-                {b}
+          <div>
+            <div className="relative mb-6 h-28 overflow-hidden rounded-xl bg-slate-50">
+              <div className="absolute left-5 top-5 w-24 rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition-transform duration-300 ease-snappy group-hover:-translate-y-1">
+                <div className="mb-3 flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-brand-500" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-ai-400" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-teal-400" />
+                </div>
+                <div className="space-y-2">
+                  <span className="block h-1.5 w-full rounded-full bg-slate-200" />
+                  <span className="block h-1.5 w-4/5 rounded-full bg-slate-200" />
+                  <span className="block h-1.5 w-1/2 rounded-full bg-slate-200" />
+                </div>
+              </div>
+              <div className="absolute right-5 top-6 grid h-16 w-16 place-items-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+                <Sym name="shield_lock" className="text-[34px]" />
+              </div>
+              <div className="absolute bottom-4 left-5 right-5 flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-600 shadow-sm">
+                <span className="grid h-5 w-5 place-items-center rounded-full bg-green-100 text-green-600">
+                  <Sym name="check" className="text-[15px]" />
+                </span>
+                Local-first file handling
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold text-ink">Private by Design</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              Your documents stay under your control from upload to export.
+            </p>
+          </div>
+          <div className="mt-6 grid gap-2 text-sm">
+            {[
+              ["cloud_off", "No training on your files"],
+              ["lock", "Protected export and sharing"],
+              ["history", "Recent scans stay on this device"],
+            ].map(([icon, label]) => (
+              <span key={label} className="flex items-center gap-2 text-slate-600">
+                <Sym name={icon} className="text-[18px] text-brand-600" />
+                {label}
               </span>
             ))}
           </div>
@@ -211,7 +234,7 @@ export default function Home() {
               <Sym name="auto_awesome" className="text-[22px] text-ai-500" />
             </h3>
             <p className="mt-3 text-slate-600">
-              Support for over 120 languages with high-fidelity text extraction. Perfect for
+              Support for over 100 languages with high-fidelity text extraction. Perfect for
               international business travel and receipt management.
             </p>
             <Link
@@ -263,7 +286,7 @@ export default function Home() {
       </section>
 
       {/* New AI document tools — curated highlight band */}
-      <section className="mb-20">
+      <section data-translate="tools" className="mb-20">
         <div className="mb-4 flex items-center gap-2">
           <span className="rounded-md bg-ai-100 px-1.5 py-0.5 text-[10px] font-bold leading-none text-ai-700">
             NEW

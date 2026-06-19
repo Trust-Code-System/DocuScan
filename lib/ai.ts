@@ -415,6 +415,36 @@ export async function translateDoc(
   );
 }
 
+// ---- UI string translation (powers <AutoTranslate/>) ----------------------
+/**
+ * Translate an array of short UI strings into `targetLang`, preserving order
+ * and array length so the caller can map results back 1:1. Brand names, code,
+ * URLs, numbers and placeholders are left untouched. Used to localize the whole
+ * site at runtime; results are cached client-side so each string is paid once.
+ */
+export async function translateUiStrings(
+  strings: string[],
+  targetLang: string,
+): Promise<{ translations: string[] }> {
+  const res = await structured<{ translations: string[] }>(
+    `You localize a web app's interface into ${targetLang}. You receive a JSON array of UI ` +
+      `strings (labels, buttons, headings, sentences). Return a "translations" array with each ` +
+      `string translated naturally into ${targetLang}, in the SAME ORDER and with the SAME ` +
+      `LENGTH as the input. Keep the product name "DocuScan" and any other proper nouns, file ` +
+      `extensions (PDF, DOCX), URLs, code and bracketed placeholders like [Name] unchanged. ` +
+      `Translate the meaning, not word-for-word. Return only the array.`,
+    JSON.stringify(strings),
+    {
+      type: "object",
+      additionalProperties: false,
+      properties: { translations: { type: "array", items: { type: "string" } } },
+      required: ["translations"],
+    },
+    { maxTokens: 8_000, effort: "low" },
+  );
+  return res;
+}
+
 // ---- B4: Document compare / redline ---------------------------------------
 export type CompareResult = {
   summary: string;

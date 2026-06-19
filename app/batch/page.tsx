@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import JSZip from "jszip";
 import { compressPdf, type CompressLevel } from "@/lib/compress";
 import { validateDocFile, formatBytes } from "@/lib/limits";
@@ -8,6 +8,13 @@ import { anyFileToPdf } from "@/lib/toPdf";
 import { useGuestTask } from "@/lib/useGuestTask";
 import Dropzone from "@/components/Dropzone";
 import { track, Events } from "@/lib/analytics";
+import {
+  clearBatchSession,
+  fileToStoredBatchItem,
+  loadBatchSession,
+  saveBatchSession,
+  storedItemToFile,
+} from "@/lib/batchSession";
 
 const LEVELS: { value: CompressLevel; label: string }[] = [
   { value: "high", label: "Strong" },
@@ -22,14 +29,90 @@ export default function BatchPage() {
   const [level, setLevel] = useState<CompressLevel>("balanced");
   const [busy, setBusy] = useState(false);
   const [zipUrl, setZipUrl] = useState<string | null>(null);
+  const [zipBytes, setZipBytes] = useState<Uint8Array | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { usage, consume } = useGuestTask();
   const [converting, setConverting] = useState(false);
+  const restoredRef = useRef(false);
+  const zipUrlRef = useRef<string | null>(null);
+
+  function clearZip() {
+    if (zipUrlRef.current) URL.revokeObjectURL(zipUrlRef.current);
+    zipUrlRef.current = null;
+    setZipUrl(null);
+    setZipBytes(null);
+  }
+
+  function setZipFromBytes(bytes: Uint8Array) {
+    if (zipUrlRef.current) URL.revokeObjectURL(zipUrlRef.current);
+    const url = URL.createObjectURL(new Blob([bytes as BlobPart], { type: "application/zip" }));
+    zipUrlRef.current = url;
+    setZipBytes(bytes);
+    setZipUrl(url);
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const session = await loadBatchSession();
+      if (cancelled) return;
+      if (session) {
+        setLevel(session.level);
+        setItems(
+          session.items.map((it) => ({
+            file: storedItemToFile(it),
+            status: it.status,
+            outSize: it.outSize,
+          })),
+        );
+        if (session.zip) setZipFromBytes(new Uint8Array(session.zip.bytes.slice(0)));
+      }
+      restoredRef.current = true;
+    })();
+
+    return () => {
+      cancelled = true;
+      if (zipUrlRef.current) URL.revokeObjectURL(zipUrlRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!restoredRef.current) return;
+    const timeout = window.setTimeout(() => {
+      void (async () => {
+        if (items.length === 0 && !zipBytes) {
+          await clearBatchSession();
+          return;
+        }
+
+        const storedZipBytes = zipBytes ? new Uint8Array(zipBytes).buffer : undefined;
+
+        await saveBatchSession({
+          level,
+          items: await Promise.all(
+            items.map((it) =>
+              fileToStoredBatchItem(
+                it.file,
+                it.status === "working" ? "queued" : it.status,
+                it.outSize,
+              ),
+            ),
+          ),
+          zip: storedZipBytes
+            ? { name: "docuscan-batch.zip", type: "application/zip", bytes: storedZipBytes }
+            : undefined,
+        });
+      })();
+    }, 250);
+
+    return () => window.clearTimeout(timeout);
+  }, [items, level, zipBytes]);
 
   async function add(files: FileList | null) {
     setError(null);
-    setZipUrl(null);
+    clearZip();
     if (!files) return;
+
     const next: Item[] = [];
     const rejected: string[] = [];
     setConverting(true);
@@ -49,6 +132,7 @@ export default function BatchPage() {
     } finally {
       setConverting(false);
     }
+
     if (next.length === 0) {
       setError(rejected.join(" ") || "Add one or more supported files (max 20MB each).");
       return;
@@ -61,13 +145,14 @@ export default function BatchPage() {
     if (items.length === 0) return;
     setError(null);
     setBusy(true);
-    setZipUrl(null);
+    clearZip();
     try {
       const blocked = await consume();
       if (blocked) {
         setError(blocked);
         return;
       }
+
       track(Events.ToolRun, { tool: "batch", count: items.length });
       const zip = new JSZip();
       const results = [...items];
@@ -85,8 +170,9 @@ export default function BatchPage() {
         }
         setItems([...results]);
       }
+
       const blob = await zip.generateAsync({ type: "blob" });
-      setZipUrl(URL.createObjectURL(blob));
+      setZipFromBytes(new Uint8Array(await blob.arrayBuffer()));
       track(Events.ToolResult, { tool: "batch", count: results.length });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Batch processing failed.");
@@ -97,6 +183,13 @@ export default function BatchPage() {
 
   const totalIn = items.reduce((s, it) => s + it.file.size, 0);
   const totalOut = items.reduce((s, it) => s + (it.outSize ?? 0), 0);
+
+  async function clearAll() {
+    setItems([]);
+    setError(null);
+    clearZip();
+    await clearBatchSession();
+  }
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
@@ -116,7 +209,7 @@ export default function BatchPage() {
           <>
             <p className="font-medium text-ink">Drop files here</p>
             <p className="mt-1 text-sm text-muted">
-              {converting ? "Converting to PDF…" : "PDF, Word, images & more — converted to PDF · or"}
+              {converting ? "Converting to PDF..." : "PDF, Word, images and more - converted to PDF - or"}
             </p>
             <button
               type="button"
@@ -144,7 +237,10 @@ export default function BatchPage() {
                 <button
                   key={l.value}
                   type="button"
-                  onClick={() => setLevel(l.value)}
+                  onClick={() => {
+                    setLevel(l.value);
+                    clearZip();
+                  }}
                   className={`rounded-xl border p-3 font-semibold transition ${
                     level === l.value
                       ? "border-brand-500 bg-brand-50 text-ink"
@@ -163,22 +259,32 @@ export default function BatchPage() {
                 <span className="truncate pr-3 text-ink">{it.file.name}</span>
                 <span className="shrink-0 text-muted">
                   {it.status === "queued" && formatBytes(it.file.size)}
-                  {it.status === "working" && "Compressing…"}
-                  {it.status === "done" && `→ ${formatBytes(it.outSize ?? 0)} ✓`}
+                  {it.status === "working" && "Compressing..."}
+                  {it.status === "done" && `-> ${formatBytes(it.outSize ?? 0)} done`}
                   {it.status === "error" && <span className="text-red-600">failed</span>}
                 </span>
               </li>
             ))}
           </ul>
 
-          <button
-            type="button"
-            onClick={run}
-            disabled={busy}
-            className="mt-6 rounded-xl bg-brand-500 px-6 py-3 font-semibold text-white hover:bg-brand-600 disabled:opacity-60"
-          >
-            {busy ? "Processing…" : `Compress ${items.length} file${items.length > 1 ? "s" : ""}`}
-          </button>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={run}
+              disabled={busy}
+              className="rounded-xl bg-brand-500 px-6 py-3 font-semibold text-white hover:bg-brand-600 disabled:opacity-60"
+            >
+              {busy ? "Processing..." : `Compress ${items.length} file${items.length > 1 ? "s" : ""}`}
+            </button>
+            <button
+              type="button"
+              onClick={clearAll}
+              disabled={busy}
+              className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-ink hover:bg-slate-50 disabled:opacity-60"
+            >
+              Clear
+            </button>
+          </div>
         </>
       )}
 
@@ -186,7 +292,7 @@ export default function BatchPage() {
         <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-4">
           <h2 className="font-semibold text-ink">Batch ready</h2>
           <p className="mt-1 text-sm text-muted">
-            {formatBytes(totalIn)} → {formatBytes(totalOut)} across {items.length} files.
+            {formatBytes(totalIn)} to {formatBytes(totalOut)} across {items.length} files.
           </p>
           <a
             href={zipUrl}

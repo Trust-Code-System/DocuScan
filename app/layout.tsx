@@ -11,6 +11,7 @@ import Analytics from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
 import ReferralCapture from "@/components/ReferralCapture";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import AutoTranslate from "@/components/AutoTranslate";
 import BackButton from "@/components/BackButton";
 import { SITE_URL } from "@/lib/seo";
 import { BRAND, brandParts } from "@/lib/brand";
@@ -70,6 +71,7 @@ export default async function RootLayout({
           <div className="flex w-full flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
             <Link
               href="/"
+              data-no-translate
               className="press flex items-center gap-2 self-start whitespace-nowrap text-xl font-bold sm:text-lg"
             >
               {BRAND.isDefault ? (
@@ -89,6 +91,7 @@ export default async function RootLayout({
                 <span className="text-brand-500">{tail}</span>
               </span>
             </Link>
+            <div className="flex w-full items-center gap-2 sm:w-auto sm:gap-3">
             <nav className="grid w-full grid-cols-4 gap-1 rounded-xl bg-slate-100 p-1 text-xs sm:flex sm:w-auto sm:items-center sm:bg-transparent sm:p-0 sm:text-sm">
               <Link
                 href="/image-to-pdf"
@@ -115,6 +118,10 @@ export default async function RootLayout({
                 {t(locale, "nav.privacy")}
               </Link>
             </nav>
+              <div className="shrink-0">
+                <LocaleSwitcher current={locale} placement="down" />
+              </div>
+            </div>
           </div>
         </header>
 
@@ -123,6 +130,7 @@ export default async function RootLayout({
           {children}
         </main>
 
+        <AutoTranslate />
         <DropGuard />
         <Haptics />
         <Pwa />

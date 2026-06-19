@@ -8,8 +8,9 @@
  * re-renders to a clean PDF or DOCX.
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { extractAnyText } from "@/lib/extractText";
+import { LANGUAGES } from "@/lib/i18n";
 import { validateDocFile, formatBytes } from "@/lib/limits";
 import { useGuestTask } from "@/lib/useGuestTask";
 import { blocksToPdf, blocksToDocxBlob } from "@/lib/docExport";
@@ -18,12 +19,10 @@ import type { DocBlock } from "@/lib/ai";
 import PdfResult from "@/components/PdfResult";
 import Select from "@/components/Select";
 
-// Translation targets — not limited to the UI locales.
-const LANGS = [
-  "English", "Spanish", "French", "Arabic", "German", "Portuguese", "Italian",
-  "Chinese (Simplified)", "Hindi", "Japanese", "Korean", "Russian", "Dutch",
-  "Turkish", "Swahili", "Yoruba", "Hausa", "Igbo",
-];
+// Translation targets — the full supported language set (shared with the UI
+// language switcher via lib/i18n), minus the "no-op" English-to-English entry
+// only when it's the source; we keep English so users can translate *into* it.
+const LANGS = LANGUAGES.map((l) => l.name);
 
 export default function TranslatePage() {
   const [file, setFile] = useState<File | null>(null);
@@ -34,6 +33,12 @@ export default function TranslatePage() {
   const [busy, setBusy] = useState(false);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const { usage, consume } = useGuestTask();
+
+  // Preset the target when arrived from the language switcher (/translate?to=…).
+  useEffect(() => {
+    const to = new URLSearchParams(window.location.search).get("to");
+    if (to && LANGS.includes(to)) setTarget(to);
+  }, []);
 
   function pick(files: FileList | null) {
     setError(null);

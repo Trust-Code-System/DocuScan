@@ -7,6 +7,7 @@ import {
   reconstruct,
   detectRedactions,
   translateDoc,
+  translateUiStrings,
   compareDocs,
   summarize,
   rewriteDoc,
@@ -79,11 +80,32 @@ export async function POST(req: NextRequest) {
     question?: string;
     history?: ChatTurn[];
     jobDescription?: string;
+    strings?: unknown[];
   };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+  }
+
+  // ui-translate takes a `strings` array rather than document `text`.
+  if (body.task === "ui-translate") {
+    const targetLang = (body.targetLang ?? "").trim();
+    if (!targetLang) {
+      return NextResponse.json({ error: "No target language provided." }, { status: 400 });
+    }
+    const strings = Array.isArray(body.strings)
+      ? body.strings.filter((s): s is string => typeof s === "string")
+      : [];
+    if (!strings.length) {
+      return NextResponse.json({ translations: [] });
+    }
+    try {
+      return NextResponse.json(await translateUiStrings(strings, targetLang));
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "AI request failed.";
+      return NextResponse.json({ error: msg }, { status: 502 });
+    }
   }
 
   const text = typeof body.text === "string" ? body.text.trim() : "";
