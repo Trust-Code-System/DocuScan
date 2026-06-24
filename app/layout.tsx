@@ -8,6 +8,7 @@ import DropGuard from "@/components/DropGuard";
 import Haptics from "@/components/Haptics";
 import FeedbackPopup from "@/components/FeedbackPopup";
 import Analytics from "@/components/Analytics";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import CookieConsent from "@/components/CookieConsent";
 import ReferralCapture from "@/components/ReferralCapture";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
@@ -140,6 +141,7 @@ export default async function RootLayout({
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
+        <VercelAnalytics />
 
         <footer className="border-t border-slate-200 bg-white">
           <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
